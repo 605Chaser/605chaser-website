@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>7-Day Forecast — 605 Chaser</title>
+<meta name="description" content="Get your free 7-day local weather forecast from 605 Chaser, covering the Northern Plains.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --charcoal:#141414;
+    --charcoal2:#1c1c1c;
+    --charcoal3:#242424;
+    --cream:#F5F1E8;
+    --orange:#E85D2C;
+    --amber:#FFB703;
+    --steel:#8B96A3;
+    --line:rgba(245,241,232,0.1);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    background:var(--charcoal);
+    color:var(--cream);
+    font-family:'Oswald',sans-serif;
+    font-weight:300;
+    min-height:100vh;
+  }
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:900px;margin:0 auto;padding:0 20px;}
+  h1,h2{font-family:'Anton',sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:0.02em;}
+
+  /* ── NAV ── */
+  nav{border-bottom:1px solid var(--line);background:rgba(20,20,20,0.92);}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;}
+  .nav-logo{display:flex;align-items:center;gap:10px;}
+  .nav-logo img{height:36px;width:auto;display:block;}
+  .nav-logo span{font-family:'Anton',sans-serif;font-size:18px;letter-spacing:0.03em;}
+  .back-link{
+    font-family:'Space Mono',monospace;font-size:12px;color:var(--steel);
+    letter-spacing:0.04em;
+  }
+  .back-link:hover{color:var(--amber);}
+
+  /* ── HEADER ── */
+  header{padding:50px 0 30px;text-align:center;}
+  .header-logo{width:100px;height:auto;margin:0 auto 18px;display:block;}
+  .eyebrow{
+    font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.14em;
+    color:var(--amber);text-transform:uppercase;margin-bottom:10px;
+  }
+  header h1{font-size:clamp(30px,5vw,46px);}
+  header h1 .accent{color:var(--orange);}
+  header p{color:var(--steel);font-size:15px;margin-top:10px;max-width:480px;margin-left:auto;margin-right:auto;}
+
+  /* ── SEARCH ── */
+  .search-box{
+    max-width:460px;margin:34px auto 0;display:flex;gap:8px;
+  }
+  .search-box input{
+    flex:1;background:var(--charcoal2);border:1px solid var(--line);
+    color:var(--cream);font-family:'Oswald',sans-serif;font-size:15px;
+    padding:14px 16px;border-radius:2px;outline:none;
+  }
+  .search-box input::placeholder{color:var(--steel);}
+  .search-box input:focus{border-color:var(--orange);}
+  .search-box button{
+    background:var(--orange);color:var(--charcoal);border:none;
+    font-family:'Oswald',sans-serif;font-weight:600;font-size:14px;
+    letter-spacing:0.04em;text-transform:uppercase;padding:0 24px;
+    border-radius:2px;cursor:pointer;transition:background .2s;
+    white-space:nowrap;
+  }
+  .search-box button:hover{background:var(--amber);}
+  .search-box button:disabled{opacity:.5;cursor:default;}
+  .search-hint{
+    text-align:center;font-family:'Space Mono',monospace;font-size:11px;
+    color:var(--steel);margin-top:10px;
+  }
+  .geo-link{
+    display:block;text-align:center;margin-top:14px;
+    font-family:'Space Mono',monospace;font-size:12px;color:var(--amber);
+    cursor:pointer;
+  }
+  .geo-link:hover{text-decoration:underline;}
+
+  /* ── STATES ── */
+  .status-msg{
+    text-align:center;padding:40px 20px;color:var(--steel);
+    font-family:'Space Mono',monospace;font-size:13px;
+  }
+  .status-msg.error{color:var(--orange);}
+  .spinner{
+    width:20px;height:20px;border:2px solid var(--line);
+    border-top-color:var(--amber);border-radius:50%;
+    display:inline-block;margin-right:8px;vertical-align:middle;
+    animation:spin .8s linear infinite;
+  }
+  @keyframes spin{to{transform:rotate(360deg);}}
+
+  /* ── RESULTS ── */
+  #results{display:none;padding:40px 0 80px;}
+  .location-line{
+    text-align:center;margin-bottom:6px;
+  }
+  .location-line h2{font-size:clamp(24px,4vw,34px);color:var(--cream);}
+  .location-sub{
+    text-align:center;font-family:'Space Mono',monospace;font-size:11px;
+    color:var(--steel);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:36px;
+  }
+
+  /* Current conditions banner */
+  .current{
+    background:var(--charcoal2);border:1px solid var(--line);
+    border-radius:4px;padding:26px 30px;margin-bottom:40px;
+    display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;
+  }
+  .current-left{display:flex;align-items:center;gap:18px;}
+  .current-icon{font-size:52px;line-height:1;}
+  .current-temp{font-family:'Anton',sans-serif;font-size:56px;color:var(--amber);line-height:1;}
+  .current-desc{font-size:15px;color:var(--cream);margin-top:4px;}
+  .current-meta{
+    font-family:'Space Mono',monospace;font-size:11px;color:var(--steel);
+    display:flex;flex-direction:column;gap:6px;text-align:right;
+  }
+  .current-meta span b{color:var(--cream);font-weight:700;}
+
+  .alert-banner{
+    background:rgba(232,93,44,0.12);border:1px solid rgba(232,93,44,0.4);
+    border-radius:4px;padding:14px 18px;margin-bottom:24px;
+    font-family:'Space Mono',monospace;font-size:12px;color:var(--orange);
+    display:flex;align-items:flex-start;gap:10px;
+  }
+
+  /* 7-day grid */
+  .section-label{
+    font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.12em;
+    color:var(--orange);text-transform:uppercase;margin-bottom:16px;
+  }
+  .forecast-grid{
+    display:grid;grid-template-columns:repeat(7,1fr);gap:8px;
+  }
+  @media(max-width:820px){
+    .forecast-grid{grid-template-columns:repeat(4,1fr);}
+  }
+  @media(max-width:520px){
+    .forecast-grid{grid-template-columns:repeat(2,1fr);}
+  }
+  .day-card{
+    background:var(--charcoal2);border:1px solid var(--line);
+    border-radius:4px;padding:16px 10px;text-align:center;
+    transition:border-color .2s;
+  }
+  .day-card:hover{border-color:var(--steel);}
+  .day-name{
+    font-family:'Space Mono',monospace;font-size:10px;color:var(--steel);
+    text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;
+  }
+  .day-icon{font-size:30px;margin-bottom:8px;}
+  .day-hi{font-family:'Anton',sans-serif;font-size:20px;color:var(--cream);}
+  .day-lo{font-family:'Space Mono',monospace;font-size:12px;color:var(--steel);margin-top:2px;}
+  .day-precip{
+    font-family:'Space Mono',monospace;font-size:10px;color:var(--amber);
+    margin-top:8px;
+  }
+  .day-precip.zero{color:var(--steel);opacity:.5;}
+
+  footer{
+    border-top:1px solid var(--line);padding:26px 0;text-align:center;
+    font-family:'Space Mono',monospace;font-size:10px;color:var(--steel);
+  }
+  footer a{color:var(--amber);}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="nav-logo">
+      <img src="605-chaser-logo.png" alt="605 Chaser logo">
+      <span>605 CHASER</span>
+    </div>
+    <a href="/" class="back-link">← BACK TO SITE</a>
+  </div>
+</nav>
+
+<header>
+  <div class="wrap">
+    <img src="605-chaser-logo.png" alt="605 Chaser" class="header-logo">
+    <div class="eyebrow">Free Local Weather</div>
+    <h1>Your <span class="accent">7-Day Forecast</span></h1>
+    <p>Enter your ZIP code or city to get an up-to-date, no-nonsense forecast — powered by the National Weather Service.</p>
+
+    <form class="search-box" id="searchForm">
+      <input type="text" id="locationInput" placeholder="ZIP code or city, state" autocomplete="off">
+      <button type="submit" id="searchBtn">Get Forecast</button>
+    </form>
+    <div class="search-hint">e.g. "57032" or "Sioux Falls, SD"</div>
+    <span class="geo-link" id="geoLink">📍 Use my current location</span>
+  </div>
+</header>
+
+<div class="wrap">
+  <div id="statusMsg"></div>
+
+  <div id="results">
+    <div class="location-line"><h2 id="locName">—</h2></div>
+    <div class="location-sub" id="locUpdated">—</div>
+
+    <div id="alertArea"></div>
+
+    <div class="current" id="currentBox" style="display:none;">
+      <div class="current-left">
+        <div class="current-icon" id="curIcon">☀️</div>
+        <div>
+          <div class="current-temp" id="curTemp">--°</div>
+          <div class="current-desc" id="curDesc">—</div>
+        </div>
+      </div>
+      <div class="current-meta">
+        <span>Wind: <b id="curWind">--</b></span>
+        <span>Humidity: <b id="curHumidity">--</b></span>
+      </div>
+    </div>
+
+    <div class="section-label">7-Day Outlook</div>
+    <div class="forecast-grid" id="forecastGrid"></div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    Forecast data via National Weather Service (api.weather.gov) · Provided by <a href="/">605 Chaser LLC</a>
+  </div>
+</footer>
+
+<script>
+const statusMsg = document.getElementById('statusMsg');
+const results = document.getElementById('results');
+const searchForm = document.getElementById('searchForm');
+const locationInput = document.getElementById('locationInput');
+const searchBtn = document.getElementById('searchBtn');
+const geoLink = document.getElementById('geoLink');
+
+const WEATHER_ICONS = [
+  { keys: ['thunder','tstm'], icon: '⛈️' },
+  { keys: ['tornado'], icon: '🌪️' },
+  { keys: ['snow','blizzard','flurr'], icon: '❄️' },
+  { keys: ['sleet','ice','freezing'], icon: '🧊' },
+  { keys: ['rain','shower'], icon: '🌧️' },
+  { keys: ['fog','haze','mist'], icon: '🌫️' },
+  { keys: ['wind'], icon: '💨' },
+  { keys: ['cloudy','overcast'], icon: '☁️' },
+  { keys: ['partly','mostly sunny','mostly clear'], icon: '⛅' },
+  { keys: ['clear','sunny'], icon: '☀️' },
+  { keys: ['night'], icon: '🌙' },
+];
+function iconFor(text){
+  const t = (text||'').toLowerCase();
+  for(const w of WEATHER_ICONS){ if(w.keys.some(k=>t.includes(k))) return w.icon; }
+  return '🌤️';
+}
+
+function showStatus(html, isError){
+  statusMsg.innerHTML = `<div class="status-msg${isError?' error':''}">${html}</div>`;
+  results.style.display = 'none';
+}
+function clearStatus(){ statusMsg.innerHTML = ''; }
+
+async function geocode(query){
+  // Try ZIP code first (5-digit US zip)
+  const cleaned = query.trim();
+  if (/^\d{5}$/.test(cleaned)) {
+    const r = await fetch(`https://api.zippopotam.us/us/${cleaned}`);
+    if (r.ok) {
+      const j = await r.json();
+      const place = j.places?.[0];
+      if (place) {
+        return {
+          lat: parseFloat(place.latitude),
+          lon: parseFloat(place.longitude),
+          label: `${place['place name']}, ${place['state abbreviation']}`
+        };
+      }
+    }
+    throw new Error('ZIP code not found');
+  }
+  // Otherwise try city/state search
+  const r = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(cleaned)}&count=1&language=en&format=json&countryCode=US`);
+  const j = await r.json();
+  const res = j.results?.[0];
+  if (!res) throw new Error('Location not found');
+  return {
+    lat: res.latitude,
+    lon: res.longitude,
+    label: `${res.name}, ${res.admin1 || ''}`.replace(/, $/,'')
+  };
+}
+
+async function loadForecast(lat, lon, label){
+  showStatus('<span class="spinner"></span>Fetching your forecast…');
+  try {
+    const ptResp = await fetch(`https://api.weather.gov/points/${lat.toFixed(4)},${lon.toFixed(4)}`);
+    if (!ptResp.ok) throw new Error('Location not covered by NWS');
+    const ptJson = await ptResp.json();
+    const props = ptJson.properties;
+
+    const [forecastJson, alertsJson] = await Promise.all([
+      fetch(props.forecast).then(r => r.json()),
+      fetch(`https://api.weather.gov/alerts/active?point=${lat.toFixed(4)},${lon.toFixed(4)}`).then(r => r.json()).catch(()=>null)
+    ]);
+
+    const periods = forecastJson.properties?.periods || [];
+    if (!periods.length) throw new Error('No forecast data available for this location');
+
+    // Populate location name
+    document.getElementById('locName').textContent = label;
+    document.getElementById('locUpdated').textContent =
+      `Updated ${new Date(forecastJson.properties.updated).toLocaleString([], {month:'short', day:'numeric', hour:'numeric', minute:'2-digit'})}`;
+
+    // Alerts
+    const alertArea = document.getElementById('alertArea');
+    alertArea.innerHTML = '';
+    const activeAlerts = alertsJson?.features || [];
+    if (activeAlerts.length > 0) {
+      const top = activeAlerts[0];
+      alertArea.innerHTML = `<div class="alert-banner">⚠️ <span><b>${top.properties.event}</b> in effect for this area${activeAlerts.length>1?` (+${activeAlerts.length-1} more)`:''}. Stay weather aware.</span></div>`;
+    }
+
+    // Current conditions = first period
+    const current = periods[0];
+    document.getElementById('currentBox').style.display = 'flex';
+    document.getElementById('curIcon').textContent = iconFor(current.shortForecast + (current.isDaytime ? '' : ' night'));
+    document.getElementById('curTemp').textContent = `${current.temperature}°${current.temperatureUnit}`;
+    document.getElementById('curDesc').textContent = current.shortForecast;
+    document.getElementById('curWind').textContent = `${current.windSpeed} ${current.windDirection}`;
+    document.getElementById('curHumidity').textContent = current.relativeHumidity?.value != null ? `${Math.round(current.relativeHumidity.value)}%` : '—';
+
+    // 7-day grid — pair day/night periods into daily cards, skip the very first (current) period
+    const grid = document.getElementById('forecastGrid');
+    grid.innerHTML = '';
+    const dayPeriods = periods.filter(p => p.isDaytime);
+    const nightPeriods = periods.filter(p => !p.isDaytime);
+
+    const cards = dayPeriods.slice(0, 7).map((day, i) => {
+      const night = nightPeriods[i];
+      return { day, night };
+    });
+
+    cards.forEach(({day, night}) => {
+      const precip = day.probabilityOfPrecipitation?.value ?? 0;
+      const card = document.createElement('div');
+      card.className = 'day-card';
+      card.innerHTML = `
+        <div class="day-name">${day.name.replace(' Night','').slice(0,3).toUpperCase()}</div>
+        <div class="day-icon">${iconFor(day.shortForecast)}</div>
+        <div class="day-hi">${day.temperature}°</div>
+        <div class="day-lo">${night ? night.temperature + '°' : '--'}</div>
+        <div class="day-precip ${precip === 0 ? 'zero' : ''}">💧 ${precip}%</div>
+      `;
+      grid.appendChild(card);
+    });
+
+    clearStatus();
+    results.style.display = 'block';
+  } catch (err) {
+    showStatus(`⚠ ${err.message || 'Something went wrong fetching the forecast. Please try again.'}`, true);
+  }
+}
+
+searchForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const query = locationInput.value.trim();
+  if (!query) return;
+  searchBtn.disabled = true;
+  showStatus('<span class="spinner"></span>Looking up location…');
+  try {
+    const geo = await geocode(query);
+    await loadForecast(geo.lat, geo.lon, geo.label);
+  } catch (err) {
+    showStatus(`⚠ ${err.message || 'Could not find that location. Try a ZIP code or "City, State".'}`, true);
+  } finally {
+    searchBtn.disabled = false;
+  }
+});
+
+geoLink.addEventListener('click', () => {
+  if (!navigator.geolocation) {
+    showStatus('⚠ Geolocation is not available in this browser.', true);
+    return;
+  }
+  showStatus('<span class="spinner"></span>Getting your location…');
+  navigator.geolocation.getCurrentPosition(
+    async (pos) => {
+      const { latitude, longitude } = pos.coords;
+      try {
+        const r = await fetch(`https://geocoding-api.open-meteo.com/v1/search?latitude=${latitude}&longitude=${longitude}`).catch(()=>null);
+        let label = 'Your Location';
+        // Reverse geocode fallback via Nominatim (best-effort, non-blocking)
+        try {
+          const rev = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json&zoom=10`, {headers:{'Accept-Language':'en'}});
+          const revJson = await rev.json();
+          const city = revJson.address?.city || revJson.address?.town || revJson.address?.village || revJson.address?.county;
+          const state = revJson.address?.state_code || revJson.address?.state;
+          if (city) label = `${city}${state ? ', ' + state : ''}`;
+        } catch {}
+        await loadForecast(latitude, longitude, label);
+      } catch {
+        await loadForecast(latitude, longitude, 'Your Location');
+      }
+    },
+    () => showStatus('⚠ Could not access your location. Please allow location access or search manually.', true),
+    { timeout: 10000 }
+  );
+});
+</script>
+
+</body>
+</html>
