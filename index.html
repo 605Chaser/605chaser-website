@@ -170,6 +170,18 @@
   }
   .service-card h3{font-size:22px;color:var(--cream);margin-bottom:12px;}
   .service-card p{color:var(--steel);font-size:15px;}
+  .service-links{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap;}
+  .service-link{
+    display:inline-flex;align-items:center;gap:6px;
+    font-family:'Space Mono',monospace;font-size:11px;font-weight:700;
+    letter-spacing:0.05em;text-transform:uppercase;
+    padding:7px 13px;border-radius:20px;border:1px solid;
+    transition:all .2s;
+  }
+  .service-link.fb{color:#5f9eff;border-color:rgba(95,158,255,0.4);background:rgba(95,158,255,0.08);}
+  .service-link.fb:hover{background:rgba(95,158,255,0.18);}
+  .service-link.yt{color:#ff6259;border-color:rgba(255,98,89,0.4);background:rgba(255,98,89,0.08);}
+  .service-link.yt:hover{background:rgba(255,98,89,0.18);}
 
   /* ── TEAM ── */
   .team-layout{display:grid;grid-template-columns:300px 1fr;gap:50px;margin-top:46px;align-items:start;}
@@ -300,6 +312,10 @@
         <div class="service-num">01 — CONTENT & MEDIA</div>
         <h3>Live Severe Weather Coverage</h3>
         <p>Real-time video, live-streamed intercepts, and short-form storm footage distributed across Facebook, YouTube, and TikTok.</p>
+        <div class="service-links">
+          <a href="https://www.facebook.com/605chaser/live_videos" target="_blank" rel="noopener noreferrer" class="service-link fb">▶ Facebook Live</a>
+          <a href="https://www.youtube.com/@605chaser/streams" target="_blank" rel="noopener noreferrer" class="service-link yt">▶ YouTube Streams</a>
+        </div>
       </div>
       <div class="service-card">
         <div class="service-num">02 — PARTNERSHIPS</div>
