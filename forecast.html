@@ -21,6 +21,7 @@
     --steel:#8B96A3;
     --line:rgba(245,241,232,0.1);
     --green:#5fe0a0;
+    --muted:rgba(245,241,232,0.62);
   }
   *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
   body{
@@ -56,7 +57,7 @@
   .brand-tagline{font-family:'Space Mono',monospace;font-size:10px;color:var(--amber);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:22px;}
   header h1{font-size:clamp(28px,4.6vw,42px);margin-top:4px;}
   header h1 .accent{color:var(--orange);}
-  header p{color:var(--steel);font-size:14px;margin-top:10px;max-width:460px;margin-left:auto;margin-right:auto;}
+  header p{color:var(--muted);font-size:14px;margin-top:10px;max-width:460px;margin-left:auto;margin-right:auto;}
 
   /* SEARCH */
   .search-box{max-width:440px;margin:30px auto 0;display:flex;gap:8px;}
@@ -93,7 +94,19 @@
   }
   .loc-header h2{font-size:clamp(24px,4vw,32px);color:var(--cream);}
   .loc-date{font-family:'Space Mono',monospace;font-size:13px;color:var(--steel);}
-  .location-sub{text-align:center;font-family:'Space Mono',monospace;font-size:10px;color:var(--steel);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:32px;opacity:.7;}
+  .location-sub{text-align:center;font-family:'Space Mono',monospace;font-size:10px;color:var(--steel);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:16px;opacity:.7;}
+
+  .climate-row{
+    display:none;flex-direction:column;align-items:center;gap:3px;
+    margin-bottom:10px;text-align:center;
+  }
+  .climate-stats{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;align-items:center;}
+  .climate-item{
+    font-family:'Space Mono',monospace;font-size:12px;color:var(--muted);
+    display:flex;align-items:center;gap:4px;white-space:nowrap;
+  }
+  .climate-item strong{color:var(--amber);font-weight:700;}
+  .climate-credit{font-family:'Space Mono',monospace;font-size:9.5px;color:var(--steel);opacity:.7;}
 
   .alert-banner{
     background:rgba(232,93,44,0.12);border:1px solid rgba(232,93,44,0.4);
@@ -112,7 +125,7 @@
   .current-icon{font-size:56px;line-height:1;}
   .current-temp{font-family:'Anton',sans-serif;font-size:60px;color:var(--amber);line-height:1;}
   .current-desc{font-size:15px;color:var(--cream);margin-top:4px;}
-  .current-meta{font-family:'Space Mono',monospace;font-size:11px;color:var(--steel);display:flex;flex-direction:column;gap:7px;text-align:right;}
+  .current-meta{font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);display:flex;flex-direction:column;gap:7px;text-align:right;}
   .current-meta span b{color:var(--cream);font-weight:700;}
 
   .section-label{
@@ -135,21 +148,21 @@
   .day-name{font-family:'Space Mono',monospace;font-size:11px;color:var(--cream);text-transform:uppercase;letter-spacing:0.06em;font-weight:700;}
   .day-date{font-family:'Space Mono',monospace;font-size:9px;color:var(--steel);margin-bottom:10px;}
   .day-icon{font-size:32px;margin-bottom:10px;}
-  .day-desc{font-size:10.5px;color:var(--steel);min-height:26px;margin-bottom:10px;line-height:1.3;padding:0 2px;}
+  .day-desc{font-size:11px;color:var(--muted);min-height:26px;margin-bottom:10px;line-height:1.35;padding:0 2px;font-weight:400;}
 
   .hilo-row{display:flex;justify-content:center;gap:14px;margin-bottom:10px;}
   .hilo{display:flex;flex-direction:column;align-items:center;}
-  .hilo-label{font-family:'Space Mono',monospace;font-size:8px;color:var(--steel);letter-spacing:0.1em;margin-bottom:2px;}
+  .hilo-label{font-family:'Space Mono',monospace;font-size:8px;color:var(--muted);letter-spacing:0.1em;margin-bottom:2px;}
   .hilo-val{font-family:'Anton',sans-serif;font-size:19px;}
   .hilo-val.hi{color:var(--cream);}
-  .hilo-val.lo{color:var(--steel);font-size:15px;}
+  .hilo-val.lo{color:var(--muted);font-size:15px;}
 
-  .day-wind{font-family:'Space Mono',monospace;font-size:9px;color:var(--steel);margin-bottom:8px;}
+  .day-wind{font-family:'Space Mono',monospace;font-size:9.5px;color:var(--muted);margin-bottom:8px;}
 
   .rain-badge{
     font-family:'Space Mono',monospace;font-size:9px;font-weight:700;
-    padding:3px 8px;border-radius:12px;display:inline-flex;align-items:center;gap:4px;
-    letter-spacing:0.04em;
+    padding:4px 9px;border-radius:12px;display:inline-flex;align-items:center;gap:4px;
+    letter-spacing:0.02em;white-space:normal;line-height:1.3;text-align:center;max-width:100%;
   }
   .rain-low{background:rgba(95,224,160,0.12);color:var(--green);border:1px solid rgba(95,224,160,0.3);}
   .rain-mod{background:rgba(255,183,3,0.12);color:var(--amber);border:1px solid rgba(255,183,3,0.35);}
@@ -173,6 +186,7 @@
     .search-box button{padding:13px 0;width:100%;}
     .loc-header{flex-direction:column;gap:2px;}
     .day-desc{min-height:32px;}
+    .climate-stats{flex-direction:column;gap:6px;}
   }
 </style>
 </head>
@@ -214,6 +228,8 @@
       <span class="loc-date" id="locDate">—</span>
     </div>
     <div class="location-sub" id="locUpdated">—</div>
+    <div class="climate-row" id="climateNormalsRow"></div>
+    <div class="climate-row" id="mtdPrecipRow" style="margin-bottom:28px;"></div>
 
     <div id="alertArea"></div>
 
@@ -269,10 +285,153 @@ function iconFor(text){
   return '🌤️';
 }
 function rainBadge(pct){
-  let cls = 'rain-low', label = 'Low';
-  if (pct >= 60) { cls = 'rain-high'; label = 'High'; }
-  else if (pct >= 30) { cls = 'rain-mod'; label = 'Moderate'; }
-  return `<span class="rain-badge ${cls}">💧 ${pct}% · ${label}</span>`;
+  let cls = 'rain-low';
+  if (pct >= 60) { cls = 'rain-high'; }
+  else if (pct >= 30) { cls = 'rain-mod'; }
+  return `<span class="rain-badge ${cls}">💧 ${pct}% chance of rain</span>`;
+}
+
+// ── 30-YEAR CLIMATE NORMALS (Open-Meteo historical reanalysis) ────────────
+// Best-effort, non-blocking — never breaks the live forecast if it fails.
+let climateRequestId = 0;
+async function fetchClimateNormals(lat, lon){
+  const myId = ++climateRequestId;
+  const el = document.getElementById('climateNormalsRow');
+  el.style.display = 'none';
+  try {
+    const url = `https://archive-api.open-meteo.com/v1/archive?latitude=${lat.toFixed(4)}&longitude=${lon.toFixed(4)}&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,snowfall_sum&temperature_unit=fahrenheit&precipitation_unit=inch&timezone=auto`;
+    const resp = await fetch(url);
+    if (!resp.ok) return;
+    const json = await resp.json();
+    const daily = json.daily;
+    if (!daily?.time?.length) return;
+
+    const mm = String(new Date().getMonth() + 1).padStart(2, '0');
+    const highs = [], lows = [];
+    const precipByYear = {}, snowByYear = {};
+    for (let i = 0; i < daily.time.length; i++) {
+      const t = daily.time[i];
+      if (t.slice(5, 7) !== mm) continue;
+      const year = t.slice(0, 4);
+      const hi = daily.temperature_2m_max[i], lo = daily.temperature_2m_min[i];
+      const pr = daily.precipitation_sum[i], sn = daily.snowfall_sum[i];
+      if (hi != null) highs.push(hi);
+      if (lo != null) lows.push(lo);
+      if (pr != null) precipByYear[year] = (precipByYear[year] || 0) + pr;
+      if (sn != null) snowByYear[year] = (snowByYear[year] || 0) + sn;
+    }
+    const avg = arr => arr.length ? arr.reduce((a,b)=>a+b,0) / arr.length : null;
+    if (!highs.length) return;
+    if (myId !== climateRequestId) return;
+
+    const high = avg(highs), low = avg(lows);
+    const precip = avg(Object.values(precipByYear));
+    const snow = avg(Object.values(snowByYear));
+    const monthLabel = new Date().toLocaleString('en-US', { month: 'long' });
+
+    let stats = `<span class="climate-item">📊 ${monthLabel} avg (1991–2020):</span>`;
+    if (high != null && low != null) stats += `<span class="climate-item">🌡️ <strong>${Math.round(high)}°</strong>/<strong>${Math.round(low)}°F</strong></span>`;
+    if (precip != null) stats += `<span class="climate-item">💧 <strong>${precip.toFixed(1)}"</strong> precip</span>`;
+    if (snow != null && snow >= 0.1) stats += `<span class="climate-item">❄️ <strong>${snow.toFixed(1)}"</strong> snow</span>`;
+
+    el.innerHTML = `<div class="climate-stats">${stats}</div><div class="climate-credit">Modeled avg · data: Open-Meteo.com</div>`;
+    el.style.display = 'flex';
+  } catch (e) { /* best-effort — never blocks the main forecast */ }
+}
+
+// ── MONTH-TO-DATE PRECIP (NOAA/ACIS station data, Open-Meteo fallback) ────
+function haversineMiles(lat1, lon1, lat2, lon2){
+  const R = 3958.8, toRad = d => d * Math.PI / 180;
+  const dLat = toRad(lat2-lat1), dLon = toRad(lon2-lon1);
+  const a = Math.sin(dLat/2)**2 + Math.cos(toRad(lat1))*Math.cos(toRad(lat2))*Math.sin(dLon/2)**2;
+  return R * 2 * Math.asin(Math.sqrt(a));
+}
+async function fetchMTDPrecip(lat, lon){
+  document.getElementById('mtdPrecipRow').style.display = 'none';
+  const gotOfficial = await fetchOfficialMTDPrecip(lat, lon);
+  if (gotOfficial) return;
+  await fetchModeledMTDPrecip(lat, lon);
+}
+async function fetchOfficialMTDPrecip(lat, lon){
+  try {
+    const pad = 0.6;
+    const bbox = `${(lon-pad).toFixed(2)},${(lat-pad).toFixed(2)},${(lon+pad).toFixed(2)},${(lat+pad).toFixed(2)}`;
+    const metaResp = await fetch(`https://data.rcc-acis.org/StnMeta?bbox=${bbox}&meta=uid,name,ll,sids&elems=pcpn&output=json`);
+    if (!metaResp.ok) return false;
+    const metaData = await metaResp.json();
+    const stations = (metaData.meta || []).filter(st => st.ll && st.uid);
+    if (!stations.length) return false;
+
+    const isAirport = st => (st.sids || []).some(s => /\s5$/.test(s));
+    const ranked = stations
+      .map(st => ({ ...st, dist: haversineMiles(lat, lon, st.ll[1], st.ll[0]), airport: isAirport(st) }))
+      .sort((a,b) => (b.airport - a.airport) || (a.dist - b.dist))
+      .slice(0, 8);
+
+    const now = new Date();
+    const y = now.getFullYear(), m = String(now.getMonth()+1).padStart(2,'0');
+    const startDate = `${y}-${m}-01`;
+    const endDate = now.toISOString().slice(0,10);
+
+    for (const st of ranked) {
+      try {
+        const dataResp = await fetch(`https://data.rcc-acis.org/StnData?uid=${st.uid}&sdate=${startDate}&edate=${endDate}&elems=pcpn,snow&output=json`);
+        if (!dataResp.ok) continue;
+        const dataJson = await dataResp.json();
+        if (dataJson.meta?.uid != null && dataJson.meta.uid !== st.uid) continue;
+        const rows = dataJson.data;
+        if (!rows?.length) continue;
+
+        let rain = 0, snow = 0, gotData = false;
+        for (const row of rows) {
+          const [, pVal, sVal] = row;
+          if (pVal != null && pVal !== 'M') { const v = pVal === 'T' ? 0 : parseFloat(pVal); if (!isNaN(v)) { rain += v; gotData = true; } }
+          if (sVal != null && sVal !== 'M') { const v = sVal === 'T' ? 0 : parseFloat(sVal); if (!isNaN(v)) snow += v; }
+        }
+        if (!gotData) continue;
+
+        renderMTDPrecip({
+          monthLabel: now.toLocaleString('en-US', { month: 'long' }),
+          rain, snow, official: true, stationName: st.name, distanceMi: Math.round(st.dist)
+        });
+        return true;
+      } catch (e) {}
+    }
+    return false;
+  } catch (e) { return false; }
+}
+async function fetchModeledMTDPrecip(lat, lon){
+  try {
+    const now = new Date();
+    const y = now.getFullYear(), m = String(now.getMonth()+1).padStart(2,'0');
+    const startDate = `${y}-${m}-01`;
+    const endDate = now.toISOString().slice(0,10);
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat.toFixed(4)}&longitude=${lon.toFixed(4)}&start_date=${startDate}&end_date=${endDate}&daily=precipitation_sum,snowfall_sum&temperature_unit=fahrenheit&precipitation_unit=inch&timezone=auto`;
+    const resp = await fetch(url);
+    if (!resp.ok) return;
+    const data = await resp.json();
+    const daily = data.daily;
+    if (!daily?.time?.length) return;
+    let rain = 0, snow = 0, gotData = false;
+    for (let i = 0; i < daily.time.length; i++) {
+      const p = daily.precipitation_sum[i], s = daily.snowfall_sum[i];
+      if (p != null) { rain += p; gotData = true; }
+      if (s != null) snow += s;
+    }
+    if (!gotData) return;
+    renderMTDPrecip({ monthLabel: now.toLocaleString('en-US', { month: 'long' }), rain, snow, official: false });
+  } catch (e) {}
+}
+function renderMTDPrecip(d){
+  const el = document.getElementById('mtdPrecipRow');
+  let stats = `<span class="climate-item">🗓️ ${d.monthLabel} to date:</span>`;
+  stats += `<span class="climate-item">💧 <strong>${d.rain.toFixed(2)}"</strong> rain</span>`;
+  if (d.snow >= 0.1) stats += `<span class="climate-item">❄️ <strong>${d.snow.toFixed(1)}"</strong> snow</span>`;
+  const credit = d.official
+    ? `Official NOAA station data (${d.stationName}, ~${d.distanceMi}mi away) · source: NOAA/ACIS`
+    : 'Modeled estimate, not an official gauge reading · data: Open-Meteo.com';
+  el.innerHTML = `<div class="climate-stats">${stats}</div><div class="climate-credit">${credit}</div>`;
+  el.style.display = 'flex';
 }
 
 function showStatus(html, isError){
@@ -370,6 +529,10 @@ async function loadForecast(lat, lon, label){
       `;
       grid.appendChild(card);
     });
+
+    // Fire-and-forget — best-effort climate context, never blocks the live forecast
+    fetchClimateNormals(lat, lon);
+    fetchMTDPrecip(lat, lon);
 
     clearStatus();
     results.style.display = 'block';
