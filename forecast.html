@@ -2,7 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#141414">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>7-Day Forecast — 605 Chaser</title>
 <meta name="description" content="Get your free 7-day local weather forecast from 605 Chaser, covering the Northern Plains.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,7 +22,7 @@
     --line:rgba(245,241,232,0.1);
     --green:#5fe0a0;
   }
-  *{margin:0;padding:0;box-sizing:border-box;}
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
   body{
     background:var(--charcoal);
     color:var(--cream);
@@ -154,6 +157,23 @@
 
   footer{border-top:1px solid var(--line);padding:26px 0;text-align:center;font-family:'Space Mono',monospace;font-size:10px;color:var(--steel);}
   footer a{color:var(--amber);}
+
+  @media(max-width:760px){
+    header{padding:32px 0 20px;}
+    header p{font-size:13px;}
+    .current{padding:22px 20px;justify-content:center;text-align:center;}
+    .current-left{flex-direction:column;gap:10px;}
+    .current-meta{text-align:center;align-items:center;}
+    .current-icon{font-size:46px;}
+    .current-temp{font-size:48px;}
+    .wrap{padding:0 16px;}
+  }
+  @media(max-width:460px){
+    .search-box{flex-direction:column;}
+    .search-box button{padding:13px 0;width:100%;}
+    .loc-header{flex-direction:column;gap:2px;}
+    .day-desc{min-height:32px;}
+  }
 </style>
 </head>
 <body>
