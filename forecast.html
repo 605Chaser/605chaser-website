@@ -468,8 +468,9 @@ async function loadForecast(lat, lon, label){
     const ptJson = await ptResp.json();
     const props = ptJson.properties;
 
-    const [forecastJson, alertsJson] = await Promise.all([
+    const [forecastJson, hourlyJson, alertsJson] = await Promise.all([
       fetch(props.forecast).then(r => r.json()),
+      fetch(props.forecastHourly).then(r => r.json()).catch(()=>null),
       fetch(`https://api.weather.gov/alerts/active?point=${lat.toFixed(4)},${lon.toFixed(4)}`).then(r => r.json()).catch(()=>null)
     ]);
 
@@ -500,7 +501,9 @@ async function loadForecast(lat, lon, label){
     document.getElementById('curTemp').textContent = `${current.temperature}°${current.temperatureUnit}`;
     document.getElementById('curDesc').textContent = current.shortForecast;
     document.getElementById('curWind').textContent = `${current.windSpeed} ${current.windDirection}`;
-    document.getElementById('curHumidity').textContent = current.relativeHumidity?.value != null ? `${Math.round(current.relativeHumidity.value)}%` : '—';
+    const hourlyNow = hourlyJson?.properties?.periods?.[0];
+    const humidRaw = current.relativeHumidity?.value ?? hourlyNow?.relativeHumidity?.value;
+    document.getElementById('curHumidity').textContent = humidRaw != null ? `${Math.round(humidRaw)}%` : '—';
 
     const grid = document.getElementById('forecastGrid');
     grid.innerHTML = '';
