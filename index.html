@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#141414">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<title>605 Chaser LLC — Tracking Chaos. Delivering Clarity.</title>
+<meta name="description" content="605 Chaser LLC is a storm chasing and severe weather content operation covering the Northern Plains — South Dakota, North Dakota, Minnesota, Iowa, and Nebraska.">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="605 Chaser LLC">
+<meta property="og:title" content="605 Chaser LLC — Tracking Chaos. Delivering Clarity.">
+<meta property="og:description" content="Storm chasing and severe weather content operation covering a five-state Northern Plains territory: SD, ND, MN, IA, NE.">
+<meta property="og:image" content="https://605chaser.com/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://605chaser.com/">
+
+<!-- Twitter / X Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="605 Chaser LLC — Tracking Chaos. Delivering Clarity.">
+<meta name="twitter:description" content="Storm chasing and severe weather content operation covering a five-state Northern Plains territory.">
+<meta name="twitter:image" content="https://605chaser.com/og-image.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --charcoal:#141414;
+    --charcoal2:#1c1c1c;
+    --cream:#F5F1E8;
+    --gold:#E8B723;
+    --amber:#FFB703;
+    --steel:#8B96A3;
+    --line:rgba(245,241,232,0.1);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--charcoal);
+    color:var(--cream);
+    font-family:'Oswald',sans-serif;
+    font-weight:300;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--gold);color:var(--charcoal);}
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px;}
+
+  h1,h2,h3{font-family:'Anton',sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:0.02em;line-height:1.05;}
+
+  /* ── NAV ── */
+  nav{
+    position:sticky;top:0;z-index:100;
+    background:rgba(20,20,20,0.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;padding-top:16px;padding-bottom:16px;}
+  .logo{
+    font-family:'Anton',sans-serif;
+    font-size:22px;letter-spacing:0.04em;
+    color:var(--cream);
+    display:flex;align-items:center;gap:9px;
+    white-space:nowrap;flex-shrink:0;
+  }
+  .logo-icon{height:32px;width:auto;display:block;flex-shrink:0;}
+  .logo-mark{
+    width:11px;height:11px;border-radius:50%;
+    background:var(--gold);
+    box-shadow:0 0 10px var(--gold);
+    flex-shrink:0;
+  }
+  .nav-links{display:flex;gap:30px;font-size:13px;text-transform:uppercase;letter-spacing:0.08em;font-weight:500;}
+  .nav-links a{color:var(--steel);transition:color .2s;}
+  .nav-links a:hover{color:var(--amber);}
+  .llc-pill{
+    font-family:'Space Mono',monospace;
+    font-size:10px;letter-spacing:0.08em;
+    color:var(--steel);
+    border:1px solid var(--line);
+    padding:4px 10px;border-radius:20px;
+    text-transform:uppercase;
+    white-space:nowrap;
+  }
+  .hamburger{
+    display:none;flex-direction:column;gap:5px;background:none;border:none;
+    cursor:pointer;padding:6px;-webkit-tap-highlight-color:transparent;
+  }
+  .hamburger span{width:22px;height:2px;background:var(--cream);transition:all .25s;}
+  .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .hamburger.open span:nth-child(2){opacity:0;}
+  .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+  .mobile-menu{
+    display:none;flex-direction:column;
+    max-height:0;overflow:hidden;transition:max-height .3s ease;
+    background:var(--charcoal2);border-bottom:1px solid var(--line);
+  }
+  .mobile-menu.open{max-height:340px;}
+  .mobile-menu a{
+    padding:16px 28px;font-size:14px;text-transform:uppercase;letter-spacing:0.08em;
+    color:var(--cream);border-bottom:1px solid var(--line);font-weight:500;
+  }
+  .mobile-menu a:last-child{border-bottom:none;}
+  .mobile-menu a:active{background:rgba(232,183,35,0.1);}
+
+  @media(max-width:760px){
+    .nav-links{display:none;}
+    .llc-pill{display:none;}
+    .hamburger{display:flex;}
+    .mobile-menu{display:flex;}
+  }
+
+  /* ── HERO ── */
+  .hero{padding:100px 0 70px;position:relative;}
+  .hero-eyebrow{
+    font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.15em;
+    color:var(--amber);text-transform:uppercase;margin-bottom:22px;
+    display:flex;align-items:center;gap:8px;
+  }
+  .hero-eyebrow::before{content:"";width:24px;height:1px;background:var(--amber);}
+  .hero h1{font-size:clamp(48px,8vw,104px);color:var(--cream);}
+  .hero h1 .accent{color:var(--gold);}
+  .hero p{
+    max-width:540px;margin-top:26px;font-size:18px;font-weight:300;color:var(--steel);
+  }
+  .hero-cta{display:flex;gap:14px;margin-top:38px;flex-wrap:wrap;}
+  .btn{
+    font-family:'Oswald',sans-serif;font-weight:600;font-size:13px;letter-spacing:0.08em;
+    text-transform:uppercase;padding:14px 28px;border-radius:2px;
+    display:inline-flex;align-items:center;gap:8px;transition:all .2s;
+  }
+  .btn-primary{background:var(--gold);color:var(--charcoal);}
+  .btn-primary:hover{background:var(--amber);}
+  .btn-ghost{border:1px solid var(--line);color:var(--cream);}
+  .btn-ghost:hover{border-color:var(--steel);}
+
+  /* ── DATA READOUT STRIP (signature element) ── */
+  .readout{
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    background:var(--charcoal2);
+    overflow:hidden;
+  }
+  .readout .wrap{
+    display:flex;flex-wrap:wrap;gap:0;
+  }
+  .readout-item{
+    flex:1 1 160px;
+    padding:18px 22px;
+    border-right:1px solid var(--line);
+    font-family:'Space Mono',monospace;
+  }
+  .readout-item:last-child{border-right:none;}
+  .readout-label{font-size:10px;letter-spacing:0.1em;color:var(--steel);text-transform:uppercase;margin-bottom:6px;}
+  .readout-val{font-size:19px;color:var(--amber);font-weight:700;}
+  .readout-val.gold{color:var(--gold);}
+  .readout-val.live{color:#5fe0a0;}
+  .live-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:#5fe0a0;margin-right:6px;animation:blink 2s ease-in-out infinite;}
+  @keyframes blink{0%,100%{opacity:1;}50%{opacity:.35;}}
+
+  /* ── SECTION SHARED ── */
+  section{padding:90px 0;}
+  .section-label{
+    font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.12em;
+    color:var(--gold);text-transform:uppercase;margin-bottom:14px;
+  }
+  .section-title{font-size:clamp(30px,4vw,46px);color:var(--cream);max-width:620px;}
+
+  @media(max-width:760px){
+    section{padding:56px 0;}
+    .hero{padding:56px 0 40px;}
+    .hero p{font-size:16px;}
+    .hero-cta{flex-direction:column;}
+    .hero-cta .btn{justify-content:center;width:100%;}
+    .readout-item{flex:1 1 45%;padding:14px 16px;}
+    .wrap{padding:0 18px;}
+  }
+  @media(max-width:420px){
+    .readout-item{flex:1 1 100%;border-right:none;border-bottom:1px solid var(--line);}
+    .readout-item:last-child{border-bottom:none;}
+  }
+
+  /* ── ABOUT ── */
+  .about-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:60px;margin-top:46px;align-items:start;}
+  @media(max-width:820px){ .about-grid{grid-template-columns:1fr;} }
+  .about-text p{color:var(--steel);font-size:16px;margin-bottom:16px;max-width:520px;}
+  .about-text strong{color:var(--cream);font-weight:500;}
+  .coverage-box{
+    border:1px solid var(--line);padding:26px;background:var(--charcoal2);
+  }
+  .coverage-box .section-label{margin-bottom:18px;}
+  .state-list{display:grid;grid-template-columns:1fr 1fr;gap:10px 20px;}
+  .state-item{
+    display:flex;justify-content:space-between;align-items:center;
+    font-family:'Space Mono',monospace;font-size:13px;
+    border-bottom:1px solid var(--line);padding-bottom:8px;
+  }
+  .state-item span:first-child{color:var(--cream);}
+  .state-item span:last-child{color:var(--steel);font-size:11px;}
+
+  /* ── SERVICES ── */
+  .services-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;margin-top:50px;background:var(--line);}
+  @media(max-width:760px){ .services-grid{grid-template-columns:1fr;} }
+  .service-card{
+    background:var(--charcoal);padding:34px 30px;
+    transition:background .2s;
+  }
+  .service-card:hover{background:var(--charcoal2);}
+  .service-num{
+    font-family:'Space Mono',monospace;font-size:12px;color:var(--gold);
+    margin-bottom:16px;letter-spacing:0.08em;
+  }
+  .service-card h3{font-size:22px;color:var(--cream);margin-bottom:12px;}
+  .service-card p{color:var(--steel);font-size:15px;}
+  .service-links{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap;}
+  .service-link{
+    display:inline-flex;align-items:center;gap:6px;
+    font-family:'Space Mono',monospace;font-size:11px;font-weight:700;
+    letter-spacing:0.05em;text-transform:uppercase;
+    padding:7px 13px;border-radius:20px;border:1px solid;
+    transition:all .2s;
+  }
+  .service-link.fb{color:#5f9eff;border-color:rgba(95,158,255,0.4);background:rgba(95,158,255,0.08);}
+  .service-link.fb:hover{background:rgba(95,158,255,0.18);}
+  .service-link.yt{color:#ff6259;border-color:rgba(255,98,89,0.4);background:rgba(255,98,89,0.08);}
+  .service-link.yt:hover{background:rgba(255,98,89,0.18);}
+
+  /* ── TEAM ── */
+  .team-layout{display:grid;grid-template-columns:300px 1fr;gap:50px;margin-top:46px;align-items:start;}
+  @media(max-width:820px){ .team-layout{grid-template-columns:1fr;} }
+  .team-video-wrap{border:1px solid var(--line);background:var(--charcoal2);padding:8px;}
+  .team-video-wrap video{width:100%;display:block;aspect-ratio:4/5;object-fit:cover;background:#000;}
+  .team-video-caption{
+    font-family:'Space Mono',monospace;font-size:10px;color:var(--steel);
+    text-transform:uppercase;letter-spacing:0.08em;padding:10px 4px 2px;
+  }
+  .team-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
+  @media(max-width:480px){ .team-grid{grid-template-columns:1fr;} }
+  .team-card{border-top:2px solid var(--gold);padding-top:16px;}
+  .team-name{font-family:'Anton',sans-serif;font-size:20px;color:var(--cream);text-transform:uppercase;letter-spacing:0.01em;}
+  .team-role{
+    font-family:'Space Mono',monospace;font-size:11px;color:var(--amber);
+    text-transform:uppercase;letter-spacing:0.06em;margin-top:6px;
+  }
+
+  /* ── CONTACT / FOOTER ── */
+  footer{
+    background:var(--charcoal2);border-top:1px solid var(--line);
+    padding:70px 0 34px;
+  }
+  .footer-grid{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:50px;}
+  @media(max-width:760px){ .footer-grid{grid-template-columns:1fr;gap:36px;} }
+  .footer-logo-img{height:64px;width:auto;display:block;margin-bottom:16px;}
+  .footer-brand p{color:var(--steel);font-size:14px;max-width:320px;}
+  .footer-col h4{
+    font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.1em;
+    color:var(--gold);text-transform:uppercase;margin-bottom:16px;
+  }
+  .footer-col a, .footer-col div{
+    display:block;color:var(--cream);font-size:14px;margin-bottom:10px;
+  }
+  .footer-col a:hover{color:var(--amber);}
+  .footer-bottom{
+    margin-top:60px;padding-top:24px;border-top:1px solid var(--line);
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
+    font-family:'Space Mono',monospace;font-size:11px;color:var(--steel);
+  }
+  .footer-bottom strong{color:var(--steel);font-weight:400;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="logo"><img src="/605-chaser-logo.png" alt="605 Chaser logo" class="logo-icon">605 CHASER</div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#team">Team</a>
+      <a href="/forecast.html">7-Day Forecast</a>
+      <a href="https://tornadotarget.netlify.app" target="_blank" rel="noopener noreferrer">Tornado Targets</a>
+      <a href="/sponsor.html">Sponsor Us</a>
+      <a href="/ride-along.html">Ride-Along</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="llc-pill">605 Chaser LLC</div>
+    <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#team">Team</a>
+    <a href="/forecast.html">7-Day Forecast</a>
+    <a href="https://tornadotarget.netlify.app" target="_blank" rel="noopener noreferrer">Tornado Targets</a>
+    <a href="/sponsor.html">Sponsor Us</a>
+    <a href="/ride-along.html">Ride-Along</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-eyebrow">Northern Plains Severe Weather Coverage</div>
+    <h1>Tracking Chaos.<br>Delivering <span class="accent">Clarity.</span></h1>
+    <p>605 Chaser LLC is a storm chasing and severe weather content operation based in Harrisburg, South Dakota — covering live tornado, hail, and wind events across a five-state territory for broadcasters, sponsors, and the public.</p>
+    <div class="hero-cta">
+      <a href="mailto:sdweatherdad@gmail.com" class="btn btn-primary">Partner With Us</a>
+      <a href="https://www.youtube.com/@605chaser/streams" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">Watch Live Coverage →</a>
+    </div>
+  </div>
+</header>
+
+<div class="readout">
+  <div class="wrap">
+    <div class="readout-item">
+      <div class="readout-label">Status</div>
+      <div class="readout-val live"><span class="live-dot"></span>Active Coverage</div>
+    </div>
+    <div class="readout-item">
+      <div class="readout-label">Territory</div>
+      <div class="readout-val">5-State Region</div>
+    </div>
+    <div class="readout-item">
+      <div class="readout-label">Base of Operations</div>
+      <div class="readout-val gold">Harrisburg, SD</div>
+    </div>
+    <div class="readout-item">
+      <div class="readout-label">Founded</div>
+      <div class="readout-val">2019</div>
+    </div>
+    <div class="readout-item">
+      <div class="readout-label">Entity</div>
+      <div class="readout-val">SD LLC</div>
+    </div>
+  </div>
+</div>
+
+<section id="about">
+  <div class="wrap">
+    <div class="section-label">About the Operation</div>
+    <h2 class="section-title">Storm chasing built into a formal, sustainable business.</h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>605 Chaser began in 2019 as an independent severe weather content project and has grown into <strong>605 Chaser LLC</strong>, a registered South Dakota business built around live storm coverage, field reporting, and public safety communication.</p>
+        <p>The team runs a full broadcast pipeline — live overlays, real-time radar and mesoscale analysis tools, road and shelter intelligence, and direct coordination with National Weather Service offices — to deliver accurate, fast severe weather information from the field.</p>
+        <p>Beyond content, 605 Chaser is building toward guided ride-along experiences for the 2027 chase season and a Field Scholar Program connecting university meteorology students with real storm intercepts.</p>
+      </div>
+      <div class="coverage-box">
+        <div class="section-label">Coverage Territory</div>
+        <div class="state-list">
+          <div class="state-item"><span>South Dakota</span><span>HOME BASE</span></div>
+          <div class="state-item"><span>North Dakota</span><span>ACTIVE</span></div>
+          <div class="state-item"><span>Minnesota</span><span>ACTIVE</span></div>
+          <div class="state-item"><span>Iowa</span><span>ACTIVE</span></div>
+          <div class="state-item"><span>Nebraska</span><span>ACTIVE</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="wrap">
+    <div class="section-label">What We Do</div>
+    <h2 class="section-title">From live storm footage to guided field experiences.</h2>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-num">01 — CONTENT & MEDIA</div>
+        <h3>Live Severe Weather Coverage</h3>
+        <p>Real-time video, live-streamed intercepts, and short-form storm footage distributed across Facebook, YouTube, and TikTok.</p>
+        <div class="service-links">
+          <a href="https://www.facebook.com/605chaser/live_videos" target="_blank" rel="noopener noreferrer" class="service-link fb">▶ Facebook Live</a>
+          <a href="https://www.youtube.com/@605chaser/streams" target="_blank" rel="noopener noreferrer" class="service-link yt">▶ YouTube Streams</a>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-num">02 — PARTNERSHIPS</div>
+        <h3>Sponsorships & Brand Integration</h3>
+        <p>Field-use product placement and sponsor integration for outdoor, automotive, and emergency-preparedness brands, backed by an active analytics program.</p>
+        <div class="service-links">
+          <a href="/sponsor.html" class="service-link fb">→ Sponsorship Details</a>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-num">03 — RIDE-ALONGS</div>
+        <h3>Guided Storm Chase Experiences</h3>
+        <p>Tiered ride-along program launching for the 2027 season — Storm Observer, Content Creator, and Field Intensive experiences for guests riding with the team.</p>
+        <div class="service-links">
+          <a href="/ride-along.html" class="service-link yt">→ Ride-Along Details</a>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-num">04 — EDUCATION & OUTREACH</div>
+        <h3>Speaking & Community Programs</h3>
+        <p>Speaking engagements, severe weather education, and the developing Field Scholar Program connecting meteorology students with real field forecasting.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="team">
+  <div class="wrap">
+    <div class="section-label">The Team</div>
+    <h2 class="section-title">Six people. One radar screen. Five states of road.</h2>
+    <div class="team-layout">
+      <div>
+        <div class="team-video-wrap">
+          <video controls playsinline preload="metadata">
+            <source src="605ChaserTeam.mp4" type="video/mp4">
+            Your browser doesn't support embedded video.
+          </video>
+        </div>
+        <div class="team-video-caption">605 Chaser · Field Team</div>
+      </div>
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="team-name">Henry Cramer</div>
+          <div class="team-role">Founder & President</div>
+        </div>
+        <div class="team-card">
+          <div class="team-name">Jeff Andera</div>
+          <div class="team-role">Vice President</div>
+        </div>
+        <div class="team-card">
+          <div class="team-name">Brian Anglin</div>
+          <div class="team-role">Field Operations & Logistics</div>
+        </div>
+        <div class="team-card">
+          <div class="team-name">Trace Wipf</div>
+          <div class="team-role">Field Operations Lead</div>
+        </div>
+        <div class="team-card">
+          <div class="team-name">Kelly Lacey</div>
+          <div class="team-role">Social Media Manager</div>
+        </div>
+        <div class="team-card">
+          <div class="team-name">Mathew "MJ" Johnson</div>
+          <div class="team-role">Video Editor</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="/605chaser-logo-full.png" alt="605 Chaser — Tracking Chaos, Delivering Clarity" class="footer-logo-img">
+        <p>605 Chaser LLC is a storm chasing and severe weather content operation based in Harrisburg, South Dakota, covering the Northern Plains.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="tel:+16059060063">(605) 906-0063</a>
+        <a href="https://www.facebook.com/605chaser" target="_blank" rel="noopener noreferrer">facebook.com/605chaser</a>
+        <div>726 W Willow St, Unit 2<br>Harrisburg, SD 57032</div>
+      </div>
+      <div class="footer-col">
+        <h4>Business Entity</h4>
+        <div>605 Chaser LLC</div>
+        <div>South Dakota</div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© <span id="year"></span> 605 Chaser LLC. All rights reserved.</div>
+      <div><strong>Tracking Chaos. Delivering Clarity.</strong></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburgerBtn.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.toggle('open');
+    hamburgerBtn.classList.toggle('open', isOpen);
+    hamburgerBtn.setAttribute('aria-expanded', isOpen);
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      hamburgerBtn.classList.remove('open');
+      hamburgerBtn.setAttribute('aria-expanded', 'false');
+    });
+  });
+</script>
+</body>
+</html>
