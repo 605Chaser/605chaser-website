@@ -111,6 +111,38 @@
   .proof-box .section-label{justify-content:center;}
   .proof-box p{color:var(--steel);font-size:16px;max-width:560px;margin:10px auto 0;}
 
+  /* ── SPONSORSHIP TIERS ── */
+  .tier-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:50px;}
+  @media(max-width:900px){ .tier-grid{grid-template-columns:1fr;} }
+  .tier-card{border:1px solid var(--line);background:var(--charcoal2);padding:30px;display:flex;flex-direction:column;}
+  .tier-card.featured{border-color:var(--gold);}
+  .tier-badge{font-family:'Space Mono',monospace;font-size:11px;color:var(--gold);letter-spacing:0.1em;margin-bottom:6px;}
+  .tier-card h3{font-size:22px;color:var(--cream);margin-bottom:6px;}
+  .tier-price{font-family:'Anton',sans-serif;font-size:32px;color:var(--amber);margin-bottom:2px;}
+  .tier-price span{font-family:'Space Mono',monospace;font-size:12px;color:var(--steel);text-transform:uppercase;font-weight:400;}
+  .tier-limit{font-family:'Space Mono',monospace;font-size:11px;color:var(--steel);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:18px;}
+  .tier-list{border-top:1px solid var(--line);padding-top:16px;flex-grow:1;}
+  .tier-list div{font-family:'Space Mono',monospace;font-size:12px;color:var(--steel);margin-bottom:10px;padding-left:16px;position:relative;}
+  .tier-list div::before{content:"✓";position:absolute;left:0;color:var(--gold);}
+  .tier-list div.sub{color:var(--cream);}
+
+  /* ── EVENT SPONSORSHIPS ── */
+  .event-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:26px;background:var(--line);}
+  @media(max-width:760px){ .event-grid{grid-template-columns:1fr;} }
+  .event-card{background:var(--charcoal);padding:26px;}
+  .event-card h4{font-size:15px;color:var(--cream);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:8px;font-family:'Oswald',sans-serif;font-weight:600;}
+  .event-price{font-family:'Space Mono',monospace;font-size:18px;color:var(--gold);font-weight:700;margin-bottom:10px;}
+  .event-card p{color:var(--steel);font-size:13px;}
+
+  /* ── GOAL STRIP ── */
+  .goal-strip{border:1px solid var(--line);background:var(--charcoal2);margin-top:30px;display:flex;flex-wrap:wrap;}
+  .goal-item{flex:1 1 160px;padding:20px 22px;border-right:1px solid var(--line);font-family:'Space Mono',monospace;}
+  .goal-item:last-child{border-right:none;background:rgba(232,183,35,0.08);}
+  .goal-label{font-size:10px;letter-spacing:0.08em;color:var(--steel);text-transform:uppercase;margin-bottom:6px;}
+  .goal-val{font-size:18px;color:var(--cream);font-weight:700;}
+  .goal-item:last-child .goal-val{color:var(--gold);}
+  @media(max-width:700px){ .goal-item{flex:1 1 50%;border-bottom:1px solid var(--line);} }
+
   /* ── CTA BAND ── */
   .cta-band{background:var(--charcoal2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:70px 0;text-align:center;}
   .cta-band h2{font-size:clamp(28px,4vw,40px);max-width:640px;margin:0 auto 18px;}
@@ -167,8 +199,8 @@
     <h1>Reach An Audience<br>That Watches When It <span class="accent">Matters.</span></h1>
     <p>605 Chaser puts your brand in front of a highly engaged Northern Plains audience during the moments they're paying the closest attention — live severe weather. Field-use placement, live-stream integration, and short-form content across Facebook, TikTok, and YouTube.</p>
     <div class="hero-cta">
-      <a href="mailto:sdweatherdad@gmail.com?subject=Sponsorship%20Inquiry" class="btn btn-primary">Get Our Media Kit</a>
-      <a href="/#services" class="btn btn-ghost">See What We Do →</a>
+      <a href="#levels" class="btn btn-primary">See Sponsorship Levels</a>
+      <a href="mailto:sdweatherdad@gmail.com?subject=Sponsorship%20Inquiry" class="btn btn-ghost">Email Us →</a>
     </div>
   </div>
 </header>
@@ -201,41 +233,124 @@
 <section id="why">
   <div class="wrap">
     <div class="section-label">Why Partner With Us</div>
-    <h2 class="section-title">Your brand, in the field, when the weather is the story everyone's watching.</h2>
-    <p class="section-intro">Severe weather content draws attention other content can't compete with — people watch live, they share, and they come back the next time a warning goes out. Sponsors get placed inside that moment, not just next to it.</p>
+    <h2 class="section-title">Align your brand with trust, community, and public safety.</h2>
+    <p class="section-intro">605 Chaser is a trusted source for severe weather tracking, live coverage, and community education across South Dakota and the surrounding region. Partner with us to reach thousands of engaged viewers while supporting a mission that keeps our communities informed and prepared.</p>
     <div class="services-grid">
       <div class="service-card">
         <div class="service-num">01</div>
-        <h3>Live Broadcast Placement</h3>
-        <p>On-air mentions and visual placement during live storm-chase broadcasts across Facebook and YouTube.</p>
+        <h3>Reach Engaged Followers</h3>
+        <p>Thousands of engaged weather followers across Facebook, YouTube, and TikTok.</p>
       </div>
       <div class="service-card">
         <div class="service-num">02</div>
-        <h3>Short-Form Integration</h3>
-        <p>Sponsor callouts and product integration built into daily severe weather reels distributed across Facebook, TikTok, and YouTube.</p>
+        <h3>Trust & Public Safety</h3>
+        <p>Align your brand with trust, community, and public safety in the region you serve.</p>
       </div>
       <div class="service-card">
         <div class="service-num">03</div>
-        <h3>Field-Use Product Placement</h3>
-        <p>Real, visible use of outdoor, automotive, and emergency-preparedness gear in actual field conditions — not staged studio shots.</p>
+        <h3>Real-Time Coverage</h3>
+        <p>Support real-time severe weather coverage and community education initiatives.</p>
       </div>
       <div class="service-card">
         <div class="service-num">04</div>
-        <h3>24/7 Stream Exposure</h3>
-        <p>Presence on our nationwide 24/7 YouTube weather stream, running continuously beyond individual chase days.</p>
+        <h3>Local, Regional Impact</h3>
+        <p>Local exposure with regional impact across South Dakota and surrounding areas.</p>
       </div>
     </div>
-    <div class="proof-box">
-      <div class="section-label">Building Our Sponsor Roster</div>
-      <p>605 Chaser is actively growing its partnership program for the 2026–2027 chase seasons. Reach out early and we'll work with you directly on placement and reporting as a founding partner.</p>
+  </div>
+</section>
+
+<section id="levels">
+  <div class="wrap">
+    <div class="section-label">Annual Sponsorship Levels</div>
+    <h2 class="section-title">Three tiers, built to sustain our mission and grow our impact.</h2>
+    <div class="tier-grid">
+      <div class="tier-card">
+        <div class="tier-badge">BRONZE SPONSOR</div>
+        <h3>Bronze</h3>
+        <div class="tier-price">$500<span> / year</span></div>
+        <div class="tier-limit">Limited to 10 sponsors</div>
+        <div class="tier-list">
+          <div>Business name on 605 Chaser sponsor board (website & live streams)</div>
+          <div>Logo on thank-you sponsor slides</div>
+          <div>1 social media thank-you post per year</div>
+          <div>Listed in annual sponsor spotlight</div>
+        </div>
+      </div>
+      <div class="tier-card featured">
+        <div class="tier-badge">SILVER SPONSOR</div>
+        <h3>Silver</h3>
+        <div class="tier-price">$1,000<span> / year</span></div>
+        <div class="tier-limit">Limited to 5 sponsors</div>
+        <div class="tier-list">
+          <div class="sub">All Bronze benefits, plus:</div>
+          <div>Medium logo on live stream overlay</div>
+          <div>2 social media thank-you posts per year</div>
+          <div>Business name in all major forecast/outlook posts</div>
+          <div>Feature in one "Sponsor Spotlight" post per year</div>
+        </div>
+      </div>
+      <div class="tier-card">
+        <div class="tier-badge">GOLD SPONSOR</div>
+        <h3>Gold</h3>
+        <div class="tier-price">$2,500<span> / year</span></div>
+        <div class="tier-limit">Limited to 2 sponsors</div>
+        <div class="tier-list">
+          <div class="sub">All Silver benefits, plus:</div>
+          <div>Large logo on live stream overlay</div>
+          <div>Logo on all video intros/outros</div>
+          <div>4 social media thank-you posts per year</div>
+          <div>Exclusive "Partner Spotlight" video feature (1 per year)</div>
+          <div>Priority placement on website sponsor page</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-label" style="margin-top:64px;">Event-Specific Sponsorships</div>
+    <p class="section-intro">Prefer to support a single moment instead of a full year? These options let you back a specific chase day, event, or presentation.</p>
+    <div class="event-grid">
+      <div class="event-card">
+        <h4>Single Chase Day</h4>
+        <div class="event-price">$100 – $250</div>
+        <p>Perfect for businesses that want to support a single chase day or weather coverage event.</p>
+      </div>
+      <div class="event-card">
+        <h4>Major Severe Weather Event</h4>
+        <div class="event-price">$250 – $500</div>
+        <p>High-visibility sponsorship during major severe weather outbreaks and events.</p>
+      </div>
+      <div class="event-card">
+        <h4>Community Event or Presentation</h4>
+        <div class="event-price">$250 – $750</div>
+        <p>Support weather safety presentations, community events, or other educational initiatives.</p>
+      </div>
+    </div>
+
+    <div class="goal-strip">
+      <div class="goal-item">
+        <div class="goal-label">10 Bronze Sponsors</div>
+        <div class="goal-val">$5,000 / year</div>
+      </div>
+      <div class="goal-item">
+        <div class="goal-label">5 Silver Sponsors</div>
+        <div class="goal-val">$5,000 / year</div>
+      </div>
+      <div class="goal-item">
+        <div class="goal-label">2 Gold Sponsors</div>
+        <div class="goal-val">$5,000 / year</div>
+      </div>
+      <div class="goal-item">
+        <div class="goal-label">Total Annual Goal</div>
+        <div class="goal-val">$15,000 / year</div>
+      </div>
     </div>
   </div>
 </section>
 
 <div class="cta-band">
   <div class="wrap">
-    <h2>Interested in partnering with 605 Chaser?</h2>
-    <p>Email us and we'll send over our full media kit, audience breakdown, and sponsorship rates.</p>
+    <h2>Ready to partner with 605 Chaser?</h2>
+    <p>Let's work together to keep our communities informed and safe. Email us to pick your level and get started.</p>
     <a href="mailto:sdweatherdad@gmail.com?subject=Sponsorship%20Inquiry" class="btn btn-primary">Email sdweatherdad@gmail.com</a>
   </div>
 </div>
