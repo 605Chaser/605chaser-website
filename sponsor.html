@@ -6,6 +6,10 @@
 <meta name="theme-color" content="#141414">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <title>Sponsor 605 Chaser — Partnerships & Brand Integration</title>
 <meta name="description" content="Partner with 605 Chaser LLC, a storm chasing and severe weather media operation reaching 25,000+ followers across Facebook, TikTok, and YouTube with live coverage across the Northern Plains.">
 
@@ -16,7 +20,7 @@
 <meta property="og:description" content="Reach an engaged severe-weather audience across Facebook, TikTok, and YouTube. Partner with 605 Chaser LLC.">
 <meta property="og:image" content="https://605chaser.com/og-image.jpg">
 <meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="1500">
+<meta property="og:image:height" content="630">
 <meta property="og:url" content="https://605chaser.com/sponsor.html">
 
 <!-- Twitter / X Card -->
@@ -47,7 +51,8 @@
   /* ── NAV ── */
   nav{position:sticky;top:0;z-index:100;background:rgba(20,20,20,0.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
   nav .wrap{display:flex;align-items:center;justify-content:space-between;padding-top:16px;padding-bottom:16px;}
-  .logo{font-family:'Anton',sans-serif;font-size:22px;letter-spacing:0.04em;color:var(--cream);display:flex;align-items:center;gap:9px;}
+  .logo{font-family:'Anton',sans-serif;font-size:22px;letter-spacing:0.04em;color:var(--cream);display:flex;align-items:center;gap:9px;white-space:nowrap;flex-shrink:0;}
+  .logo-icon{height:32px;width:auto;display:block;flex-shrink:0;}
   .logo-mark{width:11px;height:11px;border-radius:50%;background:var(--gold);box-shadow:0 0 10px var(--gold);flex-shrink:0;}
   .nav-links{display:flex;gap:26px;font-size:13px;text-transform:uppercase;letter-spacing:0.08em;font-weight:500;}
   .nav-links a{color:var(--steel);transition:color .2s;}
@@ -152,7 +157,7 @@
   footer{background:var(--charcoal2);border-top:1px solid var(--line);padding:70px 0 34px;}
   .footer-grid{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:50px;}
   @media(max-width:760px){ .footer-grid{grid-template-columns:1fr;gap:36px;} }
-  .footer-brand .logo{margin-bottom:16px;}
+  .footer-logo-img{height:64px;width:auto;display:block;margin-bottom:16px;}
   .footer-brand p{color:var(--steel);font-size:14px;max-width:320px;}
   .footer-col h4{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.1em;color:var(--gold);text-transform:uppercase;margin-bottom:16px;}
   .footer-col a, .footer-col div{display:block;color:var(--cream);font-size:14px;margin-bottom:10px;}
@@ -165,7 +170,7 @@
 
 <nav>
   <div class="wrap">
-    <a href="/" class="logo"><span class="logo-mark"></span>605 CHASER</a>
+    <a href="/" class="logo"><img src="/605-chaser-logo.png" alt="605 Chaser logo" class="logo-icon">605 CHASER</a>
     <div class="nav-links">
       <a href="/#about">About</a>
       <a href="/#services">Services</a>
@@ -359,7 +364,7 @@
   <div class="wrap">
     <div class="footer-grid">
       <div class="footer-brand">
-        <div class="logo"><span class="logo-mark"></span>605 CHASER</div>
+        <img src="/605chaser-logo-full.png" alt="605 Chaser — Tracking Chaos, Delivering Clarity" class="footer-logo-img">
         <p>605 Chaser LLC is a storm chasing and severe weather content operation based in Harrisburg, South Dakota, covering the Northern Plains.</p>
       </div>
       <div class="footer-col">
