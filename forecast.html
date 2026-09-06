@@ -16,7 +16,7 @@
     --charcoal2:#1c1c1c;
     --charcoal3:#242424;
     --cream:#F5F1E8;
-    --orange:#E85D2C;
+    --gold:#E8B723;
     --amber:#FFB703;
     --steel:#8B96A3;
     --line:rgba(245,241,232,0.1);
@@ -48,7 +48,7 @@
   header{padding:44px 0 26px;text-align:center;}
   .logo-badge{
     width:74px;height:74px;border-radius:50%;
-    background:var(--charcoal2);border:2px solid var(--orange);
+    background:var(--charcoal2);border:2px solid var(--gold);
     display:flex;align-items:center;justify-content:center;
     margin:0 auto 14px;overflow:hidden;
   }
@@ -56,7 +56,7 @@
   .brand-name{font-family:'Anton',sans-serif;font-size:15px;letter-spacing:0.1em;color:var(--cream);margin-bottom:2px;}
   .brand-tagline{font-family:'Space Mono',monospace;font-size:10px;color:var(--amber);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:22px;}
   header h1{font-size:clamp(28px,4.6vw,42px);margin-top:4px;}
-  header h1 .accent{color:var(--orange);}
+  header h1 .accent{color:var(--gold);}
   header p{color:var(--muted);font-size:14px;margin-top:10px;max-width:460px;margin-left:auto;margin-right:auto;}
 
   /* SEARCH */
@@ -67,9 +67,9 @@
     padding:13px 16px;border-radius:2px;outline:none;
   }
   .search-box input::placeholder{color:var(--steel);}
-  .search-box input:focus{border-color:var(--orange);}
+  .search-box input:focus{border-color:var(--gold);}
   .search-box button{
-    background:var(--orange);color:var(--charcoal);border:none;
+    background:var(--gold);color:var(--charcoal);border:none;
     font-family:'Oswald',sans-serif;font-weight:600;font-size:13px;
     letter-spacing:0.04em;text-transform:uppercase;padding:0 22px;
     border-radius:2px;cursor:pointer;transition:background .2s;white-space:nowrap;
@@ -82,7 +82,7 @@
 
   /* STATES */
   .status-msg{text-align:center;padding:40px 20px;color:var(--steel);font-family:'Space Mono',monospace;font-size:13px;}
-  .status-msg.error{color:var(--orange);}
+  .status-msg.error{color:var(--gold);}
   .spinner{width:20px;height:20px;border:2px solid var(--line);border-top-color:var(--amber);border-radius:50%;display:inline-block;margin-right:8px;vertical-align:middle;animation:spin .8s linear infinite;}
   @keyframes spin{to{transform:rotate(360deg);}}
 
@@ -109,9 +109,9 @@
   .climate-credit{font-family:'Space Mono',monospace;font-size:9.5px;color:var(--steel);opacity:.7;}
 
   .alert-banner{
-    background:rgba(232,93,44,0.12);border:1px solid rgba(232,93,44,0.4);
+    background:rgba(232,183,35,0.12);border:1px solid rgba(232,183,35,0.4);
     border-radius:4px;padding:14px 18px;margin-bottom:24px;
-    font-family:'Space Mono',monospace;font-size:12px;color:var(--orange);
+    font-family:'Space Mono',monospace;font-size:12px;color:var(--gold);
     display:flex;align-items:flex-start;gap:10px;
   }
 
@@ -130,7 +130,7 @@
 
   .section-label{
     font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.12em;
-    color:var(--orange);text-transform:uppercase;margin-bottom:16px;
+    color:var(--gold);text-transform:uppercase;margin-bottom:16px;
     display:flex;align-items:center;gap:8px;
   }
   .section-label::after{content:"";flex:1;height:1px;background:var(--line);}
@@ -144,7 +144,7 @@
     background:var(--charcoal2);border:1px solid var(--line);border-radius:6px;
     padding:16px 12px 14px;text-align:center;transition:border-color .2s, transform .2s;
   }
-  .day-card:hover{border-color:var(--orange);transform:translateY(-2px);}
+  .day-card:hover{border-color:var(--gold);transform:translateY(-2px);}
   .day-name{font-family:'Space Mono',monospace;font-size:11px;color:var(--cream);text-transform:uppercase;letter-spacing:0.06em;font-weight:700;}
   .day-date{font-family:'Space Mono',monospace;font-size:9px;color:var(--steel);margin-bottom:10px;}
   .day-icon{font-size:32px;margin-bottom:10px;}
@@ -166,7 +166,7 @@
   }
   .rain-low{background:rgba(95,224,160,0.12);color:var(--green);border:1px solid rgba(95,224,160,0.3);}
   .rain-mod{background:rgba(255,183,3,0.12);color:var(--amber);border:1px solid rgba(255,183,3,0.35);}
-  .rain-high{background:rgba(232,93,44,0.14);color:var(--orange);border:1px solid rgba(232,93,44,0.4);}
+  .rain-high{background:rgba(232,183,35,0.14);color:var(--gold);border:1px solid rgba(232,183,35,0.4);}
 
   footer{border-top:1px solid var(--line);padding:26px 0;text-align:center;font-family:'Space Mono',monospace;font-size:10px;color:var(--steel);}
   footer a{color:var(--amber);}
