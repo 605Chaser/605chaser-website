@@ -47,6 +47,10 @@
   .nav-logo span{font-family:'Anton',sans-serif;font-size:17px;letter-spacing:0.03em;}
   .back-link{font-family:'Space Mono',monospace;font-size:12px;color:var(--steel);letter-spacing:0.04em;}
   .back-link:hover{color:var(--amber);}
+  .nav-right{display:flex;align-items:center;gap:18px;}
+  .btn-donate{font-family:'Oswald',sans-serif;font-weight:600;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;background:var(--gold);color:var(--charcoal);padding:8px 14px;border-radius:20px;white-space:nowrap;transition:background .2s;}
+  .btn-donate:hover{background:var(--amber);}
+  @media(max-width:460px){ .btn-donate{padding:7px 11px;font-size:11px;} }
 
   /* HEADER */
   header{padding:44px 0 26px;text-align:center;}
@@ -202,7 +206,10 @@
       <img src="605-chaser-logo.png" alt="605 Chaser logo">
       <span>605 CHASER</span>
     </div>
-    <a href="/" class="back-link">← BACK TO SITE</a>
+    <div class="nav-right">
+      <a href="https://www.paypal.com/paypalme/605chaser" target="_blank" rel="noopener noreferrer" class="btn-donate">Donate Today</a>
+      <a href="/" class="back-link">← BACK TO SITE</a>
+    </div>
   </div>
 </nav>
 
