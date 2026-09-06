@@ -78,9 +78,16 @@
     box-shadow:0 0 10px var(--gold);
     flex-shrink:0;
   }
-  .nav-links{display:flex;gap:30px;font-size:13px;text-transform:uppercase;letter-spacing:0.08em;font-weight:500;}
+  .nav-links{display:flex;gap:24px;font-size:13px;text-transform:uppercase;letter-spacing:0.08em;font-weight:500;}
   .nav-links a{color:var(--steel);transition:color .2s;}
   .nav-links a:hover{color:var(--amber);}
+  .btn-donate{
+    font-family:'Oswald',sans-serif;font-weight:600;font-size:12px;letter-spacing:0.06em;
+    text-transform:uppercase;background:var(--gold);color:var(--charcoal);
+    padding:9px 16px;border-radius:20px;white-space:nowrap;transition:background .2s;
+    flex-shrink:0;
+  }
+  .btn-donate:hover{background:var(--amber);}
   .llc-pill{
     font-family:'Space Mono',monospace;
     font-size:10px;letter-spacing:0.08em;
@@ -103,17 +110,19 @@
     max-height:0;overflow:hidden;transition:max-height .3s ease;
     background:var(--charcoal2);border-bottom:1px solid var(--line);
   }
-  .mobile-menu.open{max-height:340px;}
+  .mobile-menu.open{max-height:600px;}
   .mobile-menu a{
     padding:16px 28px;font-size:14px;text-transform:uppercase;letter-spacing:0.08em;
     color:var(--cream);border-bottom:1px solid var(--line);font-weight:500;
   }
   .mobile-menu a:last-child{border-bottom:none;}
   .mobile-menu a:active{background:rgba(232,183,35,0.1);}
+  .mobile-menu a.donate{color:var(--gold);font-weight:700;}
 
   @media(max-width:760px){
     .nav-links{display:none;}
     .llc-pill{display:none;}
+    .btn-donate{display:none;}
     .hamburger{display:flex;}
     .mobile-menu{display:flex;}
   }
@@ -292,6 +301,7 @@
       <a href="#contact">Contact</a>
     </div>
     <div class="llc-pill">605 Chaser LLC</div>
+    <a href="https://www.paypal.com/paypalme/605chaser" target="_blank" rel="noopener noreferrer" class="btn-donate">Donate Today</a>
     <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
@@ -305,6 +315,7 @@
     <a href="/sponsor.html">Sponsor Us</a>
     <a href="/ride-along.html">Ride-Along</a>
     <a href="#contact">Contact</a>
+    <a href="https://www.paypal.com/paypalme/605chaser" target="_blank" rel="noopener noreferrer" class="donate">Donate Today</a>
   </div>
 </nav>
 
