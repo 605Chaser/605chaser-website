@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#141414">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<title>Storm Ingredients Simulator (Training Tool) — 605 Chaser</title>
+<meta name="description" content="An educational training sandbox from 605 Chaser for learning how meteorologists think about severe weather risk. Fictional scenarios only — not a real forecast.">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="605 Chaser LLC">
+<meta property="og:title" content="Storm Ingredients Simulator (Training Tool) — 605 Chaser">
+<meta property="og:description" content="Build a fictional severe-weather scenario and see how the ingredients come together. Educational only — not a real forecast.">
+<meta property="og:image" content="https://605chaser.com/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://605chaser.com/storm-simulator.html">
+
+<!-- Twitter / X Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Storm Ingredients Simulator (Training Tool) — 605 Chaser">
+<meta name="twitter:description" content="A fictional training sandbox for learning severe weather ingredients. Not a real forecast.">
+<meta name="twitter:image" content="https://605chaser.com/og-image.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --charcoal:#141414;
+    --charcoal2:#1c1c1c;
+    --charcoal3:#242424;
+    --cream:#F5F1E8;
+    --gold:#E8B723;
+    --amber:#FFB703;
+    --steel:#8B96A3;
+    --line:rgba(245,241,232,0.1);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--charcoal);color:var(--cream);font-family:'Oswald',sans-serif;font-weight:300;line-height:1.6;overflow-x:hidden;}
+  ::selection{background:var(--gold);color:var(--charcoal);}
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px;}
+  h1,h2,h3{font-family:'Anton',sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:0.02em;line-height:1.05;}
+
+  /* ── DISCLAIMER BAR (sticky, always visible) ── */
+  .disclaimer-bar{position:sticky;top:0;z-index:200;background:var(--amber);color:var(--charcoal);font-family:'Oswald',sans-serif;font-weight:600;font-size:13px;text-align:center;padding:10px 16px;letter-spacing:0.02em;}
+  .disclaimer-bar a{text-decoration:underline;color:var(--charcoal);}
+  .disclaimer-bar strong{font-weight:800;}
+
+  /* ── NAV ── */
+  nav{position:sticky;top:38px;z-index:100;background:rgba(20,20,20,0.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;padding-top:16px;padding-bottom:16px;}
+  .logo{font-family:'Anton',sans-serif;font-size:22px;letter-spacing:0.04em;color:var(--cream);display:flex;align-items:center;gap:9px;white-space:nowrap;flex-shrink:0;}
+  .logo-icon{height:32px;width:auto;display:block;flex-shrink:0;}
+  .nav-links{display:flex;gap:18px;font-size:12px;text-transform:uppercase;letter-spacing:0.07em;font-weight:500;}
+  .nav-links a{color:var(--steel);transition:color .2s;}
+  .nav-links a:hover, .nav-links a.current{color:var(--amber);}
+  .llc-pill{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.08em;color:var(--steel);border:1px solid var(--line);padding:4px 10px;border-radius:20px;text-transform:uppercase;white-space:nowrap;}
+  .btn-donate{font-family:'Oswald',sans-serif;font-weight:600;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;background:var(--gold);color:var(--charcoal);padding:9px 16px;border-radius:20px;white-space:nowrap;transition:background .2s;flex-shrink:0;}
+  .btn-donate:hover{background:var(--amber);}
+  .hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;-webkit-tap-highlight-color:transparent;}
+  .hamburger span{width:22px;height:2px;background:var(--cream);transition:all .25s;}
+  .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .hamburger.open span:nth-child(2){opacity:0;}
+  .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+  .mobile-menu{display:none;flex-direction:column;max-height:0;overflow:hidden;transition:max-height .3s ease;background:var(--charcoal2);border-bottom:1px solid var(--line);}
+  .mobile-menu.open{max-height:600px;}
+  .mobile-menu a{padding:16px 28px;font-size:14px;text-transform:uppercase;letter-spacing:0.08em;color:var(--cream);border-bottom:1px solid var(--line);font-weight:500;}
+  .mobile-menu a:last-child{border-bottom:none;}
+  .mobile-menu a:active{background:rgba(232,183,35,0.1);}
+  .mobile-menu a.donate{color:var(--gold);font-weight:700;}
+  @media(max-width:900px){ .nav-links{display:none;} .llc-pill{display:none;} .btn-donate{display:none;} .hamburger{display:flex;} .mobile-menu{display:flex;} }
+
+  /* ── HERO ── */
+  .hero{padding:64px 0 40px;position:relative;}
+  .hero-eyebrow{font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.15em;color:var(--amber);text-transform:uppercase;margin-bottom:18px;display:flex;align-items:center;gap:8px;}
+  .hero-eyebrow::before{content:"";width:24px;height:1px;background:var(--amber);}
+  .hero h1{font-size:clamp(32px,5.5vw,58px);color:var(--cream);}
+  .hero h1 .accent{color:var(--gold);}
+  .hero p{max-width:640px;margin-top:20px;font-size:16px;font-weight:300;color:var(--steel);}
+  .wrap{padding-left:28px;padding-right:28px;}
+  section{padding:50px 0;}
+  .section-label{font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.12em;color:var(--gold);text-transform:uppercase;margin-bottom:14px;}
+
+  /* ── TOOL LAYOUT (scoped to .sim) ── */
+  .sim-wrap{display:grid;gap:16px;grid-template-columns:380px 1fr;}
+  @media (max-width: 1024px){.sim-wrap{grid-template-columns:1fr;}}
+  .sim-card{background:var(--charcoal2);border:1px solid var(--line);border-radius:10px;padding:18px 20px;}
+  .sim-card h2{margin:0 0 6px;font-size:16px;letter-spacing:.3px;font-weight:600;font-family:'Oswald',sans-serif;text-transform:uppercase;color:var(--gold);}
+  .sim-card .sim-h2-note{color:var(--steel);font-size:12.5px;margin-bottom:14px;}
+  .sim-row{display:grid;grid-template-columns:1fr 130px;gap:10px;align-items:center;margin-bottom:8px;}
+  .sim-row label{font-size:13px;color:var(--cream);}
+  .sim-row .val{text-align:right;color:var(--amber);font-weight:700;font-family:'Space Mono',monospace;font-size:13px;}
+  input[type="range"]{width:100%;accent-color:var(--gold);}
+  select, input[type="number"]{
+    width:100%;background:var(--charcoal);color:var(--cream);border:1px solid var(--line);border-radius:6px;padding:8px 10px;outline:none;font-family:'Oswald',sans-serif;font-size:13px;}
+  select:focus, input:focus{border-color:var(--gold);}
+  .sim-hint{color:var(--steel);font-size:11.5px;margin-top:2px;}
+  .sim-controls{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 0;}
+  .sim-btn{background:var(--charcoal);color:var(--cream);border:1px solid var(--line);border-radius:20px;padding:9px 16px;cursor:pointer;transition:.2s;font-family:'Oswald',sans-serif;font-weight:600;font-size:12px;letter-spacing:0.04em;text-transform:uppercase;}
+  .sim-btn:hover{border-color:var(--gold);color:var(--gold);}
+  .sim-btn.primary{background:var(--gold);color:var(--charcoal);border:none;}
+  .sim-btn.primary:hover{background:var(--amber);color:var(--charcoal);}
+  .sim-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .sim-metric{background:var(--charcoal);border:1px dashed var(--line);border-radius:10px;padding:12px;display:grid;gap:6px;}
+  .sim-metric .big{font-size:20px;font-weight:800;font-family:'Space Mono',monospace;color:var(--cream);}
+  .sim-badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;padding:4px 10px;border-radius:999px;border:1px solid var(--line);background:var(--charcoal2);color:var(--steel);text-transform:uppercase;letter-spacing:0.06em;font-family:'Space Mono',monospace;}
+  .sim-bars{display:grid;gap:12px;}
+  .sim-bar{display:grid;grid-template-columns:110px 1fr 50px;gap:10px;align-items:center;}
+  .sim-bar .label{color:var(--cream);font-size:13px;}
+  .sim-bar .track{height:10px;background:var(--charcoal);border-radius:999px;overflow:hidden;border:1px solid var(--line);}
+  .sim-bar .fill{height:100%;width:0%;transition:width .3s ease;}
+  .sim-bar .pct{text-align:right;color:var(--cream);font-weight:700;font-size:12px;font-family:'Space Mono',monospace;}
+  .fill.tor{background:linear-gradient(90deg, rgba(232,183,35,0.35), var(--gold));}
+  .fill.hail{background:linear-gradient(90deg, rgba(255,183,3,0.35), var(--amber));}
+  .fill.wind{background:linear-gradient(90deg, rgba(139,150,163,0.5), var(--cream));}
+
+  /* ── FICTIONAL RESULT BOX (watermarked so it survives a screenshot) ── */
+  .sim-result-wrap{position:relative;margin-top:16px;border:1px solid var(--line);border-radius:10px;padding:16px;background:var(--charcoal);overflow:hidden;}
+  .sim-result-wrap::before{
+    content:"SIMULATED · NOT A REAL FORECAST · SIMULATED · NOT A REAL FORECAST · SIMULATED";
+    position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.15em;color:rgba(245,241,232,0.05);
+    transform:rotate(-12deg) scale(1.6);white-space:nowrap;pointer-events:none;
+  }
+  .sim-result-caption{position:relative;text-align:center;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.1em;color:var(--amber);text-transform:uppercase;margin-bottom:10px;font-weight:700;}
+  .sim-riskbox{position:relative;display:grid;gap:8px;grid-template-columns:repeat(6,1fr);}
+  .sim-risk{text-align:center;padding:10px 6px;border-radius:8px;font-weight:800;font-size:11px;border:1px solid var(--line);background:var(--charcoal2);opacity:.55;transform:scale(.97);transition:.2s;color:var(--steel);font-family:'Oswald',sans-serif;letter-spacing:0.02em;}
+  .sim-risk.active{opacity:1;transform:scale(1);border-color:var(--gold);}
+  .sim-risk.active.lvl0{color:var(--steel);}
+  .sim-risk.active.lvl1{color:#c9a552;}
+  .sim-risk.active.lvl2{color:var(--gold);}
+  .sim-risk.active.lvl3{color:var(--gold);box-shadow:0 0 12px rgba(232,183,35,0.25);}
+  .sim-risk.active.lvl4{color:var(--amber);box-shadow:0 0 14px rgba(255,183,3,0.3);}
+  .sim-risk.active.lvl5{color:var(--amber);box-shadow:0 0 18px rgba(255,183,3,0.45);}
+
+  @media(max-width:760px){ .sim-riskbox{grid-template-columns:repeat(3,1fr);} }
+
+  details.sim-details{margin-top:16px;background:var(--charcoal);border:1px solid var(--line);border-radius:10px;padding:12px 14px;}
+  details.sim-details summary{cursor:pointer;color:var(--gold);font-weight:700;font-size:14px;}
+  .sim-explain{color:var(--cream);font-size:13.5px;line-height:1.7;margin-top:10px;}
+  .sim-explain ul{padding-left:18px;margin:8px 0;}
+  .sim-explain b{color:var(--gold);}
+
+  canvas{width:100%;height:170px;background:var(--charcoal);border:1px solid var(--line);border-radius:8px;}
+  .sim-footer-note{color:var(--steel);font-size:11.5px;margin-top:10px;}
+
+  /* Dials */
+  .sim-dials{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+  @media(max-width:600px){ .sim-dials{grid-template-columns:1fr;} }
+  .sim-dial{display:grid;place-items:center;background:var(--charcoal);border:1px solid var(--line);border-radius:10px;padding:14px;}
+  .sim-gauge{width:100px;height:100px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--line) 0deg,var(--line) 360deg);position:relative;}
+  .sim-gauge::after{content:"";position:absolute;width:76px;height:76px;border-radius:50%;background:var(--charcoal2);border:1px solid var(--line);}
+  .sim-dial .val{position:absolute;font-weight:800;font-size:17px;font-family:'Space Mono',monospace;color:var(--cream);}
+  .sim-dial .lbl{margin-top:8px;font-size:11.5px;color:var(--steel);text-align:center;}
+
+  .real-link-box{border:1px solid var(--line);background:var(--charcoal2);border-radius:10px;padding:16px 20px;margin-top:24px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;}
+  .real-link-box p{font-size:13px;color:var(--steel);}
+  .real-link-box .links a{color:var(--gold);text-decoration:underline;margin-right:16px;font-family:'Space Mono',monospace;font-size:13px;}
+
+  /* ── FOOTER ── */
+  footer{background:var(--charcoal2);border-top:1px solid var(--line);padding:70px 0 34px;}
+  .footer-grid{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:50px;}
+  @media(max-width:760px){ .footer-grid{grid-template-columns:1fr;gap:36px;} }
+  .footer-logo-img{height:64px;width:auto;display:block;margin-bottom:16px;}
+  .footer-brand p{color:var(--steel);font-size:14px;max-width:320px;}
+  .footer-col h4{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.1em;color:var(--gold);text-transform:uppercase;margin-bottom:16px;}
+  .footer-col a, .footer-col div{display:block;color:var(--cream);font-size:14px;margin-bottom:10px;}
+  .footer-col a:hover{color:var(--amber);}
+  .footer-bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-family:'Space Mono',monospace;font-size:11px;color:var(--steel);}
+  .footer-bottom strong{color:var(--steel);font-weight:400;}
+</style>
+</head>
+<body>
+
+<div class="disclaimer-bar">
+  ⚠ <strong>TRAINING SIMULATOR</strong> — This builds a fictional scenario from numbers you choose. It is not live weather data and not a real forecast. For real conditions, check <a href="https://www.weather.gov" target="_blank" rel="noopener noreferrer">weather.gov</a> or <a href="https://www.spc.noaa.gov" target="_blank" rel="noopener noreferrer">spc.noaa.gov</a>.
+</div>
+
+<nav>
+  <div class="wrap">
+    <a href="/" class="logo"><img src="/605-chaser-logo.png" alt="605 Chaser logo" class="logo-icon">605 CHASER</a>
+    <div class="nav-links">
+      <a href="/#about">About</a>
+      <a href="/#services">Services</a>
+      <a href="/#team">Team</a>
+      <a href="/forecast.html">7-Day Forecast</a>
+      <a href="https://tornadotarget.netlify.app" target="_blank" rel="noopener noreferrer">Tornado Targets</a>
+      <a href="/storm-simulator.html" class="current">Storm Simulator</a>
+      <a href="/sponsor.html">Sponsor Us</a>
+      <a href="/ride-along.html">Ride-Along</a>
+      <a href="/#contact">Contact</a>
+    </div>
+    <div class="llc-pill">605 Chaser LLC</div>
+    <a href="https://www.paypal.com/paypalme/605chaser" target="_blank" rel="noopener noreferrer" class="btn-donate">Donate Today</a>
+    <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="/#about">About</a>
+    <a href="/#services">Services</a>
+    <a href="/#team">Team</a>
+    <a href="/forecast.html">7-Day Forecast</a>
+    <a href="https://tornadotarget.netlify.app" target="_blank" rel="noopener noreferrer">Tornado Targets</a>
+    <a href="/storm-simulator.html">Storm Simulator</a>
+    <a href="/sponsor.html">Sponsor Us</a>
+    <a href="/ride-along.html">Ride-Along</a>
+    <a href="/#contact">Contact</a>
+    <a href="https://www.paypal.com/paypalme/605chaser" target="_blank" rel="noopener noreferrer" class="donate">Donate Today</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-eyebrow">Educational Training Tool</div>
+    <h1>Storm Ingredients <span class="accent">Simulator</span></h1>
+    <p>Drag the sliders to build a completely fictional atmosphere, then see how meteorologists weigh ingredients like instability, wind shear, and moisture to think about severe weather risk. This is a teaching sandbox for weather enthusiasts — the numbers are made up by you, not real current conditions, and the results are not a forecast.</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="section-label">Build A Hypothetical Scenario</div>
+    <div class="sim-controls" style="margin-bottom:20px;">
+      <select id="preset">
+        <option value="">Load a scenario…</option>
+        <option value="classic">Classic Tornadic Plains</option>
+        <option value="cool">Cool-Season Low / QLCS</option>
+        <option value="pulse">Hot & Humid Pulse Storms</option>
+        <option value="derecho">Derecho / Intense Wind</option>
+        <option value="highplains">High Plains HP Supercell</option>
+        <option value="elevated">Elevated Hail Night</option>
+      </select>
+      <button class="sim-btn" id="applyPreset">Load</button>
+      <button class="sim-btn" id="randomize">Randomize</button>
+      <button class="sim-btn" id="reset">Reset</button>
+    </div>
+
+    <div class="sim-wrap">
+      <!-- LEFT: INPUTS -->
+      <div class="sim-card">
+        <h2>Choose Your Fictional Ingredients</h2>
+        <div class="sim-h2-note">Nothing here is live data — you're inventing a hypothetical atmosphere to explore.</div>
+
+        <div class="sim-row"><label>Parcel Type</label>
+          <select id="parcelType"><option value="SB" selected>SB (Surface-Based)</option><option value="ML">ML (Mixed-Layer)</option></select>
+        </div>
+        <div class="sim-row" title="Surface temperature in °F">
+          <label>Surface Temp (°F)</label><div class="val"><span id="tVal">82</span></div>
+        </div>
+        <input type="range" id="temp" min="40" max="105" value="82" step="1"/>
+        <div class="sim-row" title="Surface dewpoint in °F">
+          <label>Dewpoint (°F)</label><div class="val"><span id="tdVal">72</span></div>
+        </div>
+        <input type="range" id="td" min="30" max="80" value="72" step="1"/>
+        <div class="sim-row" title="Instability (CAPE) in J/kg — a real measure of how much energy is available for storm updrafts.">
+          <label><span id="capeLbl">SB CAPE (J/kg)</span></label><div class="val"><span id="capeVal">2500</span></div>
+        </div>
+        <input type="range" id="cape" min="0" max="6000" value="2500" step="50"/>
+        <div class="sim-row" title="MLCAPE (J/kg). Used if Parcel Type = ML.">
+          <label>ML CAPE (J/kg)</label><div class="val"><span id="mlcapeVal">1800</span></div>
+        </div>
+        <input type="range" id="mlcape" min="0" max="6000" value="1800" step="50"/>
+        <div class="sim-row" title="Convective Inhibition (CIN) in J/kg — the 'lid' that suppresses storms until it's overcome.">
+          <label>CIN (J/kg)</label><div class="val"><span id="cinVal">50</span></div>
+        </div>
+        <input type="range" id="cin" min="0" max="300" value="50" step="5"/>
+        <div class="sim-row" title="Downdraft CAPE (DCAPE) in J/kg — relates to how strong downdrafts/wind gusts could be.">
+          <label>DCAPE (J/kg)</label><div class="val"><span id="dcapeVal">800</span></div>
+        </div>
+        <input type="range" id="dcape" min="0" max="2000" value="800" step="25"/>
+        <div class="sim-row" title="Wet-Bulb Zero height in km — lower values favor larger hail reaching the ground.">
+          <label>Wet-Bulb Zero Height (km)</label><div class="val"><span id="wbzVal">3.0</span></div>
+        </div>
+        <input type="range" id="wbz" min="1.0" max="4.5" value="3.0" step="0.1"/>
+        <div class="sim-row" title="Mid-level lapse rate (~700–500 mb), °C/km — steeper rates favor stronger updrafts.">
+          <label>Lapse Rate (°C/km)</label><div class="val"><span id="lrVal">7.5</span></div>
+        </div>
+        <input type="range" id="lapse" min="5" max="9" value="7.5" step="0.1"/>
+        <div class="sim-row" title="0–1 km Storm-Relative Helicity (m²/s²) — relates to low-level rotation potential.">
+          <label>0–1 km SRH (m²/s²)</label><div class="val"><span id="srhVal">180</span></div>
+        </div>
+        <input type="range" id="srh" min="0" max="600" value="180" step="10"/>
+        <div class="sim-row" title="A teaching-only scaling factor, loosely inspired by the idea of effective-layer values.">
+          <label>Effective-Layer Scaling</label>
+          <select id="effLayer"><option value="off" selected>Off</option><option value="on">On (SRH×1.15, Shear×1.10)</option></select>
+        </div>
+        <div class="sim-row" title="Fictional surface and mid-level wind used to compute a simplified shear estimate.">
+          <label>Wind (Surface / 500 mb)</label><div class="val" style="font-size:11px;"><span id="wSummary">180°@15 kt → 240°@55 kt</span></div>
+        </div>
+        <div class="sim-grid-2">
+          <div><label class="sim-hint">Surface Dir (°)</label><input type="number" id="sfcDir" min="0" max="360" value="180" /></div>
+          <div><label class="sim-hint">Surface Spd (kt)</label><input type="number" id="sfcSpd" min="0" max="80" value="15" /></div>
+          <div><label class="sim-hint">500 mb Dir (°)</label><input type="number" id="midDir" min="0" max="360" value="240" /></div>
+          <div><label class="sim-hint">500 mb Spd (kt)</label><input type="number" id="midSpd" min="0" max="150" value="55" /></div>
+        </div>
+        <div class="sim-row" title="Fictional forcing strength: fronts, dryline, shortwave, boundaries.">
+          <label>Forcing</label>
+          <select id="forcing">
+            <option value="0">Weak</option>
+            <option value="1" selected>Moderate</option>
+            <option value="2">Strong</option>
+          </select>
+        </div>
+        <div class="sim-row" title="Storm mode changes how the fictional hazards get distributed.">
+          <label>Storm Mode</label>
+          <select id="mode">
+            <option value="discrete" selected>Discrete Supercell</option>
+            <option value="mixed">Mixed / Cluster</option>
+            <option value="qlcs">QLCS / Line</option>
+            <option value="pulse">Pulse / Multi-cell</option>
+            <option value="hp">HP Supercell</option>
+            <option value="elevated">Elevated</option>
+          </select>
+        </div>
+        <div class="sim-controls">
+          <button class="sim-btn primary" id="recalc">Recalculate</button>
+          <button class="sim-btn" id="explainBtn">Explain These Results</button>
+        </div>
+        <div class="sim-footer-note">This sandbox uses simplified, made-up formulas for teaching purposes only — not the real, precise calculations meteorologists use, and not connected to any live weather data. Never use this for real safety decisions.</div>
+      </div>
+
+      <!-- RIGHT: OUTPUTS -->
+      <div class="sim-card">
+        <h2>Fictional Diagnostics</h2>
+        <div class="sim-h2-note">Everything below is generated from the pretend values on the left.</div>
+        <div class="sim-grid-2">
+          <div class="sim-metric">
+            <div class="sim-badge">Thermodynamics</div>
+            <div class="big"><span id="lclFt">—</span> ft LCL</div>
+            <div class="sim-hint">Approx. cloud base height from temp/dewpoint spread.</div>
+          </div>
+          <div class="sim-metric">
+            <div class="sim-badge">Kinematics</div>
+            <div class="big"><span id="shearVal">—</span> kt Shear (0–6 km)</div>
+            <div class="sim-hint">From your fictional surface & 500 mb winds.</div>
+          </div>
+        </div>
+
+        <div class="sim-dials" style="margin-top:14px">
+          <div class="sim-dial">
+            <div class="sim-badge">Supercell Signal</div>
+            <div class="sim-gauge" id="scpGauge"><div class="val" id="scpVal">0.0</div></div>
+            <div class="lbl">Fictional supercell-favorability score (0–3+)</div>
+          </div>
+          <div class="sim-dial">
+            <div class="sim-badge">Tornado Signal</div>
+            <div class="sim-gauge" id="stpGauge"><div class="val" id="stpVal">0.0</div></div>
+            <div class="lbl">Fictional tornado-favorability score (0–5)</div>
+          </div>
+          <div class="sim-dial">
+            <div class="sim-badge">Hail Signal</div>
+            <div class="sim-gauge" id="hailPGauge"><div class="val" id="hailPVal">0.0</div></div>
+            <div class="lbl"><span id="hailSizeLbl">Hail: —</span></div>
+          </div>
+        </div>
+
+        <div class="sim-bars" style="margin-top:16px">
+          <div class="sim-bar"><div class="label">Tornado</div><div class="track"><div class="fill tor" id="torFill"></div></div><div class="pct" id="torPct">0%</div></div>
+          <div class="sim-bar"><div class="label">Hail</div><div class="track"><div class="fill hail" id="hailFill"></div></div><div class="pct" id="hailPct">0%</div></div>
+          <div class="sim-bar"><div class="label">Wind</div><div class="track"><div class="fill wind" id="windFill"></div></div><div class="pct" id="windPct">0%</div></div>
+        </div>
+
+        <div class="sim-result-wrap">
+          <div class="sim-result-caption">Fictional Result — Not A Real Forecast</div>
+          <div class="sim-riskbox" id="riskBox">
+            <div class="sim-risk none">QUIET<br>SKIES</div>
+            <div class="sim-risk mrgl">STIRRING</div>
+            <div class="sim-risk slight">BUILDING</div>
+            <div class="sim-risk enh">ACTIVE<br>CHAOS</div>
+            <div class="sim-risk md">VOLATILE</div>
+            <div class="sim-risk high">PEAK<br>CHAOS</div>
+          </div>
+        </div>
+
+        <details class="sim-details" id="expander">
+          <summary>Why did I get these results?</summary>
+          <div class="sim-explain" id="explain">Adjust the sliders, then click "Explain These Results."</div>
+        </details>
+
+        <div class="sim-grid-2" style="margin-top:16px">
+          <div class="sim-metric">
+            <div class="sim-badge">Mini Hodograph</div>
+            <canvas id="hodo" width="300" height="180"></canvas>
+            <div class="sim-hint">Fictional surface & 500 mb wind vectors, scaled.</div>
+          </div>
+          <div class="sim-metric">
+            <div class="sim-badge">Scenario Notes</div>
+            <textarea id="notes" rows="8" style="width:100%;background:var(--charcoal);color:var(--cream);border:1px solid var(--line);border-radius:8px;padding:8px;font-family:'Oswald',sans-serif;" placeholder="Jot down your own notes about this fictional scenario, storm mode reasoning, etc."></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="real-link-box">
+      <p>Remember: this tool is for learning the concepts only. For real, up-to-date severe weather information, always go straight to the source.</p>
+      <div class="links">
+        <a href="https://www.weather.gov" target="_blank" rel="noopener noreferrer">weather.gov →</a>
+        <a href="https://www.spc.noaa.gov" target="_blank" rel="noopener noreferrer">spc.noaa.gov →</a>
+        <a href="/forecast.html">605 Chaser 7-Day Forecast →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="/605chaser-logo-full.png" alt="605 Chaser — Tracking Chaos, Delivering Clarity" class="footer-logo-img">
+        <p>605 Chaser LLC is a storm chasing and severe weather content operation based in Harrisburg, South Dakota, covering the Northern Plains.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="tel:+16059060063">(605) 906-0063</a>
+        <a href="https://www.facebook.com/605chaser" target="_blank" rel="noopener noreferrer">facebook.com/605chaser</a>
+        <div>726 W Willow St, Unit 2<br>Harrisburg, SD 57032</div>
+      </div>
+      <div class="footer-col">
+        <h4>Business Entity</h4>
+        <div>605 Chaser LLC</div>
+        <div>South Dakota</div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© <span id="year"></span> 605 Chaser LLC. All rights reserved.</div>
+      <div><strong>Tracking Chaos. Delivering Clarity.</strong></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburgerBtn.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.toggle('open');
+    hamburgerBtn.classList.toggle('open', isOpen);
+    hamburgerBtn.setAttribute('aria-expanded', isOpen);
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      hamburgerBtn.classList.remove('open');
+      hamburgerBtn.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+/* ============================================================
+   STORM INGREDIENTS SIMULATOR — fictional training sandbox.
+   All formulas below are simplified, made-up teaching proxies.
+   They are NOT the real formulas meteorologists use operationally,
+   and are not connected to any live weather data.
+   ============================================================ */
+const el = id => document.getElementById(id);
+const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
+const f2c = f => (f-32)*5/9;
+
+function calcLCLft(Tf, Tdf){
+  const lcl_m = 125 * Math.max(0, (f2c(Tf) - f2c(Tdf)));
+  return Math.round(lcl_m * 3.28084);
+}
+function dirSpdToUV(dirDeg, spdKt){
+  const toRad = (dirDeg + 180) * Math.PI/180;
+  return {u: spdKt * Math.sin(toRad), v: spdKt * Math.cos(toRad)};
+}
+function bulkShearKt(sfcDir, sfcSpd, midDir, midSpd){
+  const s = dirSpdToUV(sfcDir, sfcSpd);
+  const m = dirSpdToUV(midDir, midSpd);
+  return Math.round(Math.hypot(m.u - s.u, m.v - s.v));
+}
+const norm = (v, min, max) => clamp((v - min)/(max - min), 0, 1);
+
+function setDial(gaugeEl, value01, labelEl, labelText, hue=42){
+  const pct = clamp(value01, 0, 1);
+  const deg = Math.round(360*pct);
+  gaugeEl.style.background = `conic-gradient(hsl(${hue} 75% 55%) ${deg}deg, rgba(245,241,232,0.1) ${deg}deg 360deg)`;
+  if(labelEl) labelEl.textContent = labelText;
+}
+
+const inputs = {
+  parcelType: el('parcelType'),
+  temp: el('temp'), td: el('td'),
+  cape: el('cape'), mlcape: el('mlcape'), cin: el('cin'),
+  dcape: el('dcape'),
+  lapse: el('lapse'), srh: el('srh'),
+  wbz: el('wbz'),
+  sfcDir: el('sfcDir'), sfcSpd: el('sfcSpd'),
+  midDir: el('midDir'), midSpd: el('midSpd'),
+  forcing: el('forcing'), mode: el('mode'),
+  effLayer: el('effLayer')
+};
+const vals = {
+  tVal: el('tVal'), tdVal: el('tdVal'), capeVal: el('capeVal'), mlcapeVal: el('mlcapeVal'),
+  cinVal: el('cinVal'), dcapeVal: el('dcapeVal'), lrVal: el('lrVal'), wbzVal: el('wbzVal'), srhVal: el('srhVal'),
+  wSummary: el('wSummary'), capeLbl: el('capeLbl')
+};
+const out = {
+  lclFt: el('lclFt'), shearVal: el('shearVal'),
+  torFill: el('torFill'), hailFill: el('hailFill'), windFill: el('windFill'),
+  torPct: el('torPct'), hailPct: el('hailPct'), windPct: el('windPct'),
+  riskBox: el('riskBox'), explain: el('explain'), expander: el('expander'),
+  scpGauge: el('scpGauge'), scpVal: el('scpVal'),
+  stpGauge: el('stpGauge'), stpVal: el('stpVal'),
+  hailPGauge: el('hailPGauge'), hailPVal: el('hailPVal'), hailSizeLbl: el('hailSizeLbl'),
+  hodo: el('hodo')
+};
+
+function clamp01(x){ return Math.max(0, Math.min(1, x)); }
+function simpleSCP(cape, shear06kt, srh01){
+  const c = clamp01((cape - 500)/2500);
+  const s = clamp01((shear06kt - 20)/40);
+  const r = clamp01((srh01 - 50)/200);
+  return +(3 * c * s * r).toFixed(2);
+}
+function simpleSTP(cape, lclft, srh01, cinJkg){
+  const c = clamp01((cape - 1000)/2500);
+  const l = clamp01((2500 - lclft)/2000);
+  const r = clamp01((srh01 - 100)/200);
+  const ncin = clamp01((150 - Math.max(0, cinJkg))/150);
+  return +(5 * c * l * r * ncin).toFixed(2);
+}
+function hailParam(cape, lapse, wbz_km){
+  if (wbz_km <= 0.1) wbz_km = 0.1;
+  const raw = cape * lapse * (1/ wbz_km);
+  const scaled = raw / 12000;
+  return {raw, scaled: clamp01(scaled)};
+}
+function hailSizeFromParam(scaled){
+  if (scaled < 0.5) return 'Pea–Penny';
+  if (scaled < 0.8) return 'Nickel–Quarter';
+  if (scaled < 1.1) return 'Golf Ball (~1.75")';
+  if (scaled < 1.5) return '2.0–2.5"';
+  return '≥ 2.75" (Significant)';
+}
+function computeScores(){
+  const T = +inputs.temp.value;
+  const Td = +inputs.td.value;
+  const CAPE_SB = +inputs.cape.value;
+  const CAPE_ML = +inputs.mlcape.value;
+  const parcel = inputs.parcelType.value;
+  const CAPE = parcel === 'ML' ? CAPE_ML : CAPE_SB;
+  const CIN = +inputs.cin.value;
+  const DCAPE = +inputs.dcape.value;
+  const LR = +inputs.lapse.value;
+  let SRH = +inputs.srh.value;
+  let shear = bulkShearKt(+inputs.sfcDir.value, +inputs.sfcSpd.value, +inputs.midDir.value, +inputs.midSpd.value);
+  if (inputs.effLayer.value === 'on'){
+    SRH = Math.round(SRH * 1.15);
+    shear = Math.round(shear * 1.10);
+  }
+  const LCL = calcLCLft(T, Td);
+  const forcing = +inputs.forcing.value;
+  const mode = inputs.mode.value;
+  const WBZ_km = +inputs.wbz.value;
+  const nCape  = norm(CAPE, 200, 4000);
+  const nShear = norm(shear, 15, 65);
+  const nSRH   = norm(SRH, 50, 300);
+  const nLCL   = 1 - norm(LCL, 1500, 6000);
+  const nLR    = norm(LR, 5.5, 8.5);
+  const nTd    = norm(Td, 50, 75);
+  const nForce = [0, 0.5, 1][forcing];
+  const nCIN   = 1 - norm(CIN, 25, 200);
+  const nDCAPE = norm(DCAPE, 400, 1400);
+  let tor = 0.0, hail = 0.0, wind = 0.0;
+  tor += 0.22*nCape + 0.28*nSRH + 0.20*nShear + 0.20*nLCL + 0.05*nForce + 0.05*nTd;
+  tor *= (0.65 + 0.35*nCIN);
+  const hailP = hailParam(CAPE, LR, WBZ_km).scaled;
+  hail += 0.32*nCape + 0.26*nLR + 0.22*nShear + 0.08*nTd + 0.02*nForce + 0.10*hailP;
+  hail *= (0.8 + 0.2*nCIN);
+  wind += 0.30*nShear + 0.22*nForce + 0.18*nCape + 0.18*nLR + 0.12*nDCAPE;
+  const modeMods = {
+    'discrete': {tor:+0.10, hail:+0.05, wind:+0.00},
+    'mixed'   : {tor:-0.02, hail:+0.03, wind:+0.03},
+    'qlcs'    : {tor:-0.10, hail:-0.02, wind:+0.12},
+    'pulse'   : {tor:-0.12, hail:+0.06, wind:+0.00},
+    'hp'      : {tor:+0.06, hail:+0.08, wind:+0.02},
+    'elevated': {tor:-0.25, hail:+0.10, wind:-0.05}
+  };
+  const mm = modeMods[mode] || {tor:0,hail:0,wind:0};
+  tor = clamp(tor + mm.tor, 0, 1);
+  hail = clamp(hail + mm.hail, 0, 1);
+  wind = clamp(wind + mm.wind, 0, 1);
+  const curve = x => Math.pow(x, 0.9) * 100;
+  let torPct = Math.round(curve(tor));
+  let hailPct = Math.round(curve(hail));
+  let windPct = Math.round(curve(wind));
+  const scp = simpleSCP(CAPE, shear, SRH);
+  const stp = simpleSTP(CAPE, LCL, SRH, CIN);
+  const hailPfull = hailParam(CAPE, LR, WBZ_km);
+  const hailSize = hailSizeFromParam(hailPfull.scaled);
+  const stpNudge = clamp(stp/5, 0, 1) * 0.08;
+  const scpNudge = clamp(scp/3, 0, 1) * 0.05;
+  const maxHaz = Math.max(torPct, hailPct, windPct)/100;
+  const breadth = ((tor>0.35) + (hail>0.35) + (wind>0.35))/3;
+  let composite = 0.62*maxHaz + 0.33*breadth + 0.05*nForce;
+  composite = clamp(composite + stpNudge + scpNudge, 0, 1);
+  return {
+    torPct, hailPct, windPct, LCL, shear, SRH, CAPE, CIN, DCAPE, LR, WBZ_km,
+    scp, stp, hailP: hailPfull, hailSize, composite,
+    ingredients: {parcel, T, Td, forcing: +inputs.forcing.value, mode, eff: inputs.effLayer.value}
+  };
+}
+function syncLabels(){
+  vals.tVal.textContent = inputs.temp.value;
+  vals.tdVal.textContent = inputs.td.value;
+  vals.capeVal.textContent = inputs.cape.value;
+  vals.mlcapeVal.textContent = inputs.mlcape.value;
+  vals.cinVal.textContent = inputs.cin.value;
+  vals.dcapeVal.textContent = inputs.dcape.value;
+  vals.lrVal.textContent = Number(inputs.lapse.value).toFixed(1);
+  vals.srhVal.textContent = inputs.srh.value;
+  vals.wbzVal.textContent = Number(inputs.wbz.value).toFixed(1);
+  vals.wSummary.textContent = `${inputs.sfcDir.value}°@${inputs.sfcSpd.value} kt → ${inputs.midDir.value}°@${inputs.midSpd.value} kt`;
+  vals.capeLbl.textContent = inputs.parcelType.value === 'ML' ? 'SB CAPE (J/kg) [ref]' : 'SB CAPE (J/kg)';
+}
+function setBars(t, h, w){
+  out.torFill.style.width = t + "%"; out.hailFill.style.width = h + "%"; out.windFill.style.width = w + "%";
+  out.torPct.textContent = t + "%"; out.hailPct.textContent = h + "%"; out.windPct.textContent = w + "%";
+}
+function setRisk(composite){
+  const box = out.riskBox;
+  const thresholds = [0.00, 0.15, 0.32, 0.52, 0.72, 0.88];
+  const idx = thresholds.filter(t=> composite >= t).length - 1;
+  [...box.children].forEach((c,i)=>{
+    c.classList.toggle('active', i===idx);
+    c.classList.remove('lvl0','lvl1','lvl2','lvl3','lvl4','lvl5');
+    if(i===idx) c.classList.add('lvl'+i);
+  });
+}
+function updateDials(scp, stp, hailScaled, hailSize){
+  const scp01 = clamp(scp/3, 0, 1);
+  const stp01 = clamp(stp/5, 0, 1);
+  const hail01 = clamp(hailScaled, 0, 1);
+  setDial(out.scpGauge, scp01, out.scpVal, scp.toFixed(1), 42);
+  setDial(out.stpGauge, stp01, out.stpVal, stp.toFixed(1), 38);
+  setDial(out.hailPGauge, hail01, out.hailPVal, (hail01*1.5).toFixed(1), 45);
+  out.hailSizeLbl.textContent = `Hail: ${hailSize}`;
+}
+function explainText(res){
+  const {parcel, T, Td, forcing, mode, eff} = res.ingredients;
+  const forcingWord = ["weak","moderate","strong"][forcing];
+  const modeWord = {discrete:"discrete supercells",mixed:"mixed clusters",qlcs:"a line (QLCS)",pulse:"pulse storms",hp:"HP supercells",elevated:"elevated storms"}[mode] || mode;
+  const lines = [
+    `Parcel: <b>${parcel}</b> (${parcel==='ML'?'MLCAPE':'SBCAPE'} = ${res.CAPE.toLocaleString()} J/kg, CIN = ${res.CIN} J/kg)`,
+    `Thermo: T=${T}°F, Td=${Td}°F → LCL ≈ ${res.LCL.toLocaleString()} ft AGL`,
+    `Kinematics: 0–6 km shear ≈ ${res.shear} kt; 0–1 km SRH ≈ ${res.SRH} m²/s² ${eff==='on'?'(effective-layer scaled)':''}`,
+    `Lapse Rate: ${res.LR.toFixed(1)} °C/km; Wet-Bulb Zero ≈ ${res.WBZ_km.toFixed(1)} km`,
+    `DCAPE ≈ ${res.DCAPE} J/kg (boosts the fictional wind signal on inverted-V profiles)`,
+    `Fictional signals: Supercell Signal ≈ <b>${res.scp.toFixed(1)}</b> • Tornado Signal ≈ <b>${res.stp.toFixed(1)}</b> • Hail Signal ≈ ${(res.hailP.scaled).toFixed(2)} (${res.hailSize})`,
+    `Forcing: ${forcingWord}; Mode likely: ${modeWord}.`
+  ];
+  const takeaways = [];
+  if (res.stp >= 1.0) takeaways.push("A Tornado Signal ≥ 1 suggests a non-trivial fictional tornado environment, especially with discrete mode and low cloud bases.");
+  if (res.scp >= 1.0) takeaways.push("A Supercell Signal ≥ 1 favors supercells in this fictional scenario, given enough forcing/initiation.");
+  if (res.hailP.scaled >= 0.8) takeaways.push(`A low wet-bulb zero height + steep lapse rates support larger fictional hail (${res.hailSize}).`);
+  if (res.DCAPE >= 900) takeaways.push("Higher DCAPE increases the fictional damaging-wind signal, particularly with linear storm modes.");
+  if (res.CIN >= 125) takeaways.push("Strong CIN would suppress real storms unless mesoscale forcing/boundaries erode the cap — reflected here too.");
+  return `
+    <p><strong>Summary</strong></p>
+    <ul>${lines.map(s=>`<li>${s}</li>`).join('')}</ul>
+    <p><strong>Takeaways</strong></p>
+    <ul>${(takeaways.length?takeaways:["Signals are mixed in this fictional scenario; mesoscale evolution and storm initiation would be key in the real world."]).map(t=>`<li>${t}</li>`).join('')}</ul>
+    <p class="sim-hint">Reminder: this is a fictional training sandbox. These signals are simplified, made-up scores — not real published meteorological indices, and not connected to live weather data. For actual forecasts, always check weather.gov or spc.noaa.gov.</p>
+  `;
+}
+const hctx = out.hodo.getContext('2d');
+function drawHodo(){
+  const c = out.hodo, w=c.width, h=c.height;
+  hctx.clearRect(0,0,w,h);
+  hctx.strokeStyle = "rgba(245,241,232,0.08)"; hctx.lineWidth = 1;
+  for(let i=0;i<=6;i++){
+    const x=(i/6)*w,y=(i/6)*h;
+    hctx.beginPath(); hctx.moveTo(x,0); hctx.lineTo(x,h); hctx.stroke();
+    hctx.beginPath(); hctx.moveTo(0,y); hctx.lineTo(w,y); hctx.stroke();
+  }
+  const s = dirSpdToUV(+inputs.sfcDir.value, +inputs.sfcSpd.value);
+  const m = dirSpdToUV(+inputs.midDir.value, +inputs.midSpd.value);
+  const cx=w*0.15, cy=h*0.85, scale=kt=> kt*(w*0.006);
+  function plot(vec,label,color){
+    const x=cx+scale(vec.u), y=cy-scale(vec.v);
+    hctx.strokeStyle=color; hctx.fillStyle=color; hctx.lineWidth=2;
+    hctx.beginPath(); hctx.moveTo(cx,cy); hctx.lineTo(x,y); hctx.stroke();
+    const ang=Math.atan2(y-cy,x-cx), ah=8;
+    hctx.beginPath(); hctx.moveTo(x,y);
+    hctx.lineTo(x - ah*Math.cos(ang-0.3), y - ah*Math.sin(ang-0.3));
+    hctx.lineTo(x - ah*Math.cos(ang+0.3), y - ah*Math.sin(ang+0.3));
+    hctx.closePath(); hctx.fill();
+    hctx.font="12px system-ui"; hctx.fillStyle="#F5F1E8"; hctx.fillText(label,x+6,y-6);
+  }
+  plot(s,"Sfc","#E8B723"); plot(m,"500mb","#FFB703");
+}
+const PRESETS = {
+  classic: { temp:82, td:72, cape:2500, mlcape:1800, cin:50, dcape:700, lapse:7.6, srh:220, sfcDir:170, sfcSpd:18, midDir:240, midSpd:55, forcing:1, mode:'discrete', wbz:3.0, eff:'off' },
+  cool:    { temp:68, td:64, cape:900,  mlcape:800, cin:30, dcape:500, lapse:6.8, srh:300, sfcDir:130, sfcSpd:25, midDir:220, midSpd:60, forcing:2, mode:'qlcs', wbz:2.2, eff:'on' },
+  pulse:   { temp:95, td:72, cape:2800, mlcape:2400,cin:25, dcape:600, lapse:6.5, srh:60,  sfcDir:180, sfcSpd:8,  midDir:230, midSpd:20, forcing:0, mode:'pulse', wbz:3.6, eff:'off' },
+  derecho: { temp:88, td:70, cape:2200, mlcape:1800,cin:40, dcape:1100,lapse:7.5, srh:150, sfcDir:200, sfcSpd:18, midDir:260, midSpd:70, forcing:2, mode:'qlcs', wbz:3.0, eff:'on' },
+  highplains:{temp:84, td:58, cape:2000, mlcape:1700,cin:75, dcape:900, lapse:8.2, srh:140, sfcDir:150, sfcSpd:20, midDir:250, midSpd:45, forcing:1, mode:'hp', wbz:2.4, eff:'off' },
+  elevated:{ temp:74, td:58, cape:1800, mlcape:1600,cin:120,dcape:500, lapse:7.8, srh:110, sfcDir:210, sfcSpd:15, midDir:260, midSpd:50, forcing:1, mode:'elevated', wbz:2.0, eff:'off' }
+};
+function applyPreset(key){
+  const p = PRESETS[key]; if(!p) return;
+  inputs.temp.value=p.temp; inputs.td.value=p.td; inputs.cape.value=p.cape; inputs.mlcape.value=p.mlcape;
+  inputs.cin.value=p.cin; inputs.dcape.value=p.dcape; inputs.lapse.value=p.lapse; inputs.srh.value=p.srh;
+  inputs.sfcDir.value=p.sfcDir; inputs.sfcSpd.value=p.sfcSpd; inputs.midDir.value=p.midDir; inputs.midSpd.value=p.midSpd;
+  inputs.forcing.value=p.forcing; inputs.mode.value=p.mode; inputs.wbz.value=p.wbz; inputs.effLayer.value=p.eff;
+  syncLabels(); updateAll();
+}
+function randomize(){
+  const r=(min,max,step=1)=>Math.round((Math.floor((Math.random()*(max-min))/step)*step+min)*(1/step))/(1/step);
+  inputs.temp.value=r(55,100,1); inputs.td.value=r(45,78,1);
+  inputs.cape.value=r(0,5000,50); inputs.mlcape.value=r(0,5000,50);
+  inputs.cin.value=r(0,250,5); inputs.dcape.value=r(200,1600,25);
+  inputs.lapse.value=r(5.8,8.8,0.1); inputs.srh.value=r(0,450,10);
+  inputs.sfcDir.value=r(90,210,10); inputs.sfcSpd.value=r(5,30,1);
+  inputs.midDir.value=r(210,290,10); inputs.midSpd.value=r(25,80,1);
+  inputs.forcing.value=r(0,2,1); inputs.mode.value=['discrete','mixed','qlcs','pulse','hp','elevated'][r(0,5,1)];
+  inputs.wbz.value=r(1.2,4.2,0.1); inputs.effLayer.value=Math.random()<0.5?'off':'on';
+  inputs.parcelType.value=Math.random()<0.5?'SB':'ML';
+  syncLabels(); updateAll();
+}
+function updateAll(){
+  const res = computeScores();
+  out.lclFt.textContent = res.LCL.toLocaleString();
+  out.shearVal.textContent = res.shear;
+  setBars(res.torPct, res.hailPct, res.windPct);
+  updateDials(res.scp, res.stp, res.hailP.scaled, res.hailSize);
+  setRisk(res.composite);
+  drawHodo();
+  return res;
+}
+Object.values(inputs).forEach(inp=> inp.addEventListener('input', ()=>{ syncLabels(); updateAll(); }));
+el('recalc').addEventListener('click', ()=> updateAll());
+el('explainBtn').addEventListener('click', ()=>{
+  const res = updateAll(); out.explain.innerHTML = explainText(res); out.expander.open = true;
+});
+el('applyPreset').addEventListener('click', ()=> { const key = el('preset').value; if(key) applyPreset(key); });
+el('randomize').addEventListener('click', randomize);
+el('reset').addEventListener('click', ()=>{ applyPreset('classic'); el('preset').value=''; });
+syncLabels(); const initRes = updateAll(); out.explain.innerHTML = explainText(initRes);
+</script>
+</body>
+</html>
