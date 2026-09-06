@@ -57,6 +57,37 @@
   .nav-links{display:flex;gap:22px;font-size:13px;text-transform:uppercase;letter-spacing:0.08em;font-weight:500;}
   .nav-links a{color:var(--steel);transition:color .2s;}
   .nav-links a:hover, .nav-links a.current{color:var(--amber);}
+  .nav-dropdown{position:relative;}
+  .nav-dropdown-toggle{
+    background:none;border:none;color:var(--steel);font-family:'Oswald',sans-serif;
+    text-transform:uppercase;letter-spacing:0.08em;font-size:13px;font-weight:500;
+    cursor:pointer;display:flex;align-items:center;gap:4px;padding:0;transition:color .2s;
+  }
+  .nav-dropdown-toggle .caret{font-size:10px;transition:transform .2s;position:relative;top:1px;}
+  .nav-dropdown-toggle:hover,
+  .nav-dropdown-toggle.current,
+  .nav-dropdown.open .nav-dropdown-toggle{color:var(--amber);}
+  .nav-dropdown.open .nav-dropdown-toggle .caret,
+  .nav-dropdown:hover .nav-dropdown-toggle .caret{transform:rotate(180deg);}
+  .nav-dropdown-toggle:focus-visible{outline:2px solid var(--amber);outline-offset:3px;}
+  .nav-dropdown-menu{
+    position:absolute;top:100%;left:50%;margin-top:14px;transform:translateX(-50%) translateY(6px);
+    background:var(--charcoal2);border:1px solid var(--line);border-radius:8px;
+    padding:8px;min-width:190px;display:flex;flex-direction:column;gap:2px;
+    opacity:0;visibility:hidden;transition:opacity .16s ease, transform .16s ease;
+    box-shadow:0 14px 30px rgba(0,0,0,0.45);z-index:150;
+  }
+  .nav-dropdown-menu a{
+    padding:9px 12px;border-radius:6px;font-size:13px;white-space:nowrap;color:var(--cream);
+    text-transform:uppercase;letter-spacing:0.06em;
+  }
+  .nav-dropdown-menu a:hover{background:rgba(232,183,35,0.12);color:var(--amber);}
+  .nav-dropdown-menu a.current{color:var(--gold);}
+  .nav-dropdown.open .nav-dropdown-menu,
+  .nav-dropdown:hover .nav-dropdown-menu,
+  .nav-dropdown:focus-within .nav-dropdown-menu{
+    opacity:1;visibility:visible;transform:translateX(-50%) translateY(0);
+  }
   .llc-pill{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.08em;color:var(--steel);border:1px solid var(--line);padding:4px 10px;border-radius:20px;text-transform:uppercase;white-space:nowrap;}
   .btn-donate{font-family:'Oswald',sans-serif;font-weight:600;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;background:var(--gold);color:var(--charcoal);padding:9px 16px;border-radius:20px;white-space:nowrap;transition:background .2s;flex-shrink:0;}
   .btn-donate:hover{background:var(--amber);}
@@ -140,11 +171,21 @@
       <a href="/#about">About</a>
       <a href="/#services">Services</a>
       <a href="/#team">Team</a>
-      <a href="/forecast.html">7-Day Forecast</a>
-      <a href="https://tornadotarget.netlify.app" target="_blank" rel="noopener noreferrer">Tornado Targets</a>
-      <a href="/storm-simulator.html">Storm Simulator</a>
-      <a href="/sponsor.html">Sponsor Us</a>
-      <a href="/ride-along.html" class="current">Ride-Along</a>
+      <div class="nav-dropdown">
+        <button type="button" class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">Weather Tools <span class="caret">&#9662;</span></button>
+        <div class="nav-dropdown-menu">
+          <a href="/forecast.html">7-Day Forecast</a>
+          <a href="https://tornadotarget.netlify.app" target="_blank" rel="noopener noreferrer">Tornado Targets</a>
+          <a href="/storm-simulator.html">Storm Simulator</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <button type="button" class="nav-dropdown-toggle current" aria-haspopup="true" aria-expanded="false">Get Involved <span class="caret">&#9662;</span></button>
+        <div class="nav-dropdown-menu">
+          <a href="/sponsor.html">Sponsor Us</a>
+          <a href="/ride-along.html" class="current">Ride-Along</a>
+        </div>
+      </div>
       <a href="/#contact">Contact</a>
     </div>
     <div class="llc-pill">605 Chaser LLC</div>
@@ -299,6 +340,36 @@
       hamburgerBtn.classList.remove('open');
       hamburgerBtn.setAttribute('aria-expanded', 'false');
     });
+  });
+
+  document.querySelectorAll('.nav-dropdown').forEach(dropdown => {
+    const toggle = dropdown.querySelector('.nav-dropdown-toggle');
+    toggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = dropdown.classList.contains('open');
+      document.querySelectorAll('.nav-dropdown.open').forEach(d => {
+        d.classList.remove('open');
+        d.querySelector('.nav-dropdown-toggle').setAttribute('aria-expanded', 'false');
+      });
+      if (!isOpen) {
+        dropdown.classList.add('open');
+        toggle.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+  document.addEventListener('click', () => {
+    document.querySelectorAll('.nav-dropdown.open').forEach(d => {
+      d.classList.remove('open');
+      d.querySelector('.nav-dropdown-toggle').setAttribute('aria-expanded', 'false');
+    });
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.nav-dropdown.open').forEach(d => {
+        d.classList.remove('open');
+        d.querySelector('.nav-dropdown-toggle').setAttribute('aria-expanded', 'false');
+      });
+    }
   });
 </script>
 </body>
