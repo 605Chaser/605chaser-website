@@ -11,590 +11,597 @@
 <link rel="shortcut icon" href="/favicon.ico">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <title>7-Day Forecast — 605 Chaser</title>
-<meta name="description" content="Get your free 7-day local weather forecast from 605 Chaser, covering the Northern Plains.">
+<meta name="description" content="Free 7-day forecast for any U.S. city or ZIP code from 605 Chaser, using National Weather Service data.">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="605 Chaser LLC">
+<meta property="og:title" content="7-Day Forecast — 605 Chaser">
+<meta property="og:description" content="Storm chasing and severe weather content operation covering a five-state Northern Plains territory: SD, ND, MN, IA, NE.">
+<meta property="og:image" content="https://605chaser.com/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://605chaser.com/forecast">
+
+<!-- Twitter / X Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="7-Day Forecast — 605 Chaser">
+<meta name="twitter:description" content="Storm chasing and severe weather content operation covering a five-state Northern Plains territory.">
+<meta name="twitter:image" content="https://605chaser.com/og-image.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root{
     --charcoal:#141414;
     --charcoal2:#1c1c1c;
-    --charcoal3:#242424;
     --cream:#F5F1E8;
     --gold:#E8B723;
     --amber:#FFB703;
     --steel:#8B96A3;
     --line:rgba(245,241,232,0.1);
-    --green:#5fe0a0;
-    --muted:rgba(245,241,232,0.62);
   }
   *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html{scroll-behavior:smooth;}
   body{
     background:var(--charcoal);
     color:var(--cream);
     font-family:'Oswald',sans-serif;
     font-weight:300;
-    min-height:100vh;
+    line-height:1.6;
+    overflow-x:hidden;
   }
+  ::selection{background:var(--gold);color:var(--charcoal);}
   a{color:inherit;text-decoration:none;}
-  .wrap{max-width:960px;margin:0 auto;padding:0 20px;}
-  h1,h2{font-family:'Anton',sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:0.02em;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px;}
 
-  /* NAV */
-  nav{border-bottom:1px solid var(--line);background:rgba(20,20,20,0.92);}
-  nav .wrap{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;}
-  .nav-logo{display:flex;align-items:center;gap:10px;}
-  .nav-logo img{height:34px;width:auto;display:block;}
-  .nav-logo span{font-family:'Anton',sans-serif;font-size:17px;letter-spacing:0.03em;}
-  .back-link{font-family:'Space Mono',monospace;font-size:12px;color:var(--steel);letter-spacing:0.04em;}
-  .back-link:hover{color:var(--amber);}
-  .nav-right{display:flex;align-items:center;gap:18px;}
-  .btn-donate{font-family:'Oswald',sans-serif;font-weight:600;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;background:var(--gold);color:var(--charcoal);padding:8px 14px;border-radius:20px;white-space:nowrap;transition:background .2s;}
+  h1,h2,h3{font-family:'Anton',sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:0.02em;line-height:1.05;}
+
+  /* ── NAV ── */
+  nav{
+    position:sticky;top:0;z-index:100;
+    background:rgba(20,20,20,0.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;padding-top:16px;padding-bottom:16px;}
+  .logo{
+    font-family:'Anton',sans-serif;
+    font-size:22px;letter-spacing:0.04em;
+    color:var(--cream);
+    display:flex;align-items:center;gap:9px;
+    white-space:nowrap;flex-shrink:0;
+  }
+  .logo-icon{height:32px;width:auto;display:block;flex-shrink:0;}
+  .logo-mark{
+    width:11px;height:11px;border-radius:50%;
+    background:var(--gold);
+    box-shadow:0 0 10px var(--gold);
+    flex-shrink:0;
+  }
+  .nav-links{display:flex;gap:24px;font-size:13px;text-transform:uppercase;letter-spacing:0.08em;font-weight:500;}
+  .nav-links a{color:var(--steel);transition:color .2s;}
+  .nav-links a:hover{color:var(--amber);}
+  .nav-dropdown{position:relative;}
+  .nav-dropdown-toggle{
+    background:none;border:none;color:var(--steel);font-family:'Oswald',sans-serif;
+    text-transform:uppercase;letter-spacing:0.08em;font-size:13px;font-weight:500;
+    cursor:pointer;display:flex;align-items:center;gap:4px;padding:0;transition:color .2s;
+  }
+  .nav-dropdown-toggle .caret{font-size:10px;transition:transform .2s;position:relative;top:1px;}
+  .nav-dropdown-toggle:hover,
+  .nav-dropdown-toggle.current,
+  .nav-dropdown.open .nav-dropdown-toggle{color:var(--amber);}
+  .nav-dropdown.open .nav-dropdown-toggle .caret,
+  .nav-dropdown:hover .nav-dropdown-toggle .caret{transform:rotate(180deg);}
+  .nav-dropdown-toggle:focus-visible{outline:2px solid var(--amber);outline-offset:3px;}
+  .nav-dropdown-menu{
+    position:absolute;top:100%;left:50%;margin-top:14px;transform:translateX(-50%) translateY(6px);
+    background:var(--charcoal2);border:1px solid var(--line);border-radius:8px;
+    padding:8px;min-width:190px;display:flex;flex-direction:column;gap:2px;
+    opacity:0;visibility:hidden;transition:opacity .16s ease, transform .16s ease;
+    box-shadow:0 14px 30px rgba(0,0,0,0.45);z-index:150;
+  }
+  .nav-dropdown-menu a{
+    padding:9px 12px;border-radius:6px;font-size:13px;white-space:nowrap;color:var(--cream);
+    text-transform:uppercase;letter-spacing:0.06em;
+  }
+  .nav-dropdown-menu a:hover{background:rgba(232,183,35,0.12);color:var(--amber);}
+  .nav-dropdown-menu a.current{color:var(--gold);}
+  .nav-dropdown.open .nav-dropdown-menu,
+  .nav-dropdown:hover .nav-dropdown-menu,
+  .nav-dropdown:focus-within .nav-dropdown-menu{
+    opacity:1;visibility:visible;transform:translateX(-50%) translateY(0);
+  }
+  .btn-donate{
+    font-family:'Oswald',sans-serif;font-weight:600;font-size:12px;letter-spacing:0.06em;
+    text-transform:uppercase;background:var(--gold);color:var(--charcoal);
+    padding:9px 16px;border-radius:20px;white-space:nowrap;transition:background .2s;
+    flex-shrink:0;
+  }
   .btn-donate:hover{background:var(--amber);}
-  @media(max-width:460px){ .btn-donate{padding:7px 11px;font-size:11px;} }
-
-  /* HEADER */
-  header{padding:44px 0 26px;text-align:center;}
-  .logo-badge{
-    width:74px;height:74px;border-radius:50%;
-    background:var(--charcoal2);border:2px solid var(--gold);
-    display:flex;align-items:center;justify-content:center;
-    margin:0 auto 14px;overflow:hidden;
+  .llc-pill{
+    font-family:'Space Mono',monospace;
+    font-size:10px;letter-spacing:0.08em;
+    color:var(--steel);
+    border:1px solid var(--line);
+    padding:4px 10px;border-radius:20px;
+    text-transform:uppercase;
+    white-space:nowrap;
   }
-  .logo-badge img{width:52px;height:52px;object-fit:contain;}
-  .brand-name{font-family:'Anton',sans-serif;font-size:15px;letter-spacing:0.1em;color:var(--cream);margin-bottom:2px;}
-  .brand-tagline{font-family:'Space Mono',monospace;font-size:10px;color:var(--amber);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:22px;}
-  header h1{font-size:clamp(28px,4.6vw,42px);margin-top:4px;}
-  header h1 .accent{color:var(--gold);}
-  header p{color:var(--muted);font-size:14px;margin-top:10px;max-width:460px;margin-left:auto;margin-right:auto;}
-
-  /* SEARCH */
-  .search-box{max-width:440px;margin:30px auto 0;display:flex;gap:8px;}
-  .search-box input{
-    flex:1;background:var(--charcoal2);border:1px solid var(--line);
-    color:var(--cream);font-family:'Oswald',sans-serif;font-size:15px;
-    padding:13px 16px;border-radius:2px;outline:none;
+  .hamburger{
+    display:none;flex-direction:column;gap:5px;background:none;border:none;
+    cursor:pointer;padding:6px;-webkit-tap-highlight-color:transparent;
   }
-  .search-box input::placeholder{color:var(--steel);}
-  .search-box input:focus{border-color:var(--gold);}
-  .search-box button{
-    background:var(--gold);color:var(--charcoal);border:none;
-    font-family:'Oswald',sans-serif;font-weight:600;font-size:13px;
-    letter-spacing:0.04em;text-transform:uppercase;padding:0 22px;
-    border-radius:2px;cursor:pointer;transition:background .2s;white-space:nowrap;
+  .hamburger span{width:22px;height:2px;background:var(--cream);transition:all .25s;}
+  .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .hamburger.open span:nth-child(2){opacity:0;}
+  .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+  .mobile-menu{
+    display:none;flex-direction:column;
+    max-height:0;overflow:hidden;transition:max-height .3s ease;
+    background:var(--charcoal2);border-bottom:1px solid var(--line);
   }
-  .search-box button:hover{background:var(--amber);}
-  .search-box button:disabled{opacity:.5;cursor:default;}
-  .search-hint{text-align:center;font-family:'Space Mono',monospace;font-size:11px;color:var(--steel);margin-top:10px;}
-  .geo-link{display:block;text-align:center;margin-top:12px;font-family:'Space Mono',monospace;font-size:12px;color:var(--amber);cursor:pointer;}
-  .geo-link:hover{text-decoration:underline;}
-
-  /* STATES */
-  .status-msg{text-align:center;padding:40px 20px;color:var(--steel);font-family:'Space Mono',monospace;font-size:13px;}
-  .status-msg.error{color:var(--gold);}
-  .spinner{width:20px;height:20px;border:2px solid var(--line);border-top-color:var(--amber);border-radius:50%;display:inline-block;margin-right:8px;vertical-align:middle;animation:spin .8s linear infinite;}
-  @keyframes spin{to{transform:rotate(360deg);}}
-
-  /* RESULTS */
-  #results{display:none;padding:40px 0 80px;}
-  .loc-header{
-    display:flex;align-items:baseline;justify-content:center;gap:12px;flex-wrap:wrap;
-    margin-bottom:4px;
+  .mobile-menu.open{max-height:600px;}
+  .mobile-menu a{
+    padding:16px 28px;font-size:14px;text-transform:uppercase;letter-spacing:0.08em;
+    color:var(--cream);border-bottom:1px solid var(--line);font-weight:500;
   }
-  .loc-header h2{font-size:clamp(24px,4vw,32px);color:var(--cream);}
-  .loc-date{font-family:'Space Mono',monospace;font-size:13px;color:var(--steel);}
-  .location-sub{text-align:center;font-family:'Space Mono',monospace;font-size:10px;color:var(--steel);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:16px;opacity:.7;}
-
-  .climate-row{
-    display:none;flex-direction:column;align-items:center;gap:3px;
-    margin-bottom:10px;text-align:center;
-  }
-  .climate-stats{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;align-items:center;}
-  .climate-item{
-    font-family:'Space Mono',monospace;font-size:12px;color:var(--muted);
-    display:flex;align-items:center;gap:4px;white-space:nowrap;
-  }
-  .climate-item strong{color:var(--amber);font-weight:700;}
-  .climate-credit{font-family:'Space Mono',monospace;font-size:9.5px;color:var(--steel);opacity:.7;}
-
-  .alert-banner{
-    background:rgba(232,183,35,0.12);border:1px solid rgba(232,183,35,0.4);
-    border-radius:4px;padding:14px 18px;margin-bottom:24px;
-    font-family:'Space Mono',monospace;font-size:12px;color:var(--gold);
-    display:flex;align-items:flex-start;gap:10px;
-  }
-
-  /* Current conditions */
-  .current{
-    background:linear-gradient(135deg, var(--charcoal2), var(--charcoal3));
-    border:1px solid var(--line);border-radius:6px;padding:28px 32px;margin-bottom:40px;
-    display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;
-  }
-  .current-left{display:flex;align-items:center;gap:20px;}
-  .current-icon{font-size:56px;line-height:1;}
-  .current-temp{font-family:'Anton',sans-serif;font-size:60px;color:var(--amber);line-height:1;}
-  .current-desc{font-size:15px;color:var(--cream);margin-top:4px;}
-  .current-meta{font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);display:flex;flex-direction:column;gap:7px;text-align:right;}
-  .current-meta span b{color:var(--cream);font-weight:700;}
-
-  .section-label{
-    font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.12em;
-    color:var(--gold);text-transform:uppercase;margin-bottom:16px;
-    display:flex;align-items:center;gap:8px;
-  }
-  .section-label::after{content:"";flex:1;height:1px;background:var(--line);}
-
-  /* 7-day grid */
-  .forecast-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:10px;}
-  @media(max-width:860px){ .forecast-grid{grid-template-columns:repeat(4,1fr);} }
-  @media(max-width:540px){ .forecast-grid{grid-template-columns:repeat(2,1fr);} }
-
-  .day-card{
-    background:var(--charcoal2);border:1px solid var(--line);border-radius:6px;
-    padding:16px 12px 14px;text-align:center;transition:border-color .2s, transform .2s;
-  }
-  .day-card:hover{border-color:var(--gold);transform:translateY(-2px);}
-  .day-name{font-family:'Space Mono',monospace;font-size:11px;color:var(--cream);text-transform:uppercase;letter-spacing:0.06em;font-weight:700;}
-  .day-date{font-family:'Space Mono',monospace;font-size:9px;color:var(--steel);margin-bottom:10px;}
-  .day-icon{font-size:32px;margin-bottom:10px;}
-  .day-desc{font-size:11px;color:var(--muted);min-height:26px;margin-bottom:10px;line-height:1.35;padding:0 2px;font-weight:400;}
-
-  .hilo-row{display:flex;justify-content:center;gap:14px;margin-bottom:10px;}
-  .hilo{display:flex;flex-direction:column;align-items:center;}
-  .hilo-label{font-family:'Space Mono',monospace;font-size:8px;color:var(--muted);letter-spacing:0.1em;margin-bottom:2px;}
-  .hilo-val{font-family:'Anton',sans-serif;font-size:19px;}
-  .hilo-val.hi{color:var(--cream);}
-  .hilo-val.lo{color:var(--muted);font-size:15px;}
-
-  .day-wind{font-family:'Space Mono',monospace;font-size:9.5px;color:var(--muted);margin-bottom:8px;}
-
-  .rain-badge{
-    font-family:'Space Mono',monospace;font-size:9px;font-weight:700;
-    padding:4px 9px;border-radius:12px;display:inline-flex;align-items:center;gap:4px;
-    letter-spacing:0.02em;white-space:normal;line-height:1.3;text-align:center;max-width:100%;
-  }
-  .rain-low{background:rgba(95,224,160,0.12);color:var(--green);border:1px solid rgba(95,224,160,0.3);}
-  .rain-mod{background:rgba(255,183,3,0.12);color:var(--amber);border:1px solid rgba(255,183,3,0.35);}
-  .rain-high{background:rgba(232,183,35,0.14);color:var(--gold);border:1px solid rgba(232,183,35,0.4);}
-
-  footer{border-top:1px solid var(--line);padding:26px 0;text-align:center;font-family:'Space Mono',monospace;font-size:10px;color:var(--steel);}
-  footer a{color:var(--amber);}
+  .mobile-menu a:last-child{border-bottom:none;}
+  .mobile-menu a:active{background:rgba(232,183,35,0.1);}
+  .mobile-menu a.donate{color:var(--gold);font-weight:700;}
 
   @media(max-width:760px){
-    header{padding:32px 0 20px;}
-    header p{font-size:13px;}
-    .current{padding:22px 20px;justify-content:center;text-align:center;}
-    .current-left{flex-direction:column;gap:10px;}
-    .current-meta{text-align:center;align-items:center;}
-    .current-icon{font-size:46px;}
-    .current-temp{font-size:48px;}
-    .wrap{padding:0 16px;}
+    .nav-links{display:none;}
+    .llc-pill{display:none;}
+    .btn-donate{display:none;}
+    .hamburger{display:flex;}
+    .mobile-menu{display:flex;}
   }
-  @media(max-width:460px){
-    .search-box{flex-direction:column;}
-    .search-box button{padding:13px 0;width:100%;}
-    .loc-header{flex-direction:column;gap:2px;}
-    .day-desc{min-height:32px;}
-    .climate-stats{flex-direction:column;gap:6px;}
+
+  /* ── HERO ── */
+  .hero{padding:100px 0 70px;position:relative;}
+  .hero-eyebrow{
+    font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.15em;
+    color:var(--amber);text-transform:uppercase;margin-bottom:22px;
+    display:flex;align-items:center;gap:8px;
   }
+  .hero-eyebrow::before{content:"";width:24px;height:1px;background:var(--amber);}
+  .hero h1{font-size:clamp(48px,8vw,104px);color:var(--cream);}
+  .hero h1 .accent{color:var(--gold);}
+  .hero p{
+    max-width:540px;margin-top:26px;font-size:18px;font-weight:300;color:var(--steel);
+  }
+  .hero-cta{display:flex;gap:14px;margin-top:38px;flex-wrap:wrap;}
+  .btn{
+    font-family:'Oswald',sans-serif;font-weight:600;font-size:13px;letter-spacing:0.08em;
+    text-transform:uppercase;padding:14px 28px;border-radius:2px;
+    display:inline-flex;align-items:center;gap:8px;transition:all .2s;
+  }
+  .btn-primary{background:var(--gold);color:var(--charcoal);}
+  .btn-primary:hover{background:var(--amber);}
+  .btn-ghost{border:1px solid var(--line);color:var(--cream);}
+  .btn-ghost:hover{border-color:var(--steel);}
+
+  /* ── DATA READOUT STRIP (signature element) ── */
+  .readout{
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    background:var(--charcoal2);
+    overflow:hidden;
+  }
+  .readout .wrap{
+    display:flex;flex-wrap:wrap;gap:0;
+  }
+  .readout-item{
+    flex:1 1 160px;
+    padding:18px 22px;
+    border-right:1px solid var(--line);
+    font-family:'Space Mono',monospace;
+  }
+  .readout-item:last-child{border-right:none;}
+  .readout-label{font-size:10px;letter-spacing:0.1em;color:var(--steel);text-transform:uppercase;margin-bottom:6px;}
+  .readout-val{font-size:19px;color:var(--amber);font-weight:700;}
+  .readout-val.gold{color:var(--gold);}
+  .readout-val.live{color:#5fe0a0;}
+  .live-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:#5fe0a0;margin-right:6px;animation:blink 2s ease-in-out infinite;}
+  @keyframes blink{0%,100%{opacity:1;}50%{opacity:.35;}}
+
+  /* ── SECTION SHARED ── */
+  section{padding:90px 0;}
+  .section-label{
+    font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.12em;
+    color:var(--gold);text-transform:uppercase;margin-bottom:14px;
+  }
+  .section-title{font-size:clamp(30px,4vw,46px);color:var(--cream);max-width:620px;}
+
+  @media(max-width:760px){
+    section{padding:56px 0;}
+    .hero{padding:56px 0 40px;}
+    .hero p{font-size:16px;}
+    .hero-cta{flex-direction:column;}
+    .hero-cta .btn{justify-content:center;width:100%;}
+    .readout-item{flex:1 1 45%;padding:14px 16px;}
+    .wrap{padding:0 18px;}
+  }
+  @media(max-width:420px){
+    .readout-item{flex:1 1 100%;border-right:none;border-bottom:1px solid var(--line);}
+    .readout-item:last-child{border-bottom:none;}
+  }
+
+  /* ── ABOUT ── */
+  .about-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:60px;margin-top:46px;align-items:start;}
+  @media(max-width:820px){ .about-grid{grid-template-columns:1fr;} }
+  .about-text p{color:var(--steel);font-size:16px;margin-bottom:16px;max-width:520px;}
+  .about-text strong{color:var(--cream);font-weight:500;}
+  .coverage-box{
+    border:1px solid var(--line);padding:26px;background:var(--charcoal2);
+  }
+  .coverage-box .section-label{margin-bottom:18px;}
+  .state-list{display:grid;grid-template-columns:1fr 1fr;gap:10px 20px;}
+  .state-item{
+    display:flex;justify-content:space-between;align-items:center;
+    font-family:'Space Mono',monospace;font-size:13px;
+    border-bottom:1px solid var(--line);padding-bottom:8px;
+  }
+  .state-item span:first-child{color:var(--cream);}
+  .state-item span:last-child{color:var(--steel);font-size:11px;}
+
+  /* ── SERVICES ── */
+  .services-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;margin-top:50px;background:var(--line);}
+  @media(max-width:760px){ .services-grid{grid-template-columns:1fr;} }
+  .service-card{
+    background:var(--charcoal);padding:34px 30px;
+    transition:background .2s;
+  }
+  .service-card:hover{background:var(--charcoal2);}
+  .service-num{
+    font-family:'Space Mono',monospace;font-size:12px;color:var(--gold);
+    margin-bottom:16px;letter-spacing:0.08em;
+  }
+  .service-card h3{font-size:22px;color:var(--cream);margin-bottom:12px;}
+  .service-card p{color:var(--steel);font-size:15px;}
+  .service-links{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap;}
+  .service-link{
+    display:inline-flex;align-items:center;gap:6px;
+    font-family:'Space Mono',monospace;font-size:11px;font-weight:700;
+    letter-spacing:0.05em;text-transform:uppercase;
+    padding:7px 13px;border-radius:20px;border:1px solid;
+    transition:all .2s;
+  }
+  .service-link.fb{color:#5f9eff;border-color:rgba(95,158,255,0.4);background:rgba(95,158,255,0.08);}
+  .service-link.fb:hover{background:rgba(95,158,255,0.18);}
+  .service-link.yt{color:#ff6259;border-color:rgba(255,98,89,0.4);background:rgba(255,98,89,0.08);}
+  .service-link.yt:hover{background:rgba(255,98,89,0.18);}
+
+  /* ── TEAM ── */
+  .team-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;margin-top:46px;}
+  @media(max-width:900px){ .team-grid{grid-template-columns:repeat(2,minmax(0,1fr));} }
+  @media(max-width:540px){ .team-grid{grid-template-columns:1fr;} }
+  .team-card{background:var(--charcoal2);border:1px solid var(--line);border-top:2px solid var(--gold);display:flex;flex-direction:column;min-width:0;}
+  .team-photo{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;background:#1c1c1b;}
+  .team-body{padding:18px 20px 22px;display:flex;flex-direction:column;gap:8px;flex:1;}
+  .team-name{font-family:'Anton',sans-serif;font-size:22px;color:var(--cream);text-transform:uppercase;letter-spacing:0.01em;line-height:1.1;}
+  .team-role{
+    font-family:'Space Mono',monospace;font-size:11px;color:var(--amber);
+    text-transform:uppercase;letter-spacing:0.06em;
+  }
+  .team-body p{color:var(--steel);font-size:15px;margin-top:4px;}
+  .team-more{
+    margin-top:auto;padding-top:8px;font-family:'Space Mono',monospace;font-size:11px;font-weight:700;
+    color:var(--gold);text-transform:uppercase;letter-spacing:0.06em;transition:color .2s;
+  }
+  .team-more:hover{color:var(--amber);}
+  .team-all{margin-top:34px;}
+
+  /* ── CONTACT / FOOTER ── */
+  footer{
+    background:var(--charcoal2);border-top:1px solid var(--line);
+    padding:70px 0 34px;
+  }
+  .footer-grid{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:50px;}
+  @media(max-width:760px){ .footer-grid{grid-template-columns:1fr;gap:36px;} }
+  .footer-logo-img{height:64px;width:auto;display:block;margin-bottom:16px;}
+  .footer-brand p{color:var(--steel);font-size:14px;max-width:320px;}
+  .footer-col h4{
+    font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.1em;
+    color:var(--gold);text-transform:uppercase;margin-bottom:16px;
+  }
+  .footer-col a, .footer-col div{
+    display:block;color:var(--cream);font-size:14px;margin-bottom:10px;
+  }
+  .footer-col a:hover{color:var(--amber);}
+  .footer-bottom{
+    margin-top:60px;padding-top:24px;border-top:1px solid var(--line);
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
+    font-family:'Space Mono',monospace;font-size:11px;color:var(--steel);
+  }
+  .footer-bottom strong{color:var(--steel);font-weight:400;}
+
+  .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
+  .fc-hero{padding:64px 0 28px;}
+  .fc-hero h1{font-size:clamp(44px,7vw,88px);color:var(--cream);}
+  .fc-hero h1 .accent{color:var(--gold);}
+  .fc-sub{max-width:560px;margin-top:18px;font-size:17px;color:var(--steel);}
+  .fc-search{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px;max-width:860px;}
+  .fc-search input{flex:1 1 300px;min-width:0;background:var(--charcoal2);border:1px solid rgba(245,241,232,0.18);color:var(--cream);
+    font-family:'Space Mono',monospace;font-size:15px;padding:14px 16px;border-radius:2px;}
+  .fc-search input:focus{outline:2px solid var(--gold);border-color:transparent;}
+  .fc-search .btn{border:0;cursor:pointer;}
+  .fc-search .btn-ghost{border:1px solid var(--line);background:none;}
+  .fc-msg{min-height:22px;margin-top:12px;font-family:'Space Mono',monospace;font-size:13px;color:var(--amber);}
+  .fc-results{display:flex;flex-wrap:wrap;gap:8px;max-width:860px;}
+  .fc-results button{background:var(--charcoal2);border:1px solid var(--line);color:var(--cream);cursor:pointer;padding:10px 14px;border-radius:2px;
+    font-family:'Oswald',sans-serif;font-size:15px;text-align:left;display:flex;flex-direction:column;gap:2px;}
+  .fc-results button span{font-family:'Space Mono',monospace;font-size:11px;color:var(--steel);}
+  .fc-results button:hover{border-color:var(--gold);}
+  .fc-quick{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:18px;}
+  .fc-quick-lbl{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--steel);margin-right:4px;}
+  .fc-quick button{background:none;border:1px solid var(--line);color:var(--cream);cursor:pointer;border-radius:20px;padding:6px 14px;
+    font-family:'Oswald',sans-serif;font-size:13px;text-transform:uppercase;letter-spacing:.06em;transition:border-color .2s,color .2s;}
+  .fc-quick button:hover{border-color:var(--gold);color:var(--amber);}
+  .fc-stage-sec{padding:10px 0 80px;}
+  .fc-frame{position:relative;width:100%;aspect-ratio:16/9;border:1px solid var(--line);border-top:2px solid var(--gold);background:#141414;overflow:hidden;}
+  .fc-frame.vert{aspect-ratio:9/16;max-width:560px;margin:0 auto;}
+  .fc-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block;}
+  .fc-foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-top:12px;font-family:'Space Mono',monospace;font-size:12px;color:var(--steel);}
+  .fc-link{background:none;border:0;color:var(--gold);font-family:'Space Mono',monospace;font-size:12px;cursor:pointer;padding:0;}
+  .fc-link:hover{color:var(--amber);}
+  .btn:focus-visible,.fc-quick button:focus-visible,.fc-results button:focus-visible{outline:2px solid var(--amber);outline-offset:3px;}
+  @media(max-width:760px){ .fc-hero{padding:40px 0 18px;} .fc-search .btn{flex:1 1 auto;justify-content:center;} }
 </style>
 </head>
 <body>
 
 <nav>
   <div class="wrap">
-    <div class="nav-logo">
-      <img src="605-chaser-logo.png" alt="605 Chaser logo">
-      <span>605 CHASER</span>
+    <a href="/" class="logo"><img src="/605-chaser-logo.png" alt="605 Chaser logo" class="logo-icon">605 CHASER</a>
+    <div class="nav-links">
+      <a href="/#about">About</a>
+      <a href="/#services">Services</a>
+      <a href="/#team">Team</a>
+      <div class="nav-dropdown">
+        <button type="button" class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">Weather Tools <span class="caret">&#9662;</span></button>
+        <div class="nav-dropdown-menu">
+          <a href="/forecast.html" class="current">7-Day Forecast</a>
+          <a href="https://tornadotarget.netlify.app" target="_blank" rel="noopener noreferrer">Tornado Targets</a>
+          <a href="/storm-simulator.html">Storm Simulator</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <button type="button" class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">Get Involved <span class="caret">&#9662;</span></button>
+        <div class="nav-dropdown-menu">
+          <a href="/sponsor.html">Sponsor Us</a>
+          <a href="/ride-along.html">Ride-Along</a>
+        </div>
+      </div>
+      <a href="#contact">Contact</a>
     </div>
-    <div class="nav-right">
-      <a href="https://www.paypal.com/paypalme/605chaser" target="_blank" rel="noopener noreferrer" class="btn-donate">Donate Today</a>
-      <a href="/" class="back-link">← BACK TO SITE</a>
-    </div>
+    <div class="llc-pill">605 Chaser LLC</div>
+    <a href="https://www.paypal.com/paypalme/605chaser" target="_blank" rel="noopener noreferrer" class="btn-donate">Donate Today</a>
+    <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="/#about">About</a>
+    <a href="/#services">Services</a>
+    <a href="/#team">Team</a>
+    <a href="/forecast.html">7-Day Forecast</a>
+    <a href="https://tornadotarget.netlify.app" target="_blank" rel="noopener noreferrer">Tornado Targets</a>
+    <a href="/storm-simulator.html">Storm Simulator</a>
+    <a href="/sponsor.html">Sponsor Us</a>
+    <a href="/ride-along.html">Ride-Along</a>
+    <a href="#contact">Contact</a>
+    <a href="https://www.paypal.com/paypalme/605chaser" target="_blank" rel="noopener noreferrer" class="donate">Donate Today</a>
   </div>
 </nav>
 
-<header>
+<header class="fc-hero">
   <div class="wrap">
-    <div class="logo-badge"><img src="605-chaser-logo.png" alt="605 Chaser"></div>
-    <div class="brand-name">605 CHASER</div>
-    <div class="brand-tagline">Tracking Chaos. Delivering Clarity.</div>
-    <h1>Your <span class="accent">7-Day Forecast</span></h1>
-    <p>Enter your ZIP code or city to get an up-to-date, no-nonsense forecast — powered by the National Weather Service.</p>
+    <div class="hero-eyebrow">605 Chaser Weather Tools</div>
+    <h1>7-Day <span class="accent">Forecast</span></h1>
+    <p class="fc-sub">Pick any city or ZIP code in the U.S. Forecasts come straight from the National Weather Service and refresh every 30 minutes.</p>
 
-    <form class="search-box" id="searchForm">
-      <input type="text" id="locationInput" placeholder="ZIP code or city, state" autocomplete="off">
-      <button type="submit" id="searchBtn">Get Forecast</button>
+    <form class="fc-search" id="fcForm" autocomplete="off">
+      <label for="fcQuery" class="sr">City, state or ZIP code</label>
+      <input id="fcQuery" type="text" inputmode="search" placeholder="City, state or ZIP code">
+      <button type="submit" class="btn btn-primary">Get Forecast</button>
+      <button type="button" class="btn btn-ghost" id="fcGeo">⌖ Use My Location</button>
     </form>
-    <div class="search-hint">e.g. "57032" or "Sioux Falls, SD"</div>
-    <span class="geo-link" id="geoLink">📍 Use my current location</span>
+    <div class="fc-msg" id="fcMsg" role="status" aria-live="polite"></div>
+    <div class="fc-results" id="fcResults"></div>
+
+    <div class="fc-quick" aria-label="Quick picks">
+      <span class="fc-quick-lbl">Quick picks</span>
+      <button type="button" data-lat="43.5446" data-lon="-96.7311" data-name="Sioux Falls, SD">Sioux Falls</button>
+      <button type="button" data-lat="44.0805" data-lon="-103.2310" data-name="Rapid City, SD">Rapid City</button>
+      <button type="button" data-lat="45.4647" data-lon="-98.4865" data-name="Aberdeen, SD">Aberdeen</button>
+      <button type="button" data-lat="44.3683" data-lon="-100.3510" data-name="Pierre, SD">Pierre</button>
+      <button type="button" data-lat="46.8772" data-lon="-96.7898" data-name="Fargo, ND">Fargo</button>
+      <button type="button" data-lat="46.8083" data-lon="-100.7837" data-name="Bismarck, ND">Bismarck</button>
+      <button type="button" data-lat="44.9778" data-lon="-93.2650" data-name="Minneapolis, MN">Minneapolis</button>
+      <button type="button" data-lat="42.4963" data-lon="-96.4049" data-name="Sioux City, IA">Sioux City</button>
+      <button type="button" data-lat="41.2565" data-lon="-95.9345" data-name="Omaha, NE">Omaha</button>
+    </div>
   </div>
 </header>
 
-<div class="wrap">
-  <div id="statusMsg"></div>
-
-  <div id="results">
-    <div class="loc-header">
-      <h2 id="locName">—</h2>
-      <span class="loc-date" id="locDate">—</span>
-    </div>
-    <div class="location-sub" id="locUpdated">—</div>
-    <div class="climate-row" id="climateNormalsRow"></div>
-    <div class="climate-row" id="mtdPrecipRow" style="margin-bottom:28px;"></div>
-
-    <div id="alertArea"></div>
-
-    <div class="current" id="currentBox" style="display:none;">
-      <div class="current-left">
-        <div class="current-icon" id="curIcon">☀️</div>
-        <div>
-          <div class="current-temp" id="curTemp">--°</div>
-          <div class="current-desc" id="curDesc">—</div>
-        </div>
-      </div>
-      <div class="current-meta">
-        <span>Wind: <b id="curWind">--</b></span>
-        <span>Humidity: <b id="curHumidity">--</b></span>
-      </div>
-    </div>
-
-    <div class="section-label">7-Day Outlook</div>
-    <div class="forecast-grid" id="forecastGrid"></div>
-  </div>
-</div>
-
-<footer>
+<section class="fc-stage-sec">
   <div class="wrap">
-    Forecast data via National Weather Service (api.weather.gov) · Provided by <a href="/">605 Chaser LLC</a>
+    <div class="fc-frame" id="fcFrameBox">
+      <iframe id="fcFrame" title="7-day forecast" loading="eager"></iframe>
+    </div>
+    <div class="fc-foot">
+      <span id="fcNow">Showing: Sioux Falls, SD</span>
+      <button type="button" id="fcShare" class="fc-link">Copy link to this forecast</button>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  const DEFAULT = {lat:43.5446, lon:-96.7311, name:'Sioux Falls, SD'};
+  const ABBR={Alabama:'AL',Alaska:'AK',Arizona:'AZ',Arkansas:'AR',California:'CA',Colorado:'CO',Connecticut:'CT',Delaware:'DE',Florida:'FL',Georgia:'GA',Hawaii:'HI',Idaho:'ID',Illinois:'IL',Indiana:'IN',Iowa:'IA',Kansas:'KS',Kentucky:'KY',Louisiana:'LA',Maine:'ME',Maryland:'MD',Massachusetts:'MA',Michigan:'MI',Minnesota:'MN',Mississippi:'MS',Missouri:'MO',Montana:'MT',Nebraska:'NE',Nevada:'NV','New Hampshire':'NH','New Jersey':'NJ','New Mexico':'NM','New York':'NY','North Carolina':'NC','North Dakota':'ND',Ohio:'OH',Oklahoma:'OK',Oregon:'OR',Pennsylvania:'PA','Rhode Island':'RI','South Carolina':'SC','South Dakota':'SD',Tennessee:'TN',Texas:'TX',Utah:'UT',Vermont:'VT',Virginia:'VA',Washington:'WA','West Virginia':'WV',Wisconsin:'WI',Wyoming:'WY','District of Columbia':'DC','Puerto Rico':'PR'};
+  const $=id=>document.getElementById(id);
+  const frame=$('fcFrame'), box=$('fcFrameBox'), msg=$('fcMsg'), results=$('fcResults');
+  // Safari can't show the transparent After Effects loops, so it gets the built-in animated icons
+  const ua=navigator.userAgent;
+  const isSafari=/Safari/.test(ua) && !/Chrome|Chromium|CriOS|Edg|OPR|Firefox|FxiOS/.test(ua);
+  const isIOS=/iPhone|iPad|iPod/.test(ua) || (navigator.platform==='MacIntel' && navigator.maxTouchPoints>1);
+  const icons=(isSafari||isIOS)?'photo':'video';
+  let current=null, layout=null;
+
+  function wantLayout(){ return window.matchMedia('(max-width:760px)').matches ? 'v' : 'h'; }
+  function show(loc, push){
+    current=loc; layout=wantLayout();
+    box.classList.toggle('vert', layout==='v');
+    const p=new URLSearchParams({lat:(+loc.lat).toFixed(4), lon:(+loc.lon).toFixed(4), name:loc.name, layout, safe:'0', icons});
+    frame.src='/forecast-graphic.html?'+p.toString();
+    $('fcNow').textContent='Showing: '+loc.name;
+    results.innerHTML=''; msg.textContent='';
+    try{ localStorage.setItem('605fc:visitor', JSON.stringify(loc)); }catch(e){}
+    if(push!==false){
+      const q=new URLSearchParams({lat:(+loc.lat).toFixed(4), lon:(+loc.lon).toFixed(4), name:loc.name});
+      history.replaceState(null,'',location.pathname+'?'+q.toString());
+    }
+  }
+  let rt; addEventListener('resize',()=>{ clearTimeout(rt); rt=setTimeout(()=>{ if(current && wantLayout()!==layout) show(current,false); },250); });
+
+  async function byZip(zip){
+    const r=await fetch('https://api.zippopotam.us/us/'+zip);
+    if(!r.ok) throw new Error('nozip');
+    const j=await r.json(); const pl=j.places&&j.places[0];
+    if(!pl) throw new Error('nozip');
+    return {lat:+pl.latitude, lon:+pl.longitude, name:pl['place name']+', '+pl['state abbreviation']};
+  }
+  async function byCity(q){
+    const parts=q.split(',').map(s=>s.trim()).filter(Boolean);
+    const city=parts[0], st=(parts[1]||'').toUpperCase();
+    const r=await fetch('https://geocoding-api.open-meteo.com/v1/search?name='+encodeURIComponent(city)+'&count=10&language=en&countryCode=US');
+    const j=await r.json();
+    let list=(j.results||[]).map(x=>({lat:x.latitude, lon:x.longitude, st:ABBR[x.admin1]||x.admin1||'', county:x.admin2||'', city:x.name}));
+    if(st){ const want=ABBR[Object.keys(ABBR).find(k=>k.toUpperCase()===st)]||st; list=list.filter(x=>x.st.toUpperCase()===want); }
+    return list.map(x=>({lat:x.lat, lon:x.lon, name:x.city+', '+x.st, county:x.county}));
+  }
+
+  $('fcForm').addEventListener('submit', async e=>{
+    e.preventDefault();
+    const q=$('fcQuery').value.trim(); if(!q) return;
+    msg.textContent='Searching…'; results.innerHTML='';
+    try{
+      if(/^\d{5}$/.test(q)){ show(await byZip(q)); return; }
+      const list=await byCity(q);
+      if(!list.length){ msg.textContent='No U.S. locations matched "'+q+'". Try adding the state, like "Huron, SD", or use a ZIP code.'; return; }
+      if(list.length===1){ show(list[0]); return; }
+      msg.textContent='Pick the one you mean:';
+      list.forEach(loc=>{ const b=document.createElement('button'); b.type='button';
+        b.innerHTML='<strong></strong><span></span>'; b.querySelector('strong').textContent=loc.name; b.querySelector('span').textContent=loc.county;
+        b.onclick=()=>show(loc); results.appendChild(b); });
+    }catch(err){ msg.textContent= /nozip/.test(err.message) ? 'That ZIP code was not found.' : 'Location search is unavailable right now. Try one of the quick picks below.'; }
+  });
+
+  $('fcGeo').addEventListener('click',()=>{
+    if(!navigator.geolocation){ msg.textContent='Your browser does not share location. Search by city or ZIP instead.'; return; }
+    msg.textContent='Finding your location…';
+    navigator.geolocation.getCurrentPosition(async pos=>{
+      const lat=pos.coords.latitude, lon=pos.coords.longitude; let name='Your Location';
+      try{ const r=await fetch('https://api.weather.gov/points/'+lat.toFixed(4)+','+lon.toFixed(4),{headers:{Accept:'application/geo+json'}});
+        const j=await r.json(); const rl=j.properties.relativeLocation.properties; name=rl.city+', '+rl.state; }catch(e){}
+      show({lat,lon,name});
+    }, ()=>{ msg.textContent='Location access was blocked. Search by city or ZIP instead.'; }, {timeout:10000});
+  });
+
+  document.querySelectorAll('.fc-quick button').forEach(b=>b.addEventListener('click',()=>show({lat:+b.dataset.lat, lon:+b.dataset.lon, name:b.dataset.name})));
+
+  $('fcShare').addEventListener('click',async()=>{
+    const btn=$('fcShare');
+    try{ await navigator.clipboard.writeText(location.href); btn.textContent='Link copied'; }
+    catch(e){ btn.textContent=location.href; }
+    setTimeout(()=>btn.textContent='Copy link to this forecast',2500);
+  });
+
+  // start: link in the address bar, then the visitor's last pick, then Sioux Falls
+  const qs=new URLSearchParams(location.search);
+  let start=DEFAULT;
+  if(qs.get('lat') && qs.get('lon')) start={lat:+qs.get('lat'), lon:+qs.get('lon'), name:qs.get('name')||'Selected Location'};
+  else { try{ const s=JSON.parse(localStorage.getItem('605fc:visitor')||'null'); if(s && s.lat) start=s; }catch(e){} }
+  show(start,false);
+})();
+</script>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="/605chaser-logo-full.png" alt="605 Chaser — Tracking Chaos, Delivering Clarity" class="footer-logo-img">
+        <p>605 Chaser LLC is a storm chasing and severe weather content operation based in Harrisburg, South Dakota, covering the Northern Plains.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="tel:+16059060063">(605) 906-0063</a>
+        <a href="https://www.facebook.com/605chaser" target="_blank" rel="noopener noreferrer">facebook.com/605chaser</a>
+        <div>726 W Willow St, Unit 2<br>Harrisburg, SD 57032</div>
+      </div>
+      <div class="footer-col">
+        <h4>Business Entity</h4>
+        <div>605 Chaser LLC</div>
+        <div>South Dakota</div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© <span id="year"></span> 605 Chaser LLC. All rights reserved.</div>
+      <div><strong>Tracking Chaos. Delivering Clarity.</strong></div>
+    </div>
   </div>
 </footer>
 
 <script>
-const statusMsg = document.getElementById('statusMsg');
-const results = document.getElementById('results');
-const searchForm = document.getElementById('searchForm');
-const locationInput = document.getElementById('locationInput');
-const searchBtn = document.getElementById('searchBtn');
-const geoLink = document.getElementById('geoLink');
+  document.getElementById('year').textContent = new Date().getFullYear();
 
-const WEATHER_ICONS = [
-  { keys: ['thunder','tstm'], icon: '⛈️' },
-  { keys: ['tornado'], icon: '🌪️' },
-  { keys: ['snow','blizzard','flurr'], icon: '❄️' },
-  { keys: ['sleet','ice','freezing'], icon: '🧊' },
-  { keys: ['rain','shower'], icon: '🌧️' },
-  { keys: ['fog','haze','mist'], icon: '🌫️' },
-  { keys: ['wind'], icon: '💨' },
-  { keys: ['cloudy','overcast'], icon: '☁️' },
-  { keys: ['partly','mostly sunny','mostly clear'], icon: '⛅' },
-  { keys: ['clear','sunny'], icon: '☀️' },
-  { keys: ['night'], icon: '🌙' },
-];
-function iconFor(text){
-  const t = (text||'').toLowerCase();
-  for(const w of WEATHER_ICONS){ if(w.keys.some(k=>t.includes(k))) return w.icon; }
-  return '🌤️';
-}
-function rainBadge(pct){
-  let cls = 'rain-low';
-  if (pct >= 60) { cls = 'rain-high'; }
-  else if (pct >= 30) { cls = 'rain-mod'; }
-  return `<span class="rain-badge ${cls}">💧 ${pct}% chance of rain</span>`;
-}
-
-// ── 30-YEAR CLIMATE NORMALS (Open-Meteo historical reanalysis) ────────────
-// Best-effort, non-blocking — never breaks the live forecast if it fails.
-let climateRequestId = 0;
-async function fetchClimateNormals(lat, lon){
-  const myId = ++climateRequestId;
-  const el = document.getElementById('climateNormalsRow');
-  el.style.display = 'none';
-  try {
-    const url = `https://archive-api.open-meteo.com/v1/archive?latitude=${lat.toFixed(4)}&longitude=${lon.toFixed(4)}&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,snowfall_sum&temperature_unit=fahrenheit&precipitation_unit=inch&timezone=auto`;
-    const resp = await fetch(url);
-    if (!resp.ok) return;
-    const json = await resp.json();
-    const daily = json.daily;
-    if (!daily?.time?.length) return;
-
-    const mm = String(new Date().getMonth() + 1).padStart(2, '0');
-    const highs = [], lows = [];
-    const precipByYear = {}, snowByYear = {};
-    for (let i = 0; i < daily.time.length; i++) {
-      const t = daily.time[i];
-      if (t.slice(5, 7) !== mm) continue;
-      const year = t.slice(0, 4);
-      const hi = daily.temperature_2m_max[i], lo = daily.temperature_2m_min[i];
-      const pr = daily.precipitation_sum[i], sn = daily.snowfall_sum[i];
-      if (hi != null) highs.push(hi);
-      if (lo != null) lows.push(lo);
-      if (pr != null) precipByYear[year] = (precipByYear[year] || 0) + pr;
-      if (sn != null) snowByYear[year] = (snowByYear[year] || 0) + sn;
-    }
-    const avg = arr => arr.length ? arr.reduce((a,b)=>a+b,0) / arr.length : null;
-    if (!highs.length) return;
-    if (myId !== climateRequestId) return;
-
-    const high = avg(highs), low = avg(lows);
-    const precip = avg(Object.values(precipByYear));
-    const snow = avg(Object.values(snowByYear));
-    const monthLabel = new Date().toLocaleString('en-US', { month: 'long' });
-
-    let stats = `<span class="climate-item">📊 ${monthLabel} avg (1991–2020):</span>`;
-    if (high != null && low != null) stats += `<span class="climate-item">🌡️ <strong>${Math.round(high)}°</strong>/<strong>${Math.round(low)}°F</strong></span>`;
-    if (precip != null) stats += `<span class="climate-item">💧 <strong>${precip.toFixed(1)}"</strong> precip</span>`;
-    if (snow != null && snow >= 0.1) stats += `<span class="climate-item">❄️ <strong>${snow.toFixed(1)}"</strong> snow</span>`;
-
-    el.innerHTML = `<div class="climate-stats">${stats}</div><div class="climate-credit">Modeled avg · data: Open-Meteo.com</div>`;
-    el.style.display = 'flex';
-  } catch (e) { /* best-effort — never blocks the main forecast */ }
-}
-
-// ── MONTH-TO-DATE PRECIP (NOAA/ACIS station data, Open-Meteo fallback) ────
-function haversineMiles(lat1, lon1, lat2, lon2){
-  const R = 3958.8, toRad = d => d * Math.PI / 180;
-  const dLat = toRad(lat2-lat1), dLon = toRad(lon2-lon1);
-  const a = Math.sin(dLat/2)**2 + Math.cos(toRad(lat1))*Math.cos(toRad(lat2))*Math.sin(dLon/2)**2;
-  return R * 2 * Math.asin(Math.sqrt(a));
-}
-async function fetchMTDPrecip(lat, lon){
-  document.getElementById('mtdPrecipRow').style.display = 'none';
-  const gotOfficial = await fetchOfficialMTDPrecip(lat, lon);
-  if (gotOfficial) return;
-  await fetchModeledMTDPrecip(lat, lon);
-}
-async function fetchOfficialMTDPrecip(lat, lon){
-  try {
-    const pad = 0.6;
-    const bbox = `${(lon-pad).toFixed(2)},${(lat-pad).toFixed(2)},${(lon+pad).toFixed(2)},${(lat+pad).toFixed(2)}`;
-    const metaResp = await fetch(`https://data.rcc-acis.org/StnMeta?bbox=${bbox}&meta=uid,name,ll,sids&elems=pcpn&output=json`);
-    if (!metaResp.ok) return false;
-    const metaData = await metaResp.json();
-    const stations = (metaData.meta || []).filter(st => st.ll && st.uid);
-    if (!stations.length) return false;
-
-    const isAirport = st => (st.sids || []).some(s => /\s5$/.test(s));
-    const ranked = stations
-      .map(st => ({ ...st, dist: haversineMiles(lat, lon, st.ll[1], st.ll[0]), airport: isAirport(st) }))
-      .sort((a,b) => (b.airport - a.airport) || (a.dist - b.dist))
-      .slice(0, 8);
-
-    const now = new Date();
-    const y = now.getFullYear(), m = String(now.getMonth()+1).padStart(2,'0');
-    const startDate = `${y}-${m}-01`;
-    const endDate = now.toISOString().slice(0,10);
-
-    for (const st of ranked) {
-      try {
-        const dataResp = await fetch(`https://data.rcc-acis.org/StnData?uid=${st.uid}&sdate=${startDate}&edate=${endDate}&elems=pcpn,snow&output=json`);
-        if (!dataResp.ok) continue;
-        const dataJson = await dataResp.json();
-        if (dataJson.meta?.uid != null && dataJson.meta.uid !== st.uid) continue;
-        const rows = dataJson.data;
-        if (!rows?.length) continue;
-
-        let rain = 0, snow = 0, gotData = false;
-        for (const row of rows) {
-          const [, pVal, sVal] = row;
-          if (pVal != null && pVal !== 'M') { const v = pVal === 'T' ? 0 : parseFloat(pVal); if (!isNaN(v)) { rain += v; gotData = true; } }
-          if (sVal != null && sVal !== 'M') { const v = sVal === 'T' ? 0 : parseFloat(sVal); if (!isNaN(v)) snow += v; }
-        }
-        if (!gotData) continue;
-
-        renderMTDPrecip({
-          monthLabel: now.toLocaleString('en-US', { month: 'long' }),
-          rain, snow, official: true, stationName: st.name, distanceMi: Math.round(st.dist)
-        });
-        return true;
-      } catch (e) {}
-    }
-    return false;
-  } catch (e) { return false; }
-}
-async function fetchModeledMTDPrecip(lat, lon){
-  try {
-    const now = new Date();
-    const y = now.getFullYear(), m = String(now.getMonth()+1).padStart(2,'0');
-    const startDate = `${y}-${m}-01`;
-    const endDate = now.toISOString().slice(0,10);
-    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat.toFixed(4)}&longitude=${lon.toFixed(4)}&start_date=${startDate}&end_date=${endDate}&daily=precipitation_sum,snowfall_sum&temperature_unit=fahrenheit&precipitation_unit=inch&timezone=auto`;
-    const resp = await fetch(url);
-    if (!resp.ok) return;
-    const data = await resp.json();
-    const daily = data.daily;
-    if (!daily?.time?.length) return;
-    let rain = 0, snow = 0, gotData = false;
-    for (let i = 0; i < daily.time.length; i++) {
-      const p = daily.precipitation_sum[i], s = daily.snowfall_sum[i];
-      if (p != null) { rain += p; gotData = true; }
-      if (s != null) snow += s;
-    }
-    if (!gotData) return;
-    renderMTDPrecip({ monthLabel: now.toLocaleString('en-US', { month: 'long' }), rain, snow, official: false });
-  } catch (e) {}
-}
-function renderMTDPrecip(d){
-  const el = document.getElementById('mtdPrecipRow');
-  let stats = `<span class="climate-item">🗓️ ${d.monthLabel} to date:</span>`;
-  stats += `<span class="climate-item">💧 <strong>${d.rain.toFixed(2)}"</strong> rain</span>`;
-  if (d.snow >= 0.1) stats += `<span class="climate-item">❄️ <strong>${d.snow.toFixed(1)}"</strong> snow</span>`;
-  const credit = d.official
-    ? `Official NOAA station data (${d.stationName}, ~${d.distanceMi}mi away) · source: NOAA/ACIS`
-    : 'Modeled estimate, not an official gauge reading · data: Open-Meteo.com';
-  el.innerHTML = `<div class="climate-stats">${stats}</div><div class="climate-credit">${credit}</div>`;
-  el.style.display = 'flex';
-}
-
-function showStatus(html, isError){
-  statusMsg.innerHTML = `<div class="status-msg${isError?' error':''}">${html}</div>`;
-  results.style.display = 'none';
-}
-function clearStatus(){ statusMsg.innerHTML = ''; }
-
-async function geocode(query){
-  const cleaned = query.trim();
-  if (/^\d{5}$/.test(cleaned)) {
-    const r = await fetch(`https://api.zippopotam.us/us/${cleaned}`);
-    if (r.ok) {
-      const j = await r.json();
-      const place = j.places?.[0];
-      if (place) {
-        return { lat: parseFloat(place.latitude), lon: parseFloat(place.longitude), label: `${place['place name']}, ${place['state abbreviation']}` };
-      }
-    }
-    throw new Error('ZIP code not found');
-  }
-  const r = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(cleaned)}&count=1&language=en&format=json&countryCode=US`);
-  const j = await r.json();
-  const res = j.results?.[0];
-  if (!res) throw new Error('Location not found');
-  return { lat: res.latitude, lon: res.longitude, label: `${res.name}, ${res.admin1 || ''}`.replace(/, $/,'') };
-}
-
-async function loadForecast(lat, lon, label){
-  showStatus('<span class="spinner"></span>Fetching your forecast…');
-  try {
-    const ptResp = await fetch(`https://api.weather.gov/points/${lat.toFixed(4)},${lon.toFixed(4)}`);
-    if (!ptResp.ok) throw new Error('Location not covered by NWS');
-    const ptJson = await ptResp.json();
-    const props = ptJson.properties;
-
-    const [forecastJson, hourlyJson, alertsJson] = await Promise.all([
-      fetch(props.forecast).then(r => r.json()),
-      fetch(props.forecastHourly).then(r => r.json()).catch(()=>null),
-      fetch(`https://api.weather.gov/alerts/active?point=${lat.toFixed(4)},${lon.toFixed(4)}`).then(r => r.json()).catch(()=>null)
-    ]);
-
-    const periods = forecastJson.properties?.periods || [];
-    if (!periods.length) throw new Error('No forecast data available for this location');
-
-    document.getElementById('locName').textContent = label;
-    document.getElementById('locDate').textContent = new Date().toLocaleDateString([], {weekday:'long', month:'long', day:'numeric', year:'numeric'});
-
-    const updatedRaw = forecastJson.properties?.updateTime || forecastJson.properties?.updated || forecastJson.properties?.generatedAt;
-    const updatedDate = updatedRaw ? new Date(updatedRaw) : null;
-    document.getElementById('locUpdated').textContent =
-      (updatedDate && !isNaN(updatedDate))
-        ? `NWS data updated ${updatedDate.toLocaleString([], {month:'short', day:'numeric', hour:'numeric', minute:'2-digit'})}`
-        : 'NWS data · just now';
-
-    const alertArea = document.getElementById('alertArea');
-    alertArea.innerHTML = '';
-    const activeAlerts = alertsJson?.features || [];
-    if (activeAlerts.length > 0) {
-      const top = activeAlerts[0];
-      alertArea.innerHTML = `<div class="alert-banner">⚠️ <span><b>${top.properties.event}</b> in effect for this area${activeAlerts.length>1?` (+${activeAlerts.length-1} more)`:''}. Stay weather aware.</span></div>`;
-    }
-
-    const current = periods[0];
-    document.getElementById('currentBox').style.display = 'flex';
-    document.getElementById('curIcon').textContent = iconFor(current.shortForecast + (current.isDaytime ? '' : ' night'));
-    document.getElementById('curTemp').textContent = `${current.temperature}°${current.temperatureUnit}`;
-    document.getElementById('curDesc').textContent = current.shortForecast;
-    document.getElementById('curWind').textContent = `${current.windSpeed} ${current.windDirection}`;
-    const hourlyNow = hourlyJson?.properties?.periods?.[0];
-    const humidRaw = current.relativeHumidity?.value ?? hourlyNow?.relativeHumidity?.value;
-    document.getElementById('curHumidity').textContent = humidRaw != null ? `${Math.round(humidRaw)}%` : '—';
-
-    const grid = document.getElementById('forecastGrid');
-    grid.innerHTML = '';
-    const dayPeriods = periods.filter(p => p.isDaytime);
-    const nightPeriods = periods.filter(p => !p.isDaytime);
-    const cards = dayPeriods.slice(0, 7).map((day, i) => ({ day, night: nightPeriods[i] }));
-
-    const today = new Date();
-    cards.forEach(({day, night}, idx) => {
-      const precip = day.probabilityOfPrecipitation?.value ?? 0;
-      const cardDate = new Date(today); cardDate.setDate(today.getDate() + idx);
-      const dateLabel = cardDate.toLocaleDateString([], {month:'short', day:'numeric'});
-      const card = document.createElement('div');
-      card.className = 'day-card';
-      card.innerHTML = `
-        <div class="day-name">${idx === 0 ? 'Today' : day.name.replace(' Night','').slice(0,3).toUpperCase()}</div>
-        <div class="day-date">${dateLabel}</div>
-        <div class="day-icon">${iconFor(day.shortForecast)}</div>
-        <div class="day-desc">${day.shortForecast}</div>
-        <div class="hilo-row">
-          <div class="hilo"><span class="hilo-label">HIGH</span><span class="hilo-val hi">${day.temperature}°</span></div>
-          <div class="hilo"><span class="hilo-label">LOW</span><span class="hilo-val lo">${night ? night.temperature + '°' : '--'}</span></div>
-        </div>
-        <div class="day-wind">💨 ${day.windSpeed}</div>
-        ${rainBadge(precip)}
-      `;
-      grid.appendChild(card);
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburgerBtn.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.toggle('open');
+    hamburgerBtn.classList.toggle('open', isOpen);
+    hamburgerBtn.setAttribute('aria-expanded', isOpen);
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      hamburgerBtn.classList.remove('open');
+      hamburgerBtn.setAttribute('aria-expanded', 'false');
     });
+  });
 
-    // Fire-and-forget — best-effort climate context, never blocks the live forecast
-    fetchClimateNormals(lat, lon);
-    fetchMTDPrecip(lat, lon);
-
-    clearStatus();
-    results.style.display = 'block';
-  } catch (err) {
-    showStatus(`⚠ ${err.message || 'Something went wrong fetching the forecast. Please try again.'}`, true);
-  }
-}
-
-searchForm.addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const query = locationInput.value.trim();
-  if (!query) return;
-  searchBtn.disabled = true;
-  showStatus('<span class="spinner"></span>Looking up location…');
-  try {
-    const geo = await geocode(query);
-    await loadForecast(geo.lat, geo.lon, geo.label);
-  } catch (err) {
-    showStatus(`⚠ ${err.message || 'Could not find that location. Try a ZIP code or "City, State".'}`, true);
-  } finally {
-    searchBtn.disabled = false;
-  }
-});
-
-geoLink.addEventListener('click', () => {
-  if (!navigator.geolocation) {
-    showStatus('⚠ Geolocation is not available in this browser.', true);
-    return;
-  }
-  showStatus('<span class="spinner"></span>Getting your location…');
-  navigator.geolocation.getCurrentPosition(
-    async (pos) => {
-      const { latitude, longitude } = pos.coords;
-      let label = 'Your Location';
-      try {
-        const rev = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json&zoom=10`, {headers:{'Accept-Language':'en'}});
-        const revJson = await rev.json();
-        const city = revJson.address?.city || revJson.address?.town || revJson.address?.village || revJson.address?.county;
-        const state = revJson.address?.state_code || revJson.address?.state;
-        if (city) label = `${city}${state ? ', ' + state : ''}`;
-      } catch {}
-      await loadForecast(latitude, longitude, label);
-    },
-    () => showStatus('⚠ Could not access your location. Please allow location access or search manually.', true),
-    { timeout: 10000 }
-  );
-});
+  document.querySelectorAll('.nav-dropdown').forEach(dropdown => {
+    const toggle = dropdown.querySelector('.nav-dropdown-toggle');
+    toggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = dropdown.classList.contains('open');
+      document.querySelectorAll('.nav-dropdown.open').forEach(d => {
+        d.classList.remove('open');
+        d.querySelector('.nav-dropdown-toggle').setAttribute('aria-expanded', 'false');
+      });
+      if (!isOpen) {
+        dropdown.classList.add('open');
+        toggle.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+  document.addEventListener('click', () => {
+    document.querySelectorAll('.nav-dropdown.open').forEach(d => {
+      d.classList.remove('open');
+      d.querySelector('.nav-dropdown-toggle').setAttribute('aria-expanded', 'false');
+    });
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.nav-dropdown.open').forEach(d => {
+        d.classList.remove('open');
+        d.querySelector('.nav-dropdown-toggle').setAttribute('aria-expanded', 'false');
+      });
+    }
+  });
 </script>
-
 </body>
 </html>
