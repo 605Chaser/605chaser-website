@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#141414">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<title>Meet the Team — 605 Chaser LLC</title>
+<meta name="description" content="Meet the 605 Chaser team: the storm chasers, forecasters, and media crew behind live severe weather coverage across the Northern Plains.">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="605 Chaser LLC">
+<meta property="og:title" content="Meet the Team — 605 Chaser LLC">
+<meta property="og:description" content="Storm chasing and severe weather content operation covering a five-state Northern Plains territory: SD, ND, MN, IA, NE.">
+<meta property="og:image" content="https://605chaser.com/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://605chaser.com/team">
+
+<!-- Twitter / X Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Meet the Team — 605 Chaser LLC">
+<meta name="twitter:description" content="Storm chasing and severe weather content operation covering a five-state Northern Plains territory.">
+<meta name="twitter:image" content="https://605chaser.com/og-image.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --charcoal:#141414;
+    --charcoal2:#1c1c1c;
+    --cream:#F5F1E8;
+    --gold:#E8B723;
+    --amber:#FFB703;
+    --steel:#8B96A3;
+    --line:rgba(245,241,232,0.1);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--charcoal);
+    color:var(--cream);
+    font-family:'Oswald',sans-serif;
+    font-weight:300;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--gold);color:var(--charcoal);}
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px;}
+
+  h1,h2,h3{font-family:'Anton',sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:0.02em;line-height:1.05;}
+
+  /* ── NAV ── */
+  nav{
+    position:sticky;top:0;z-index:100;
+    background:rgba(20,20,20,0.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;padding-top:16px;padding-bottom:16px;}
+  .logo{
+    font-family:'Anton',sans-serif;
+    font-size:22px;letter-spacing:0.04em;
+    color:var(--cream);
+    display:flex;align-items:center;gap:9px;
+    white-space:nowrap;flex-shrink:0;
+  }
+  .logo-icon{height:32px;width:auto;display:block;flex-shrink:0;}
+  .logo-mark{
+    width:11px;height:11px;border-radius:50%;
+    background:var(--gold);
+    box-shadow:0 0 10px var(--gold);
+    flex-shrink:0;
+  }
+  .nav-links{display:flex;gap:24px;font-size:13px;text-transform:uppercase;letter-spacing:0.08em;font-weight:500;}
+  .nav-links a{color:var(--steel);transition:color .2s;}
+  .nav-links a:hover{color:var(--amber);}
+  .nav-dropdown{position:relative;}
+  .nav-dropdown-toggle{
+    background:none;border:none;color:var(--steel);font-family:'Oswald',sans-serif;
+    text-transform:uppercase;letter-spacing:0.08em;font-size:13px;font-weight:500;
+    cursor:pointer;display:flex;align-items:center;gap:4px;padding:0;transition:color .2s;
+  }
+  .nav-dropdown-toggle .caret{font-size:10px;transition:transform .2s;position:relative;top:1px;}
+  .nav-dropdown-toggle:hover,
+  .nav-dropdown-toggle.current,
+  .nav-dropdown.open .nav-dropdown-toggle{color:var(--amber);}
+  .nav-dropdown.open .nav-dropdown-toggle .caret,
+  .nav-dropdown:hover .nav-dropdown-toggle .caret{transform:rotate(180deg);}
+  .nav-dropdown-toggle:focus-visible{outline:2px solid var(--amber);outline-offset:3px;}
+  .nav-dropdown-menu{
+    position:absolute;top:100%;left:50%;margin-top:14px;transform:translateX(-50%) translateY(6px);
+    background:var(--charcoal2);border:1px solid var(--line);border-radius:8px;
+    padding:8px;min-width:190px;display:flex;flex-direction:column;gap:2px;
+    opacity:0;visibility:hidden;transition:opacity .16s ease, transform .16s ease;
+    box-shadow:0 14px 30px rgba(0,0,0,0.45);z-index:150;
+  }
+  .nav-dropdown-menu a{
+    padding:9px 12px;border-radius:6px;font-size:13px;white-space:nowrap;color:var(--cream);
+    text-transform:uppercase;letter-spacing:0.06em;
+  }
+  .nav-dropdown-menu a:hover{background:rgba(232,183,35,0.12);color:var(--amber);}
+  .nav-dropdown-menu a.current{color:var(--gold);}
+  .nav-dropdown.open .nav-dropdown-menu,
+  .nav-dropdown:hover .nav-dropdown-menu,
+  .nav-dropdown:focus-within .nav-dropdown-menu{
+    opacity:1;visibility:visible;transform:translateX(-50%) translateY(0);
+  }
+  .btn-donate{
+    font-family:'Oswald',sans-serif;font-weight:600;font-size:12px;letter-spacing:0.06em;
+    text-transform:uppercase;background:var(--gold);color:var(--charcoal);
+    padding:9px 16px;border-radius:20px;white-space:nowrap;transition:background .2s;
+    flex-shrink:0;
+  }
+  .btn-donate:hover{background:var(--amber);}
+  .llc-pill{
+    font-family:'Space Mono',monospace;
+    font-size:10px;letter-spacing:0.08em;
+    color:var(--steel);
+    border:1px solid var(--line);
+    padding:4px 10px;border-radius:20px;
+    text-transform:uppercase;
+    white-space:nowrap;
+  }
+  .hamburger{
+    display:none;flex-direction:column;gap:5px;background:none;border:none;
+    cursor:pointer;padding:6px;-webkit-tap-highlight-color:transparent;
+  }
+  .hamburger span{width:22px;height:2px;background:var(--cream);transition:all .25s;}
+  .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .hamburger.open span:nth-child(2){opacity:0;}
+  .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+  .mobile-menu{
+    display:none;flex-direction:column;
+    max-height:0;overflow:hidden;transition:max-height .3s ease;
+    background:var(--charcoal2);border-bottom:1px solid var(--line);
+  }
+  .mobile-menu.open{max-height:600px;}
+  .mobile-menu a{
+    padding:16px 28px;font-size:14px;text-transform:uppercase;letter-spacing:0.08em;
+    color:var(--cream);border-bottom:1px solid var(--line);font-weight:500;
+  }
+  .mobile-menu a:last-child{border-bottom:none;}
+  .mobile-menu a:active{background:rgba(232,183,35,0.1);}
+  .mobile-menu a.donate{color:var(--gold);font-weight:700;}
+
+  @media(max-width:760px){
+    .nav-links{display:none;}
+    .llc-pill{display:none;}
+    .btn-donate{display:none;}
+    .hamburger{display:flex;}
+    .mobile-menu{display:flex;}
+  }
+
+  /* ── HERO ── */
+  .hero{padding:100px 0 70px;position:relative;}
+  .hero-eyebrow{
+    font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.15em;
+    color:var(--amber);text-transform:uppercase;margin-bottom:22px;
+    display:flex;align-items:center;gap:8px;
+  }
+  .hero-eyebrow::before{content:"";width:24px;height:1px;background:var(--amber);}
+  .hero h1{font-size:clamp(48px,8vw,104px);color:var(--cream);}
+  .hero h1 .accent{color:var(--gold);}
+  .hero p{
+    max-width:540px;margin-top:26px;font-size:18px;font-weight:300;color:var(--steel);
+  }
+  .hero-cta{display:flex;gap:14px;margin-top:38px;flex-wrap:wrap;}
+  .btn{
+    font-family:'Oswald',sans-serif;font-weight:600;font-size:13px;letter-spacing:0.08em;
+    text-transform:uppercase;padding:14px 28px;border-radius:2px;
+    display:inline-flex;align-items:center;gap:8px;transition:all .2s;
+  }
+  .btn-primary{background:var(--gold);color:var(--charcoal);}
+  .btn-primary:hover{background:var(--amber);}
+  .btn-ghost{border:1px solid var(--line);color:var(--cream);}
+  .btn-ghost:hover{border-color:var(--steel);}
+
+  /* ── DATA READOUT STRIP (signature element) ── */
+  .readout{
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    background:var(--charcoal2);
+    overflow:hidden;
+  }
+  .readout .wrap{
+    display:flex;flex-wrap:wrap;gap:0;
+  }
+  .readout-item{
+    flex:1 1 160px;
+    padding:18px 22px;
+    border-right:1px solid var(--line);
+    font-family:'Space Mono',monospace;
+  }
+  .readout-item:last-child{border-right:none;}
+  .readout-label{font-size:10px;letter-spacing:0.1em;color:var(--steel);text-transform:uppercase;margin-bottom:6px;}
+  .readout-val{font-size:19px;color:var(--amber);font-weight:700;}
+  .readout-val.gold{color:var(--gold);}
+  .readout-val.live{color:#5fe0a0;}
+  .live-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:#5fe0a0;margin-right:6px;animation:blink 2s ease-in-out infinite;}
+  @keyframes blink{0%,100%{opacity:1;}50%{opacity:.35;}}
+
+  /* ── SECTION SHARED ── */
+  section{padding:90px 0;}
+  .section-label{
+    font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.12em;
+    color:var(--gold);text-transform:uppercase;margin-bottom:14px;
+  }
+  .section-title{font-size:clamp(30px,4vw,46px);color:var(--cream);max-width:620px;}
+
+  @media(max-width:760px){
+    section{padding:56px 0;}
+    .hero{padding:56px 0 40px;}
+    .hero p{font-size:16px;}
+    .hero-cta{flex-direction:column;}
+    .hero-cta .btn{justify-content:center;width:100%;}
+    .readout-item{flex:1 1 45%;padding:14px 16px;}
+    .wrap{padding:0 18px;}
+  }
+  @media(max-width:420px){
+    .readout-item{flex:1 1 100%;border-right:none;border-bottom:1px solid var(--line);}
+    .readout-item:last-child{border-bottom:none;}
+  }
+
+  /* ── ABOUT ── */
+  .about-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:60px;margin-top:46px;align-items:start;}
+  @media(max-width:820px){ .about-grid{grid-template-columns:1fr;} }
+  .about-text p{color:var(--steel);font-size:16px;margin-bottom:16px;max-width:520px;}
+  .about-text strong{color:var(--cream);font-weight:500;}
+  .coverage-box{
+    border:1px solid var(--line);padding:26px;background:var(--charcoal2);
+  }
+  .coverage-box .section-label{margin-bottom:18px;}
+  .state-list{display:grid;grid-template-columns:1fr 1fr;gap:10px 20px;}
+  .state-item{
+    display:flex;justify-content:space-between;align-items:center;
+    font-family:'Space Mono',monospace;font-size:13px;
+    border-bottom:1px solid var(--line);padding-bottom:8px;
+  }
+  .state-item span:first-child{color:var(--cream);}
+  .state-item span:last-child{color:var(--steel);font-size:11px;}
+
+  /* ── SERVICES ── */
+  .services-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;margin-top:50px;background:var(--line);}
+  @media(max-width:760px){ .services-grid{grid-template-columns:1fr;} }
+  .service-card{
+    background:var(--charcoal);padding:34px 30px;
+    transition:background .2s;
+  }
+  .service-card:hover{background:var(--charcoal2);}
+  .service-num{
+    font-family:'Space Mono',monospace;font-size:12px;color:var(--gold);
+    margin-bottom:16px;letter-spacing:0.08em;
+  }
+  .service-card h3{font-size:22px;color:var(--cream);margin-bottom:12px;}
+  .service-card p{color:var(--steel);font-size:15px;}
+  .service-links{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap;}
+  .service-link{
+    display:inline-flex;align-items:center;gap:6px;
+    font-family:'Space Mono',monospace;font-size:11px;font-weight:700;
+    letter-spacing:0.05em;text-transform:uppercase;
+    padding:7px 13px;border-radius:20px;border:1px solid;
+    transition:all .2s;
+  }
+  .service-link.fb{color:#5f9eff;border-color:rgba(95,158,255,0.4);background:rgba(95,158,255,0.08);}
+  .service-link.fb:hover{background:rgba(95,158,255,0.18);}
+  .service-link.yt{color:#ff6259;border-color:rgba(255,98,89,0.4);background:rgba(255,98,89,0.08);}
+  .service-link.yt:hover{background:rgba(255,98,89,0.18);}
+
+  /* ── TEAM ── */
+  .team-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;margin-top:46px;}
+  @media(max-width:900px){ .team-grid{grid-template-columns:repeat(2,minmax(0,1fr));} }
+  @media(max-width:540px){ .team-grid{grid-template-columns:1fr;} }
+  .team-card{background:var(--charcoal2);border:1px solid var(--line);border-top:2px solid var(--gold);display:flex;flex-direction:column;min-width:0;}
+  .team-photo{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;background:#1c1c1b;}
+  .team-body{padding:18px 20px 22px;display:flex;flex-direction:column;gap:8px;flex:1;}
+  .team-name{font-family:'Anton',sans-serif;font-size:22px;color:var(--cream);text-transform:uppercase;letter-spacing:0.01em;line-height:1.1;}
+  .team-role{
+    font-family:'Space Mono',monospace;font-size:11px;color:var(--amber);
+    text-transform:uppercase;letter-spacing:0.06em;
+  }
+  .team-body p{color:var(--steel);font-size:15px;margin-top:4px;}
+  .team-more{
+    margin-top:auto;padding-top:8px;font-family:'Space Mono',monospace;font-size:11px;font-weight:700;
+    color:var(--gold);text-transform:uppercase;letter-spacing:0.06em;transition:color .2s;
+  }
+  .team-more:hover{color:var(--amber);}
+  .team-all{margin-top:34px;}
+
+  /* ── CONTACT / FOOTER ── */
+  footer{
+    background:var(--charcoal2);border-top:1px solid var(--line);
+    padding:70px 0 34px;
+  }
+  .footer-grid{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:50px;}
+  @media(max-width:760px){ .footer-grid{grid-template-columns:1fr;gap:36px;} }
+  .footer-logo-img{height:64px;width:auto;display:block;margin-bottom:16px;}
+  .footer-brand p{color:var(--steel);font-size:14px;max-width:320px;}
+  .footer-col h4{
+    font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.1em;
+    color:var(--gold);text-transform:uppercase;margin-bottom:16px;
+  }
+  .footer-col a, .footer-col div{
+    display:block;color:var(--cream);font-size:14px;margin-bottom:10px;
+  }
+  .footer-col a:hover{color:var(--amber);}
+  .footer-bottom{
+    margin-top:60px;padding-top:24px;border-top:1px solid var(--line);
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
+    font-family:'Space Mono',monospace;font-size:11px;color:var(--steel);
+  }
+  .footer-bottom strong{color:var(--steel);font-weight:400;}
+
+  .current-link{color:var(--gold)!important;}
+  .crumb{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--steel);margin-bottom:22px;}
+  .crumb a:hover{color:var(--amber);}
+  .roster{display:flex;flex-wrap:wrap;gap:10px;margin-top:34px;}
+  .roster a{display:flex;align-items:center;gap:10px;border:1px solid var(--line);background:var(--charcoal2);padding:6px 14px 6px 6px;border-radius:40px;font-size:13px;text-transform:uppercase;letter-spacing:0.05em;font-weight:500;transition:border-color .2s,color .2s;}
+  .roster a:hover{border-color:var(--gold);color:var(--amber);}
+  .roster img{width:32px;height:32px;border-radius:50%;object-fit:cover;object-position:50% 20%;}
+  .bio{display:grid;grid-template-columns:300px minmax(0,1fr);gap:56px;padding:70px 0;border-top:1px solid var(--line);scroll-margin-top:80px;}
+  .bio-photo{position:sticky;top:96px;align-self:start;}
+  .bio-photo img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border:1px solid var(--line);border-top:2px solid var(--gold);}
+  .bio-meta{font-family:'Space Mono',monospace;font-size:11px;color:var(--steel);text-transform:uppercase;letter-spacing:0.08em;margin-top:12px;}
+  .bio h2{font-size:clamp(34px,4.5vw,52px);color:var(--cream);}
+  .bio .team-role{font-family:'Space Mono',monospace;font-size:12px;color:var(--amber);text-transform:uppercase;letter-spacing:0.08em;margin:10px 0 26px;}
+  .bio-copy{max-width:680px;}
+  .bio-copy p{color:#cfd3d8;font-size:17px;margin-bottom:18px;}
+  .follow{margin-top:24px;padding-top:18px;border-top:1px solid var(--line);font-family:'Space Mono',monospace;font-size:12px;color:var(--steel);display:flex;flex-wrap:wrap;gap:8px 18px;}
+  .follow strong{color:var(--gold);font-weight:700;}
+  .back-top{display:inline-block;margin-top:10px;font-family:'Space Mono',monospace;font-size:11px;color:var(--steel);text-transform:uppercase;letter-spacing:0.08em;}
+  .back-top:hover{color:var(--amber);}
+  @media(max-width:820px){
+    .bio{grid-template-columns:1fr;gap:26px;padding:50px 0;}
+    .bio-photo{position:static;max-width:280px;}
+    .bio-copy p{font-size:16px;}
+  }
+</style>
+</head>
+<body id="top">
+
+<nav>
+  <div class="wrap">
+    <a href="/" class="logo"><img src="/605-chaser-logo.png" alt="605 Chaser logo" class="logo-icon">605 CHASER</a>
+    <div class="nav-links">
+      <a href="/#about">About</a>
+      <a href="/#services">Services</a>
+      <a href="/team.html" class="current-link">Team</a>
+      <div class="nav-dropdown">
+        <button type="button" class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">Weather Tools <span class="caret">&#9662;</span></button>
+        <div class="nav-dropdown-menu">
+          <a href="/forecast.html">7-Day Forecast</a>
+          <a href="https://tornadotarget.netlify.app" target="_blank" rel="noopener noreferrer">Tornado Targets</a>
+          <a href="/storm-simulator.html">Storm Simulator</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <button type="button" class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">Get Involved <span class="caret">&#9662;</span></button>
+        <div class="nav-dropdown-menu">
+          <a href="/sponsor.html">Sponsor Us</a>
+          <a href="/ride-along.html">Ride-Along</a>
+        </div>
+      </div>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="llc-pill">605 Chaser LLC</div>
+    <a href="https://www.paypal.com/paypalme/605chaser" target="_blank" rel="noopener noreferrer" class="btn-donate">Donate Today</a>
+    <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="/#about">About</a>
+    <a href="/#services">Services</a>
+    <a href="/team.html" class="current-link">Team</a>
+    <a href="/forecast.html">7-Day Forecast</a>
+    <a href="https://tornadotarget.netlify.app" target="_blank" rel="noopener noreferrer">Tornado Targets</a>
+    <a href="/storm-simulator.html">Storm Simulator</a>
+    <a href="/sponsor.html">Sponsor Us</a>
+    <a href="/ride-along.html">Ride-Along</a>
+    <a href="#contact">Contact</a>
+    <a href="https://www.paypal.com/paypalme/605chaser" target="_blank" rel="noopener noreferrer" class="donate">Donate Today</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="crumb"><a href="/">Home</a> / Team</div>
+    <div class="hero-eyebrow">Meet the Team</div>
+    <h1>The crew behind <span class="accent">the coverage.</span></h1>
+    <p>605 Chaser is six people spread across four South Dakota counties. Every one of them keeps a full-time job, and every one of them heads for the storm when the sky turns.</p>
+    <div class="roster" role="navigation" aria-label="Team members">
+      <a href="#henry"><img src="/images/team/henry.jpg" alt="">Henry</a>
+      <a href="#jeff"><img src="/images/team/jeff.jpg" alt="">Jeff</a>
+      <a href="#brian"><img src="/images/team/brian.jpg" alt="">Brian</a>
+      <a href="#trace"><img src="/images/team/trace.jpg" alt="">Trace</a>
+      <a href="#kelly"><img src="/images/team/kelly.jpg" alt="">Kelly</a>
+      <a href="#mj"><img src="/images/team/mj.jpg" alt="">MJ</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <article class="bio" id="henry">
+    <div class="bio-photo"><img src="/images/team/henry.jpg" alt="Henry Cramer" width="640" height="800"><div class="bio-meta">Harrisburg, SD</div></div>
+    <div class="bio-copy">
+      <h2>Henry Cramer</h2>
+      <div class="team-role">Founder &amp; President</div>
+      <p>Henry was born and raised in Stickney, South Dakota, and later moved to Mitchell. After a year in Olathe, Kansas, he returned to South Dakota in 2006 and settled in Harrisburg, where he lives today. Growing up in the heart of the Great Plains exposed him early to the power and beauty of severe weather.</p>
+      <p>The 2003 Manchester, South Dakota, tornado was the event that ignited his passion. Watching the coverage and learning about the tornado's power and impact pushed him to learn everything he could about severe storms, forecasting, and atmospheric science, almost entirely self-taught.</p>
+      <p>From 2004 through 2018, Henry stepped away from chasing to raise a family, pursue music, and build a career in the financial services industry. Those years sharpened the leadership, communication, and organizational skills he uses today. In 2018, his passion returned stronger than ever, and he got back on the road.</p>
+      <p>Then came the 2019 tornadoes that struck parts of Sioux Falls. Henry watched his youngest son be terrified and felt helpless as a father, and he realized other families were feeling the same way. That moment led him to start SD Weather Enthusiast, which grew into 605 Chaser and, in 2026, became 605 Chaser LLC. Today the operation covers a five-state territory and reaches more than 25,000 followers across Facebook, YouTube, and TikTok.</p>
+      <p>As President, Henry is the team's lead forecaster and oversees operations, strategy, livestream production, content, technology, and community outreach. He also builds much of the team's custom tooling, from live broadcast overlays and real-time mesoscale analysis tools to the Tornado Target Finder and ChaserOS. His day job as a dialer operations analyst, built on data analysis, operational planning, and technology, carries directly into forecasting and running a field team. He is Spotter Network certified.</p>
+      <p>Education and public safety are at the center of Henry's mission. He has given severe weather presentations at local schools, including one featuring a hands-on tornado demonstration model he built with his son to show how the ingredients for tornado formation come together. His goal is to make weather information accessible, reduce fear through education, and help people make informed decisions before and during severe weather.</p>
+      <p>In the field, Henry believes the biggest challenge is balancing safety, responsible reporting, and growing road congestion during major events. He relies on situational awareness and multiple data sources, and he holds firm to one rule: safety always comes before footage. His favorite part of the job is supercells, analyzing the setup days in advance and then watching it unfold in real time.</p>
+      <p>Outside of weather, many people are surprised to learn that Henry sang professionally and released a music album in 2004. Music, performance, and storytelling still shape how he connects with audiences today.</p>
+      <a href="#top" class="back-top">↑ Back to top</a>
+    </div>
+  </article>
+
+  <article class="bio" id="jeff">
+    <div class="bio-photo"><img src="/images/team/jeff.jpg" alt="Jeff Andera" width="640" height="800" loading="lazy"><div class="bio-meta">Sioux Falls, SD</div></div>
+    <div class="bio-copy">
+      <h2>Jeff Andera</h2>
+      <div class="team-role">Vice President</div>
+      <p>Jeff Andera was born and raised in Harrisburg, South Dakota, where his father first sparked his fascination with weather when Jeff was just a kid. That interest grew into a full-blown passion after he watched <i>Night of the Twisters</i>, which drew him toward severe weather and tornadoes in particular. A real-life storm then turned fascination into a calling. The 1998 Spencer, South Dakota, tornado, which he experienced as a teenager, set him on the path he has followed ever since.</p>
+      <p>Jeff began actively chasing at 18 and today brings 24 years of chasing experience to 605 Chaser. He has also built and led multiple successful companies, and that entrepreneurial and leadership background carries directly into his role as Vice President, where he helps guide the organization's growth, coordination, and future direction.</p>
+      <p>What drives Jeff today isn't just the chase, it's the science. He's endlessly drawn to understanding how storms form, evolve, and dissipate, from initiation to the end of their lifecycle. That curiosity fuels his passion for education. Jeff hopes to mentor high school students and college meteorology students, helping the next generation understand both the science of severe weather and how quickly conditions can change without warning.</p>
+      <p>Jeff is candid about the challenges facing today's chasers. With more chasers on the road than ever, safety and positioning have gotten tougher. His approach is to keep the team away from chaser convoys whenever possible, putting safety first without giving up the ability to deliver coverage from the front lines.</p>
+      <p>Outside of weather, Jeff's top priority is his family, especially his four kids, who matter to him more than anything.</p>
+      <a href="#top" class="back-top">↑ Back to top</a>
+    </div>
+  </article>
+
+  <article class="bio" id="brian">
+    <div class="bio-photo"><img src="/images/team/brian.jpg" alt="Brian Anglin" width="640" height="800" loading="lazy"><div class="bio-meta">Vermillion, SD</div></div>
+    <div class="bio-copy">
+      <h2>Brian Anglin</h2>
+      <div class="team-role">Director of Operations</div>
+      <p>Brian grew up in Vermillion, South Dakota, where the powerful thunderstorms and ever-changing skies of the Northern Plains sparked a lifelong curiosity about weather. Years of experiencing severe weather across South Dakota and the Midwest, and seeing its impact on communities, drove him to learn forecasting and get involved in storm spotting and chasing.</p>
+      <p>As Director of Operations, Brian oversees field operations and logistics for 605 Chaser. He forecasts with SPC mesoanalysis, radar data, and model guidance to identify severe weather targets, and he provides live coverage from the field. He has completed NWS storm spotter training, is a member of Spotter Network, and is CPR certified.</p>
+      <p>Brian enjoys the technical side of weather operations as much as the chase itself. He spends a lot of time working with live-streaming technology, communications equipment, cameras, GPS tracking, and weather software, all to improve the information the team can provide during severe weather.</p>
+      <p>In the field, Brian believes the biggest challenge is balancing safety with the drive to document severe weather. He handles it by staying situationally aware, keeping escape routes open, watching for changing conditions, and making conservative calls when needed. His favorite thing to study is supercell structure and the mesoscale processes that lead to tornado development.</p>
+      <p>Brian believes storm chasers have a real opportunity to educate the public and share accurate information when it matters most. He hopes people come away from his work with a better understanding of severe weather, how to stay safe, and the science behind forecasting.</p>
+      <a href="#top" class="back-top">↑ Back to top</a>
+    </div>
+  </article>
+
+  <article class="bio" id="trace">
+    <div class="bio-photo"><img src="/images/team/trace.jpg" alt="Trace Wipf" width="640" height="800" loading="lazy"><div class="bio-meta">Huron, SD</div></div>
+    <div class="bio-copy">
+      <h2>Trace D. Wipf</h2>
+      <div class="team-role">Field Operations Lead</div>
+      <p>Trace grew up on his family's acreage near Huron, South Dakota, watching storms roll over the house and catching every episode of <i>Storm Chasers</i> on TV. One of his earliest weather memories is the 2003 Manchester tornado outbreak: seeing the tornado on television as his parents rushed him, his sister, and the family cats to his grandmother's basement. He credits Reed Timmer and his grandfather, a farmer who grew up during the Great Depression and always talked weather from the Farmer's Almanac, for inspiring his passion.</p>
+      <p>After an unplanned but memorable chase in 2017, Trace began chasing actively after graduating high school in 2019 and ramped up in the 2021 season. Today he serves as 605 Chaser's Field Operations Lead.</p>
+      <p>In the field, Trace leads with forecasting. He's skilled with Pivotal Weather, College of DuPage models, skew-Ts, hodographs, RadarScope, Earl Barker's NAM viewer, SPC products, the GFA observations site, and WeatherFront. He's Spotter Network certified and brings experience in livestream production, field operations, and digital content. He's also learned to trust his gut, and it has paid off. On the team, he's the one who can lighten the mood and still give solid advice when a decision is on the line.</p>
+      <p>Trace believes the biggest challenge chasers face today is balancing the pursuit of incredible weather with safe, responsible decisions. Roads get congested, storms evolve fast, and it's easy to fixate on one outcome instead of recognizing when conditions have changed. What drives him is documenting, photographing, and sharing what he sees in the field to help warn the public, and inspiring the next generation of chasers and meteorologists to do it for the right reason: public safety and peace of mind. His favorite part is watching it all come together, from the models to nature's power firsthand.</p>
+      <p>Outside of weather, Trace loves photography and videography, reading, and tackling tough problems. He studied geospatial technology at Mitchell Technical College and hopes to earn his Part 107 drone license again. He enjoys time at the range and hunting, and in his free time he sings country music.</p>
+      <div class="follow"><strong>Follow Trace</strong><span>Facebook: Trace Wipf</span><span>X: @WipfWX</span><span>Instagram: @trace.wi</span><span>TikTok: @wi_pfi</span><span>Clapper: Wi_Pfi</span></div>
+      <a href="#top" class="back-top">↑ Back to top</a>
+    </div>
+  </article>
+
+  <article class="bio" id="kelly">
+    <div class="bio-photo"><img src="/images/team/kelly.jpg" alt="Kelly Lacey" width="640" height="800" loading="lazy"><div class="bio-meta">Boyd, MN</div></div>
+    <div class="bio-copy">
+      <h2>Kelly Lacey</h2>
+      <div class="team-role">Social Media Manager</div>
+      <p>Kelly grew up in Boyd, Minnesota, and has been fascinated by weather for as long as she can remember. Her mom could never get her to come inside during a storm. As soon as Kelly could drive, she was the first one out on a gravel road to watch the sky. Her mom still tells her to get inside before she gets struck by lightning.</p>
+      <p>For Kelly, severe weather is a reminder that there's beauty to be found even in the chaos: the lightning, the rolling thunder, and the many forms a tornado can take. Her passion deepened after she got caught outside on foot during the derecho, which she calls the most incredible thing she has ever witnessed. She credits her faith as her biggest inspiration, and she is constantly amazed by God's creation.</p>
+      <p>Kelly has watched storms on her own for years. Over the past year she has also been learning from experienced chasers in the region, including a ride-along with another local chase team and hosting the first episode of a weather podcast. Her background in commercials, TV, and acting gives her an eye for what works both in front of and behind the camera, and she's completely at home on camera.</p>
+      <p>Kelly believes the biggest challenge facing chasers is going into the field without the knowledge to back it up. Safety comes first, and understanding what you're chasing is what keeps everyone safe. She's especially passionate about helping young storm enthusiasts build that knowledge so they can one day help others too.</p>
+      <p>Her message to followers is simple: if you have a passion, go after it, even if you don't fit in the same box as everyone else. Her favorite things to watch are tornadoes and lightning. Outside of weather, Kelly's family has faced a storm of its own: her daughter was diagnosed with a rare cancer. That experience inspired one of Kelly's biggest dreams, a podcast that pairs real storm chasing with the storms people face in their own lives, because every chaser has a story.</p>
+      <a href="#top" class="back-top">↑ Back to top</a>
+    </div>
+  </article>
+
+  <article class="bio" id="mj">
+    <div class="bio-photo"><img src="/images/team/mj.jpg" alt="Mathew &quot;MJ&quot; Johnson" width="640" height="800" loading="lazy"><div class="bio-meta">Huron, SD</div></div>
+    <div class="bio-copy">
+      <h2>Mathew "MJ" Johnson</h2>
+      <div class="team-role">Post-Production Media Editor</div>
+      <p>MJ has lived in Huron, South Dakota, his entire life. As a kid, he was terrified of storms. As he got older, that fear turned into fascination, especially with lightning and the raw power of what Mother Nature can do.</p>
+      <p>About three years ago, longtime friend Trace Wipf, now 605 Chaser's Field Operations Lead, invited him out on a chase, and he hasn't looked back since.</p>
+      <p>As Post-Production Media Editor, MJ takes the raw storm footage the team captures in the field and shapes it into polished content. Using CapCut and Vizard, he turns hours of chase footage into shareable highlights, recaps, and social clips. He works closely with the field and social media teams to get finished content out quickly during active weather.</p>
+      <p>Now that he's part of the 605 Chaser team, MJ is focused on learning more about how storms form and how to read radar, models, and other forecasting tools to decide where and how to chase.</p>
+      <a href="#top" class="back-top">↑ Back to top</a>
+    </div>
+  </article>
+
+</main>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="/605chaser-logo-full.png" alt="605 Chaser — Tracking Chaos, Delivering Clarity" class="footer-logo-img">
+        <p>605 Chaser LLC is a storm chasing and severe weather content operation based in Harrisburg, South Dakota, covering the Northern Plains.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="tel:+16059060063">(605) 906-0063</a>
+        <a href="https://www.facebook.com/605chaser" target="_blank" rel="noopener noreferrer">facebook.com/605chaser</a>
+        <div>726 W Willow St, Unit 2<br>Harrisburg, SD 57032</div>
+      </div>
+      <div class="footer-col">
+        <h4>Business Entity</h4>
+        <div>605 Chaser LLC</div>
+        <div>South Dakota</div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© <span id="year"></span> 605 Chaser LLC. All rights reserved.</div>
+      <div><strong>Tracking Chaos. Delivering Clarity.</strong></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburgerBtn.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.toggle('open');
+    hamburgerBtn.classList.toggle('open', isOpen);
+    hamburgerBtn.setAttribute('aria-expanded', isOpen);
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      hamburgerBtn.classList.remove('open');
+      hamburgerBtn.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  document.querySelectorAll('.nav-dropdown').forEach(dropdown => {
+    const toggle = dropdown.querySelector('.nav-dropdown-toggle');
+    toggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = dropdown.classList.contains('open');
+      document.querySelectorAll('.nav-dropdown.open').forEach(d => {
+        d.classList.remove('open');
+        d.querySelector('.nav-dropdown-toggle').setAttribute('aria-expanded', 'false');
+      });
+      if (!isOpen) {
+        dropdown.classList.add('open');
+        toggle.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+  document.addEventListener('click', () => {
+    document.querySelectorAll('.nav-dropdown.open').forEach(d => {
+      d.classList.remove('open');
+      d.querySelector('.nav-dropdown-toggle').setAttribute('aria-expanded', 'false');
+    });
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.nav-dropdown.open').forEach(d => {
+        d.classList.remove('open');
+        d.querySelector('.nav-dropdown-toggle').setAttribute('aria-expanded', 'false');
+      });
+    }
+  });
+</script>
+</body>
+</html>
