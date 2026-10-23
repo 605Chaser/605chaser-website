@@ -147,7 +147,7 @@
     max-height:0;overflow:hidden;transition:max-height .3s ease;
     background:var(--charcoal2);border-bottom:1px solid var(--line);
   }
-  .mobile-menu.open{max-height:600px;}
+  .mobile-menu.open{max-height:800px;}
   .mobile-menu a{
     padding:16px 28px;font-size:14px;text-transform:uppercase;letter-spacing:0.08em;
     color:var(--cream);border-bottom:1px solid var(--line);font-weight:500;
@@ -325,6 +325,35 @@
   .btn-donate{white-space:nowrap;}
   @media(max-width:1180px){ .llc-pill{display:none;} }
   @media(max-width:960px){ .nav-links{gap:16px;} }
+
+  /* ── WEATHER SAFETY ── */
+  #safety{background:var(--charcoal2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .safety-intro{color:var(--steel);font-size:16px;max-width:620px;margin-top:14px;}
+  .safety-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:44px;background:var(--line);}
+  @media(max-width:900px){ .safety-grid{grid-template-columns:1fr;} }
+  .safety-card{background:var(--charcoal2);padding:30px 28px;}
+  .safety-card h3{font-size:21px;color:var(--cream);margin-bottom:14px;}
+  .safety-card p,.safety-card li{color:var(--steel);font-size:15px;}
+  .safety-card ul{list-style:none;display:flex;flex-direction:column;gap:10px;}
+  .safety-card li{padding-left:16px;position:relative;}
+  .safety-card li::before{content:"";position:absolute;left:0;top:.62em;width:6px;height:6px;background:var(--gold);}
+  .safety-card strong{color:var(--cream);font-weight:500;}
+  .ww-row{border:1px solid var(--line);padding:14px 16px;margin-bottom:10px;background:var(--charcoal);}
+  .ww-row:last-child{margin-bottom:0;}
+  .ww-tag{font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:6px;}
+  .ww-tag.watch{color:var(--amber);}
+  .ww-tag.warn{color:#ff6259;}
+  .wxcall{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;margin-top:44px;border:1px solid rgba(232,183,35,.35);padding:34px;background:var(--charcoal);}
+  @media(max-width:900px){ .wxcall{grid-template-columns:1fr;padding:24px 20px;gap:26px;} }
+  .wxcall h3{font-size:clamp(24px,3vw,32px);color:var(--cream);margin-bottom:12px;}
+  .wxcall p{color:var(--steel);font-size:15px;margin-bottom:12px;}
+  .wxcall-ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px;}
+  .wxcall-ctas .btn{padding:14px 22px;}
+  .wxcall-gift{display:inline-block;margin-top:16px;font-family:'Space Mono',monospace;font-size:12px;color:var(--gold);letter-spacing:.04em;}
+  .wxcall-gift:hover{color:var(--amber);}
+  .wxcall-note{font-family:'Space Mono',monospace;font-size:11px;color:var(--steel);opacity:.8;margin-top:18px;line-height:1.6;}
+  .video-frame{position:relative;width:100%;aspect-ratio:16/9;background:#000;border:1px solid var(--line);}
+  .video-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
 </style>
 </head>
 <body>
@@ -342,6 +371,7 @@
           <a href="/forecast.html">7-Day Forecast</a>
           <a href="https://tornadotarget.netlify.app" target="_blank" rel="noopener noreferrer">Tornado Targets</a>
           <a href="/storm-simulator.html">Storm Simulator</a>
+          <a href="#safety">Weather Safety</a>
         </div>
       </div>
       <div class="nav-dropdown">
@@ -366,6 +396,7 @@
     <a href="/forecast.html">7-Day Forecast</a>
     <a href="https://tornadotarget.netlify.app" target="_blank" rel="noopener noreferrer">Tornado Targets</a>
     <a href="/storm-simulator.html">Storm Simulator</a>
+    <a href="#safety">Weather Safety</a>
     <a href="/sponsor.html">Sponsor Us</a>
     <a href="/ride-along.html">Ride-Along</a>
     <a href="#contact">Contact</a>
@@ -468,6 +499,58 @@
         <div class="service-num">04 — EDUCATION & OUTREACH</div>
         <h3>Speaking & Community Programs</h3>
         <p>Speaking engagements, severe weather education, and the developing Field Scholar Program connecting meteorology students with real field forecasting.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="safety">
+  <div class="wrap">
+    <div class="section-label">Weather Safety</div>
+    <h2 class="section-title">Know the plan before the sirens sound.</h2>
+    <p class="safety-intro">We track storms so you don't have to guess. When severe weather is headed your way, these basics from the National Weather Service are what keep families safe.</p>
+    <div class="safety-grid">
+      <div class="safety-card">
+        <h3>Watch vs. Warning</h3>
+        <div class="ww-row"><span class="ww-tag watch">Watch — Be Prepared</span><p>Conditions are favorable for severe storms or tornadoes. Review your plan, charge your phone, and keep an eye on the sky and the forecast.</p></div>
+        <div class="ww-row"><span class="ww-tag warn">Warning — Take Action</span><p>Severe weather is happening or about to happen in your area. Get to shelter now.</p></div>
+      </div>
+      <div class="safety-card">
+        <h3>Where to Shelter</h3>
+        <ul>
+          <li><strong>Get low and inside.</strong> A basement, or an interior room on the lowest floor with no windows.</li>
+          <li><strong>Protect your head.</strong> Cover up with a mattress, blankets, or helmets.</li>
+          <li><strong>Mobile homes aren't safe in a tornado.</strong> Know where your sturdy shelter is and go before the storm arrives.</li>
+          <li><strong>Never shelter under a highway overpass.</strong></li>
+          <li><strong>Flooded road? Turn around, don't drown.</strong></li>
+        </ul>
+      </div>
+      <div class="safety-card">
+        <h3>Get Alerts More Than One Way</h3>
+        <ul>
+          <li><strong>Turn on Emergency Alerts</strong> in your phone's settings.</li>
+          <li><strong>Get a NOAA Weather Radio</strong> with battery backup.</li>
+          <li><strong>Don't count on outdoor sirens</strong> — they're built to warn people outside, not to wake you up indoors.</li>
+          <li><strong>When thunder roars, go indoors.</strong> If you can hear thunder, lightning is close enough to strike.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="wxcall">
+      <div>
+        <div class="section-label">Our Recommended Alert Service</div>
+        <h3>WeatherCall NexGen</h3>
+        <p>WeatherCall calls your phone when the National Weather Service issues a warning for your location — so an alert reaches you even if you're asleep or your phone is across the room.</p>
+        <p>Sign up through 605 Chaser with station code <strong style="color:var(--gold);font-family:'Space Mono',monospace;">605x</strong>.</p>
+        <div class="wxcall-ctas">
+          <a href="https://ngorder.wxriskalerts.com/db_app2.php?station=605x" target="_blank" rel="noopener sponsored" class="btn btn-primary">Sign Up for WeatherCall</a>
+          <a href="https://weathercallservices.com/605-chaser-nexgen" target="_blank" rel="noopener sponsored" class="btn btn-ghost">Learn More →</a>
+        </div>
+        <a href="https://gift.wxriskalerts.com/gift.php?station=605x" target="_blank" rel="noopener sponsored" class="wxcall-gift">🎁 Give WeatherCall as a gift →</a>
+        <p class="wxcall-note">605 Chaser earns a small commission when you sign up through these links. It costs you nothing extra and helps fund our storm coverage.</p>
+      </div>
+      <div class="video-frame">
+        <iframe src="https://player.vimeo.com/video/1166061408?h=49571d1093&amp;dnt=1" title="605 Chaser – WeatherCall NexGen Explainer" loading="lazy" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
       </div>
     </div>
   </div>
