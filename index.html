@@ -29,7 +29,7 @@
 <meta name="twitter:description" content="Storm chasing and severe weather content operation covering a five-state Northern Plains territory.">
 <meta name="twitter:image" content="https://605chaser.com/og-image.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Permanent+Marker&family=Oswald:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root{
     --charcoal:#141414;
@@ -283,7 +283,21 @@
   .team-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;margin-top:46px;}
   @media(max-width:900px){ .team-grid{grid-template-columns:repeat(2,minmax(0,1fr));} }
   @media(max-width:540px){ .team-grid{grid-template-columns:1fr;} }
-  .team-card{background:var(--charcoal2);border:1px solid var(--line);border-top:2px solid var(--gold);display:flex;flex-direction:column;min-width:0;}
+  .team-card{background:var(--charcoal2);border:1px solid var(--line);display:flex;flex-direction:column;min-width:0;}
+  /* Polaroid-style team photos */
+  .polaroid{position:relative;margin:30px 24px 8px;background:#F3EEE3;padding:10px 10px 0;
+    box-shadow:0 14px 28px rgba(0,0,0,.55),0 2px 5px rgba(0,0,0,.4);
+    transform:rotate(-2deg);transition:transform .35s ease;}
+  .team-card:nth-child(even) .polaroid{transform:rotate(1.6deg);}
+  .polaroid::before{content:"";position:absolute;top:-13px;left:50%;width:84px;height:26px;margin-left:-42px;
+    background:rgba(232,183,35,.55);transform:rotate(-3deg);box-shadow:0 1px 3px rgba(0,0,0,.3);}
+  .polaroid .team-photo{border:0;}
+  .polaroid figcaption{font-family:'Permanent Marker','Anton',cursive;font-size:28px;line-height:1;color:#151515;
+    text-align:center;padding:13px 8px 18px;letter-spacing:.02em;text-transform:uppercase;}
+  .polaroid figcaption::after{content:"";display:block;width:46%;height:4px;margin:7px auto 0;
+    background:var(--gold);border-radius:3px;transform:rotate(-2deg);}
+  @media(hover:hover){ .team-card:hover .polaroid{transform:rotate(0deg) scale(1.01);} }
+  @media(prefers-reduced-motion:reduce){ .polaroid{transition:none;} }
   .team-photo{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;background:#1c1c1b;}
   .team-body{padding:18px 20px 22px;display:flex;flex-direction:column;gap:8px;flex:1;}
   .team-name{font-family:'Anton',sans-serif;font-size:22px;color:var(--cream);text-transform:uppercase;letter-spacing:0.01em;line-height:1.1;}
@@ -560,7 +574,7 @@
     <h2 class="section-title">Six people. One radar screen. Five states of road.</h2>
     <div class="team-grid">
       <article class="team-card">
-        <img class="team-photo" src="/images/team/henry.jpg" alt="Henry Cramer" width="640" height="800" loading="lazy">
+        <figure class="polaroid"><img class="team-photo" src="/images/team/henry.jpg" alt="Henry Cramer" width="640" height="800" loading="lazy"><figcaption aria-hidden="true">Henry</figcaption></figure>
         <div class="team-body">
           <div class="team-name">Henry Cramer</div>
           <div class="team-role">Founder &amp; President</div>
@@ -569,7 +583,7 @@
         </div>
       </article>
       <article class="team-card">
-        <img class="team-photo" src="/images/team/jeff.jpg" alt="Jeff Andera" width="640" height="800" loading="lazy">
+        <figure class="polaroid"><img class="team-photo" src="/images/team/jeff.jpg" alt="Jeff Andera" width="640" height="800" loading="lazy"><figcaption aria-hidden="true">Jeff</figcaption></figure>
         <div class="team-body">
           <div class="team-name">Jeff Andera</div>
           <div class="team-role">Vice President</div>
@@ -578,7 +592,7 @@
         </div>
       </article>
       <article class="team-card">
-        <img class="team-photo" src="/images/team/brian.jpg" alt="Brian Anglin" width="640" height="800" loading="lazy">
+        <figure class="polaroid"><img class="team-photo" src="/images/team/brian.jpg" alt="Brian Anglin" width="640" height="800" loading="lazy"><figcaption aria-hidden="true">Brian</figcaption></figure>
         <div class="team-body">
           <div class="team-name">Brian Anglin</div>
           <div class="team-role">Director of Operations</div>
@@ -587,7 +601,7 @@
         </div>
       </article>
       <article class="team-card">
-        <img class="team-photo" src="/images/team/trace.jpg" alt="Trace Wipf" width="640" height="800" loading="lazy">
+        <figure class="polaroid"><img class="team-photo" src="/images/team/trace.jpg" alt="Trace Wipf" width="640" height="800" loading="lazy"><figcaption aria-hidden="true">Trace</figcaption></figure>
         <div class="team-body">
           <div class="team-name">Trace Wipf</div>
           <div class="team-role">Field Operations Lead</div>
@@ -596,7 +610,7 @@
         </div>
       </article>
       <article class="team-card">
-        <img class="team-photo" src="/images/team/kelly.jpg" alt="Kelly Lacey" width="640" height="800" loading="lazy">
+        <figure class="polaroid"><img class="team-photo" src="/images/team/kelly.jpg" alt="Kelly Lacey" width="640" height="800" loading="lazy"><figcaption aria-hidden="true">Kelly</figcaption></figure>
         <div class="team-body">
           <div class="team-name">Kelly Lacey</div>
           <div class="team-role">Social Media Manager</div>
@@ -605,7 +619,7 @@
         </div>
       </article>
       <article class="team-card">
-        <img class="team-photo" src="/images/team/mj.jpg" alt="Mathew &quot;MJ&quot; Johnson" width="640" height="800" loading="lazy">
+        <figure class="polaroid"><img class="team-photo" src="/images/team/mj.jpg" alt="Mathew &quot;MJ&quot; Johnson" width="640" height="800" loading="lazy"><figcaption aria-hidden="true">MJ</figcaption></figure>
         <div class="team-body">
           <div class="team-name">Mathew "MJ" Johnson</div>
           <div class="team-role">Post-Production Media Editor</div>
