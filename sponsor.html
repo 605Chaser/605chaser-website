@@ -180,13 +180,6 @@
   .event-card p{color:var(--steel);font-size:13px;}
 
   /* ── GOAL STRIP ── */
-  .goal-strip{border:1px solid var(--line);background:var(--charcoal2);margin-top:30px;display:flex;flex-wrap:wrap;}
-  .goal-item{flex:1 1 160px;padding:20px 22px;border-right:1px solid var(--line);font-family:'Space Mono',monospace;}
-  .goal-item:last-child{border-right:none;background:rgba(232,183,35,0.08);}
-  .goal-label{font-size:10px;letter-spacing:0.08em;color:var(--steel);text-transform:uppercase;margin-bottom:6px;}
-  .goal-val{font-size:18px;color:var(--cream);font-weight:700;}
-  .goal-item:last-child .goal-val{color:var(--gold);}
-  @media(max-width:700px){ .goal-item{flex:1 1 50%;border-bottom:1px solid var(--line);} }
 
   /* ── CTA BAND ── */
   .cta-band{background:var(--charcoal2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:70px 0;text-align:center;}
@@ -207,6 +200,17 @@
   .btn-donate{white-space:nowrap;}
   @media(max-width:1180px){ .llc-pill{display:none;} }
   @media(max-width:960px){ .nav-links{gap:16px;} }
+  /* ── PARTNERS ── */
+  #partners{border-top:1px solid var(--line);}
+  .partners-intro{color:var(--steel);font-size:16px;max-width:620px;margin-top:14px;}
+  .partner-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:40px;}
+  @media(max-width:900px){ .partner-grid{grid-template-columns:repeat(2,1fr);} }
+  @media(max-width:420px){ .partner-grid{grid-template-columns:1fr;} }
+  .partner-slot{border:1px dashed rgba(232,183,35,.35);background:var(--charcoal2);min-height:150px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:22px;gap:8px;transition:border-color .2s,background .2s;}
+  .partner-slot:hover{border-color:var(--gold);background:rgba(232,183,35,.06);}
+  .partner-tier{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);}
+  .partner-name{font-size:18px;color:var(--cream);text-transform:uppercase;letter-spacing:.03em;}
+  .partner-cta{font-family:'Space Mono',monospace;font-size:11px;color:var(--steel);}
 </style>
 </head>
 <body>
@@ -388,23 +392,19 @@
       </div>
     </div>
 
-    <div class="goal-strip">
-      <div class="goal-item">
-        <div class="goal-label">10 Bronze Sponsors</div>
-        <div class="goal-val">$5,000 / year</div>
-      </div>
-      <div class="goal-item">
-        <div class="goal-label">5 Silver Sponsors</div>
-        <div class="goal-val">$5,000 / year</div>
-      </div>
-      <div class="goal-item">
-        <div class="goal-label">2 Gold Sponsors</div>
-        <div class="goal-val">$5,000 / year</div>
-      </div>
-      <div class="goal-item">
-        <div class="goal-label">Total Annual Goal</div>
-        <div class="goal-val">$15,000 / year</div>
-      </div>
+  </div>
+</section>
+
+<section id="partners">
+  <div class="wrap">
+    <div class="section-label">Our Partners</div>
+    <h2 class="section-title">Founding partner spots are open.</h2>
+    <p class="partners-intro">This is where our sponsors are recognized, here on the website and on our live streams. The first businesses to partner with 605 Chaser LLC will be featured as Founding Partners.</p>
+    <div class="partner-grid">
+      <a href="#apply-form" class="partner-slot"><span class="partner-tier">Gold</span><span class="partner-name">Your Logo Here</span><span class="partner-cta">Become a founding partner →</span></a>
+      <a href="#apply-form" class="partner-slot"><span class="partner-tier">Silver</span><span class="partner-name">Your Logo Here</span><span class="partner-cta">Become a founding partner →</span></a>
+      <a href="#apply-form" class="partner-slot"><span class="partner-tier">Bronze</span><span class="partner-name">Your Logo Here</span><span class="partner-cta">Become a founding partner →</span></a>
+      <a href="#apply-form" class="partner-slot"><span class="partner-tier">Event</span><span class="partner-name">Your Logo Here</span><span class="partner-cta">Sponsor a chase day →</span></a>
     </div>
   </div>
 </section>
@@ -435,8 +435,8 @@
 
 <div class="cta-band">
   <div class="wrap">
-    <h2>Ready to partner with 605 Chaser?</h2>
-    <p>Apply above, or email us directly if you'd rather talk it through first — we'll help you pick the right level and get started.</p>
+    <h2>Prefer to talk it through first?</h2>
+    <p>Email us and we'll help you pick the right level, answer questions about placement, and get you started.</p>
     <a href="mailto:sdweatherdad@gmail.com?subject=Sponsorship%20Inquiry" class="btn btn-primary">Email sdweatherdad@gmail.com</a>
   </div>
 </div>
