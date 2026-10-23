@@ -134,6 +134,10 @@
   .sim-card .sim-h2-note{color:var(--steel);font-size:12.5px;margin-bottom:14px;}
   .sim-row{display:grid;grid-template-columns:1fr 130px;gap:10px;align-items:center;margin-bottom:8px;}
   .sim-row label{font-size:13px;color:var(--cream);}
+  .sim-help-btn{display:inline-grid;place-items:center;width:18px;height:18px;margin-left:6px;border-radius:50%;border:1px solid rgba(232,183,35,.5);background:transparent;color:var(--gold);font-family:'Space Mono',monospace;font-size:11px;font-weight:700;line-height:1;cursor:pointer;vertical-align:middle;padding:0;}
+  .sim-help-btn[aria-expanded="true"]{background:var(--gold);color:var(--charcoal);}
+  .sim-help-text{font-size:12.5px;line-height:1.55;color:var(--steel);background:var(--charcoal);border-left:2px solid var(--gold);padding:8px 10px;margin:-2px 0 10px;}
+  .sim-help-text[hidden]{display:none;}
   .sim-row .val{text-align:right;color:var(--amber);font-weight:700;font-family:'Space Mono',monospace;font-size:13px;}
   input[type="range"]{width:100%;accent-color:var(--gold);}
   select, input[type="number"]{
@@ -150,7 +154,7 @@
   .sim-metric .big{font-size:20px;font-weight:800;font-family:'Space Mono',monospace;color:var(--cream);}
   .sim-badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;padding:4px 10px;border-radius:999px;border:1px solid var(--line);background:var(--charcoal2);color:var(--steel);text-transform:uppercase;letter-spacing:0.06em;font-family:'Space Mono',monospace;}
   .sim-bars{display:grid;gap:12px;}
-  .sim-bar{display:grid;grid-template-columns:110px 1fr 50px;gap:10px;align-items:center;}
+  .sim-bar{display:grid;grid-template-columns:90px 1fr 92px;gap:10px;align-items:center;}
   .sim-bar .label{color:var(--cream);font-size:13px;}
   .sim-bar .track{height:10px;background:var(--charcoal);border-radius:999px;overflow:hidden;border:1px solid var(--line);}
   .sim-bar .fill{height:100%;width:0%;transition:width .3s ease;}
@@ -195,7 +199,7 @@
   .sim-dial{display:grid;place-items:center;background:var(--charcoal);border:1px solid var(--line);border-radius:10px;padding:14px;}
   .sim-gauge{width:100px;height:100px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--line) 0deg,var(--line) 360deg);position:relative;}
   .sim-gauge::after{content:"";position:absolute;width:76px;height:76px;border-radius:50%;background:var(--charcoal2);border:1px solid var(--line);}
-  .sim-dial .val{position:absolute;font-weight:800;font-size:17px;font-family:'Space Mono',monospace;color:var(--cream);}
+  .sim-dial .val{position:absolute;z-index:1;font-weight:800;font-size:17px;font-family:'Space Mono',monospace;color:var(--cream);}
   .sim-dial .lbl{margin-top:8px;font-size:11.5px;color:var(--steel);text-align:center;}
 
   .real-link-box{border:1px solid var(--line);background:var(--charcoal2);border-radius:10px;padding:16px 20px;margin-top:24px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;}
@@ -372,10 +376,9 @@
           </select>
         </div>
         <div class="sim-controls">
-          <button class="sim-btn primary" id="recalc">Recalculate</button>
-          <button class="sim-btn" id="explainBtn">Explain These Results</button>
+          <button class="sim-btn primary" id="explainBtn">Explain These Results</button>
         </div>
-        <div class="sim-footer-note">This sandbox uses simplified, made-up formulas for teaching purposes only — not the real, precise calculations meteorologists use, and not connected to any live weather data. Never use this for real safety decisions.</div>
+        <div class="sim-footer-note">This sandbox uses simplified teaching versions of real severe-weather formulas — not the exact calculations meteorologists use, and not connected to any live weather data. Never use this for real safety decisions.</div>
       </div>
 
       <!-- RIGHT: OUTPUTS -->
@@ -399,12 +402,12 @@
           <div class="sim-dial">
             <div class="sim-badge">Supercell Signal</div>
             <div class="sim-gauge" id="scpGauge"><div class="val" id="scpVal">0.0</div></div>
-            <div class="lbl">Fictional supercell-favorability score (0–3+)</div>
+            <div class="lbl">Supercell signal — simplified SCP-style score (1+ favors supercells)</div>
           </div>
           <div class="sim-dial">
             <div class="sim-badge">Tornado Signal</div>
             <div class="sim-gauge" id="stpGauge"><div class="val" id="stpVal">0.0</div></div>
-            <div class="lbl">Fictional tornado-favorability score (0–5)</div>
+            <div class="lbl">Tornado signal — simplified STP-style score (1+ favors strong tornadoes)</div>
           </div>
           <div class="sim-dial">
             <div class="sim-badge">Hail Signal</div>
@@ -414,9 +417,9 @@
         </div>
 
         <div class="sim-bars" style="margin-top:16px">
-          <div class="sim-bar"><div class="label">Tornado</div><div class="track"><div class="fill tor" id="torFill"></div></div><div class="pct" id="torPct">0%</div></div>
-          <div class="sim-bar"><div class="label">Hail</div><div class="track"><div class="fill hail" id="hailFill"></div></div><div class="pct" id="hailPct">0%</div></div>
-          <div class="sim-bar"><div class="label">Wind</div><div class="track"><div class="fill wind" id="windFill"></div></div><div class="pct" id="windPct">0%</div></div>
+          <div class="sim-bar"><div class="label">Tornado</div><div class="track"><div class="fill tor" id="torFill"></div></div><div class="pct" id="torPct">—</div></div>
+          <div class="sim-bar"><div class="label">Hail</div><div class="track"><div class="fill hail" id="hailFill"></div></div><div class="pct" id="hailPct">—</div></div>
+          <div class="sim-bar"><div class="label">Wind</div><div class="track"><div class="fill wind" id="windFill"></div></div><div class="pct" id="windPct">—</div></div>
         </div>
 
         <div class="sim-result-wrap">
@@ -440,7 +443,7 @@
           <div class="sim-metric">
             <div class="sim-badge">Mini Hodograph</div>
             <canvas id="hodo" width="300" height="180"></canvas>
-            <div class="sim-hint">Fictional surface & 500 mb wind vectors, scaled.</div>
+            <div class="sim-hint">Shows your surface and 500 mb winds — the deep-layer shear. Low-level spin (SRH) is set separately with its slider; on a real hodograph it shows up as a curve in the lowest kilometer.</div>
           </div>
           <div class="sim-metric">
             <div class="sim-badge">Scenario Notes</div>
@@ -567,18 +570,22 @@ const out = {
 };
 
 function clamp01(x){ return Math.max(0, Math.min(1, x)); }
-function simpleSCP(cape, shear06kt, srh01){
-  const c = clamp01((cape - 500)/2500);
-  const s = clamp01((shear06kt - 20)/40);
-  const r = clamp01((srh01 - 50)/200);
-  return +(3 * c * s * r).toFixed(2);
+// Simplified teaching versions of SPC's Supercell Composite (SCP) and
+// Significant Tornado Parameter (STP). Inputs are the sandbox sliders, so
+// 0–1 km SRH stands in for effective SRH and sfc→500 mb shear for 0–6 km shear.
+function simpleSCP(cape, shear06kt, srh01, cinJkg){
+  const shr = shear06kt * 0.5144;                  // kt → m/s
+  const shearTerm = shr < 10 ? 0 : Math.min(shr / 20, 1);
+  const cinTerm = cinJkg <= 40 ? 1 : 40 / cinJkg;
+  return +Math.max(0, (cape / 1000) * (srh01 / 50) * shearTerm * cinTerm).toFixed(2);
 }
-function simpleSTP(cape, lclft, srh01, cinJkg){
-  const c = clamp01((cape - 1000)/2500);
-  const l = clamp01((2500 - lclft)/2000);
-  const r = clamp01((srh01 - 100)/200);
-  const ncin = clamp01((150 - Math.max(0, cinJkg))/150);
-  return +(5 * c * l * r * ncin).toFixed(2);
+function simpleSTP(cape, lclft, srh01, cinJkg, shear06kt){
+  const lclm = lclft / 3.28084;
+  const lclTerm = lclm < 1000 ? 1 : (lclm > 2000 ? 0 : (2000 - lclm) / 1000);
+  const shr = shear06kt * 0.5144;
+  const shearTerm = shr < 12.5 ? 0 : Math.min(shr / 20, 1.5);
+  const cinTerm = cinJkg <= 50 ? 1 : (cinJkg >= 200 ? 0 : (200 - cinJkg) / 150);
+  return +Math.max(0, (cape / 1500) * lclTerm * (srh01 / 150) * shearTerm * cinTerm).toFixed(2);
 }
 function hailParam(cape, lapse, wbz_km){
   if (wbz_km <= 0.1) wbz_km = 0.1;
@@ -637,6 +644,10 @@ function computeScores(){
     'hp'      : {tor:+0.06, hail:+0.08, wind:+0.02},
     'elevated': {tor:-0.25, hail:+0.10, wind:-0.05}
   };
+  const scp = simpleSCP(CAPE, shear, SRH, CIN);
+  const stp = simpleSTP(CAPE, LCL, SRH, CIN, shear);
+  // Keep the tornado bar consistent with the tornado signal dial.
+  tor = 0.6*tor + 0.4*clamp(stp/3, 0, 1);
   const mm = modeMods[mode] || {tor:0,hail:0,wind:0};
   tor = clamp(tor + mm.tor, 0, 1);
   hail = clamp(hail + mm.hail, 0, 1);
@@ -645,12 +656,10 @@ function computeScores(){
   let torPct = Math.round(curve(tor));
   let hailPct = Math.round(curve(hail));
   let windPct = Math.round(curve(wind));
-  const scp = simpleSCP(CAPE, shear, SRH);
-  const stp = simpleSTP(CAPE, LCL, SRH, CIN);
   const hailPfull = hailParam(CAPE, LR, WBZ_km);
   const hailSize = hailSizeFromParam(hailPfull.scaled);
-  const stpNudge = clamp(stp/5, 0, 1) * 0.08;
-  const scpNudge = clamp(scp/3, 0, 1) * 0.05;
+  const stpNudge = clamp(stp/4, 0, 1) * 0.08;
+  const scpNudge = clamp(scp/10, 0, 1) * 0.05;
   const maxHaz = Math.max(torPct, hailPct, windPct)/100;
   const breadth = ((tor>0.35) + (hail>0.35) + (wind>0.35))/3;
   let composite = 0.62*maxHaz + 0.33*breadth + 0.05*nForce;
@@ -676,7 +685,8 @@ function syncLabels(){
 }
 function setBars(t, h, w){
   out.torFill.style.width = t + "%"; out.hailFill.style.width = h + "%"; out.windFill.style.width = w + "%";
-  out.torPct.textContent = t + "%"; out.hailPct.textContent = h + "%"; out.windPct.textContent = w + "%";
+  const word = v => v < 15 ? "Minimal" : v < 35 ? "Low" : v < 55 ? "Moderate" : v < 75 ? "High" : "Very High";
+  out.torPct.textContent = word(t); out.hailPct.textContent = word(h); out.windPct.textContent = word(w);
 }
 function setRisk(composite){
   const box = out.riskBox;
@@ -689,8 +699,8 @@ function setRisk(composite){
   });
 }
 function updateDials(scp, stp, hailScaled, hailSize){
-  const scp01 = clamp(scp/3, 0, 1);
-  const stp01 = clamp(stp/5, 0, 1);
+  const scp01 = clamp(scp/10, 0, 1);
+  const stp01 = clamp(stp/4, 0, 1);
   const hail01 = clamp(hailScaled, 0, 1);
   setDial(out.scpGauge, scp01, out.scpVal, scp.toFixed(1), 42);
   setDial(out.stpGauge, stp01, out.stpVal, stp.toFixed(1), 38);
@@ -721,7 +731,7 @@ function explainText(res){
     <ul>${lines.map(s=>`<li>${s}</li>`).join('')}</ul>
     <p><strong>Takeaways</strong></p>
     <ul>${(takeaways.length?takeaways:["Signals are mixed in this fictional scenario; mesoscale evolution and storm initiation would be key in the real world."]).map(t=>`<li>${t}</li>`).join('')}</ul>
-    <p class="sim-hint">Reminder: this is a fictional training sandbox. These signals are simplified, made-up scores — not real published meteorological indices, and not connected to live weather data. For actual forecasts, always check weather.gov or spc.noaa.gov.</p>
+    <p class="sim-hint">Reminder: this is a fictional training sandbox. These signals are simplified teaching versions of real indices like SCP and STP — not exact, and not connected to live weather data. For actual forecasts, always check weather.gov or spc.noaa.gov.</p>
   `;
 }
 const hctx = out.hodo.getContext('2d');
@@ -768,8 +778,13 @@ function applyPreset(key){
 }
 function randomize(){
   const r=(min,max,step=1)=>Math.round((Math.floor((Math.random()*(max-min))/step)*step+min)*(1/step))/(1/step);
-  inputs.temp.value=r(55,100,1); inputs.td.value=r(45,78,1);
-  inputs.cape.value=r(0,5000,50); inputs.mlcape.value=r(0,5000,50);
+  const T=r(55,100,1);
+  const Td=clamp(T - r(0,30,1), 40, 80);          // dewpoint never above temperature
+  inputs.temp.value=T; inputs.td.value=Td;
+  const capeMax=clamp((Td-40)*140, 200, 5500);    // more moisture allows more instability
+  const sb=r(0,capeMax,50);
+  inputs.cape.value=sb;
+  inputs.mlcape.value=Math.round(sb*(0.6+Math.random()*0.4)/50)*50;  // ML CAPE usually below SB CAPE
   inputs.cin.value=r(0,250,5); inputs.dcape.value=r(200,1600,25);
   inputs.lapse.value=r(5.8,8.8,0.1); inputs.srh.value=r(0,450,10);
   inputs.sfcDir.value=r(90,210,10); inputs.sfcSpd.value=r(5,30,1);
@@ -789,8 +804,25 @@ function updateAll(){
   drawHodo();
   return res;
 }
-Object.values(inputs).forEach(inp=> inp.addEventListener('input', ()=>{ syncLabels(); updateAll(); }));
-el('recalc').addEventListener('click', ()=> updateAll());
+// Turn hover-only tooltips into tap-friendly "?" help (works on phones).
+document.querySelectorAll('.sim-row[title]').forEach((row, i) => {
+  const text = row.getAttribute('title'); row.removeAttribute('title');
+  const label = row.querySelector('label'); if (!label) return;
+  const btn = document.createElement('button');
+  btn.type = 'button'; btn.className = 'sim-help-btn'; btn.textContent = '?';
+  btn.setAttribute('aria-label', 'What is this?'); btn.setAttribute('aria-expanded', 'false');
+  const help = document.createElement('div');
+  help.className = 'sim-help-text'; help.id = 'simHelp' + i; help.hidden = true; help.textContent = text;
+  btn.setAttribute('aria-controls', help.id);
+  btn.addEventListener('click', e => { e.preventDefault(); help.hidden = !help.hidden; btn.setAttribute('aria-expanded', String(!help.hidden)); });
+  label.appendChild(btn); row.insertAdjacentElement('afterend', help);
+});
+
+// Real air can't have a dewpoint above its temperature: keep Td <= T.
+function keepTdBelowT(){
+  if (+inputs.td.value > +inputs.temp.value) inputs.td.value = inputs.temp.value;
+}
+Object.values(inputs).forEach(inp=> inp.addEventListener('input', ()=>{ keepTdBelowT(); syncLabels(); updateAll(); }));
 el('explainBtn').addEventListener('click', ()=>{
   const res = updateAll(); out.explain.innerHTML = explainText(res); out.expander.open = true;
 });
