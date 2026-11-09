@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /sponsors/
 
 Sitemap: https://605chaser.com/sitemap.xml
